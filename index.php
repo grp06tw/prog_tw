@@ -5,6 +5,8 @@
         <title>123 Coupon!</title>
     </head>
     <body>
-        
+        <div id="main_container">
+            
+        </div>
     </body>
 </html>
