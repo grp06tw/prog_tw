@@ -1,4 +1,29 @@
 mobile??
+    ->(RM) da chiedere al prof per fattore sito responsive
 Staff e admin possono acquisire cupon???
-
+    ->(RM) credo sia ovvio, nessuno vienta ad un membro di staff usufruire del sito
+        è un po come "il membro xx dello staff di questa sezione del forum non puo postare topic"
+        non ha senso, quindi puo
 Come si usa github?
+    ->(RM) pomeriggio di bestemmie per connette git a netb.
+
+    piccola guida
+    aprite netbeans
+    in alto nella barra Team->GIT->Clone
+        in repository url -> url della cartella del progetto di github
+    poi avanti
+    alla richiesta delle branches selezionate tutte che ci sono (per ora ci sta solo master)
+    avanti e fine.
+
+    se vi chiede di creare un progetto... bestemmio,ma non dovrebbe
+
+    per salvare modifiche su github da netbeans, 
+    dopo aver lavorato
+    team->commit (vi appare la lista delle modifiche che avete fatto)
+        avete una sezione comment per scrivere cosa avete fatto
+    una volta fatto fate commit
+    ora per caricare
+    team->remote->push
+
+    non fare mai push senza commit.
+    
