@@ -1,0 +1,48 @@
+body {
+    background-color: #d6daed;
+}
+
+#wrapper, .row{ 	
+	width:100%;
+	min-width:500px;
+}
+
+#header {
+	text-align:center;
+	height:150px;
+    background-color: #FF7373;
+}
+	#login {
+		margin-right:5%;
+		float: right;
+		margin-top:50px;
+		background-color: white;
+		min-height:30px;
+		min-width:100px;
+	}
+#main_div, .page{
+	min-height:500pX;
+}
+#menu {
+    background-color: #5CCCCC;
+    border: 1px solid;
+	min-width:120px;
+	max-width:300px;
+    width:25%;
+    float: left;
+	bottom: 10px;
+}
+
+#var {
+    background-color: #ffffff;
+    border: 1px solid;
+	
+	
+}
+
+#footer {
+	clear:both;
+    background-color: #C9F76F;
+    border: 1px solid;
+}
+
