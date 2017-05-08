@@ -27,5 +27,5 @@ Come si usa github?
 
     non fare mai push senza commit.
 
-	(MP) Grazie Rà
+	(MP) Grazie Rà, capito tutto, farò delle prove
     
