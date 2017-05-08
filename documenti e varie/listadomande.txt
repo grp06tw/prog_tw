@@ -1,4 +1,4 @@
-mobile??
+﻿mobile??
     ->(RM) da chiedere al prof per fattore sito responsive
 Staff e admin possono acquisire cupon???
     ->(RM) credo sia ovvio, nessuno vienta ad un membro di staff usufruire del sito
@@ -26,4 +26,6 @@ Come si usa github?
     team->remote->push
 
     non fare mai push senza commit.
+
+	(MP) Grazie Rà
     
