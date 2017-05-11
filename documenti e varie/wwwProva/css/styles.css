@@ -1,3 +1,31 @@
+ul {
+list-style-type: none;
+padding-left: 0;
+margin-left: 0;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: #F58529;
+    background-color: transparent;
+}
+a:hover, a:active {
+    text-decoration: underline overline;
+    color: #aaa;
+}
+
+input,select{	
+	color: #F58529;
+	font-weight:bold;
+}
+select > option{
+		font-weight:normal;
+}
+
+#wrapper{
+	margin:10px;
+}
+
 #logo{
 	height: 150px;
 	margin-left:10px;
@@ -10,7 +38,7 @@
  background-color:#555;
  padding: 10px;
  height: 150px;
- margin: 10px 0px 5px 0px;
+ margin: 10px 0px 0px 0px;
 }
 
 .src{
@@ -25,15 +53,14 @@
 	margin-top: 55px;
 	margin-left: 200px;
 	height: 50px;
-	width:900px;
+	min-width:750px;
 	
 }
 
 	#form_src{
 		padding:0px;
 		margin:0px;
-		width:670px;
-		float:left;
+		display: inline;
 	}
 		#cat_src{
 			height:100%;
@@ -48,31 +75,21 @@
 			height:100%;
 			border:0px;
 			margin-right:-4px;
-			width:300px;
+			min-width:250px;
+			width:40%;
 		}
 		#submit_src, .submit{
 			height:100%;
 			border:0px;
 			width:100px;
 		}
-		
-		
-			
-		
-
-/* da sistemare */
 
 #login{
-	
+	float:right;
 	height:100%;
-	width:204px;
+	
 	
 }
-
-
-
-
-
 
 
 		
@@ -80,42 +97,39 @@
 
 
 
-#faux {
- background: url(faux-1-2-col.gif);
- margin-bottom: 5px;
- overflow: auto; 
- width: 100%
+
+#menu { 
+
+
+ background-color: #DDD;
+ padding:10px;
+ width:200px;
+ float: left;
+ 
 }
 
-#navigation {
- color: #333;
- padding: 10px;
- margin: 0px 0px 5px 0px;
- background: #ABBEBE;
+#menu > ul >li{
+	
+	text-align:center;
+	padding:10%;
+	height:20px;
+	margin:10px;
+	background-color:#555;
 }
-#leftcolumn { 
- display: inline;
- color: #333;
- margin:10px;
- padding:0;
- width: 195px;
- float: left;
-}
-#rightcolumn { 
- float: right;
- color: #333;
- margin:10px;
- padding:0;
- width: 683px;
- display: inline;
- position: relative;
+
+#page { 
+
+ background-color: #DDD;
+ margin:10px 0px 0px 230px;
+ padding:20px;
+
+ 
 }
 #footer { 
- 
+ margin-top:10px;
  clear: both;
  color: #333;
  background: #ABBEBE;
- margin: 0px 0px 10px 0px;
  padding: 10px;
 }
 .clear { clear: both; background: none; }
