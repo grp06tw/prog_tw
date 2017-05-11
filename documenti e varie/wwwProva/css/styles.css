@@ -53,7 +53,7 @@ select > option{
 	margin-top: 55px;
 	margin-left: 200px;
 	height: 50px;
-	min-width:750px;
+	min-width:800px;
 	
 }
 
@@ -75,7 +75,7 @@ select > option{
 			height:100%;
 			border:0px;
 			margin-right:-4px;
-			min-width:250px;
+			min-width:300px;
 			width:40%;
 		}
 		#submit_src, .submit{
