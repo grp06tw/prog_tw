@@ -26,6 +26,4 @@ Come si usa github?
     team->remote->push
 
     non fare mai push senza commit.
-
-	(MP) Grazie Rà, capito tutto, farò delle prove
     
