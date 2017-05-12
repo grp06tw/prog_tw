@@ -1,3 +1,23 @@
 Progettare Mappa del sito per ogni livello di utenza
 
-Viste database?s
+Viste database?
+
+PER LA SECONDA REVISIONE
+
+-Inserire nella mappa link il logout da tutti i livelli tranne nello 0
+
+-sistemare la vista della promozione, div con tutte le info dentro da andare successivamente ad aggiungere al layout iniziale
+
+-risolvere il problema dell'header in modo che sia responsive
+
+-codifica accesso al dB (dopo che il prof l'ha spiegato a lezione)
+
+-fare i link per rendere il sito navigabile
+
+-gestire il layout per la modifica di qualcosa (che poi potremo utilizzare per utenti, promozioni, aziende(?)), menù cliccabile con il CRUD, crea, leggi, modifica, elimina
+
+-documentazione, possibilmente ogni volta che si fa qualcosa di nuovo aggiungere al file documentazione
+
+-far funzionare il debuggher, fare il debug su almeno un file php che contenga un ciclo for e una funzione (xdebug)
+
+-stupiamolo con qualcosa
