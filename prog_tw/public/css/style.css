@@ -8,6 +8,10 @@ padding-left: 0;
 margin-left: 0;
 }
 
+h1{
+	color:#0398CA;
+}
+
 a:link, a:visited {
     text-decoration: none;
     /*color: #F58529;*/
@@ -111,50 +115,50 @@ select > option{
 
 
 		
-* { padding: 0; margin: 0; }
+    * { padding: 0; margin: 0; }
 
 
-/*END HEADER*/
+    /*END HEADER*/
 
-/*MAIN PAGE*/
-#main_page{
-  
-}
-#menu {
- 
- background-color: #DDD;
- padding:10px;
- width:200px;
- float: left;
-}
+    /*MAIN PAGE*/
+    #main_page{
 
-	#menu > ul >li{
-		
-		text-align:center;
-		padding:8%;
-		height:20px;
-		margin:5px;
-		background-color:#555;
-	}
-	
-	.p_menu{
-		font-weight:bold;
-		font-size:14pt;
-	}
+    }
+    #menu {
+
+     background-color: #DDD;
+     padding:10px;
+     width:200px;
+     float: left;
+    }
+
+            #menu > ul >li{
+
+                    text-align:center;
+                    padding:8%;
+                    height:20px;
+                    margin:5px;
+                    background-color:#555;
+            }
+
+            .p_menu{
+                    font-weight:bold;
+                    font-size:14pt;
+            }
 
 
 
-#page { 
- background-color: #DDD;
- margin:10px 0px 0px 230px;
- padding:20px;
-}
-#footer { 
- margin-top:10px;
- clear: both;
- background: #555;
- padding: 10px;
-}
+    #page { /*martyyyy sta quiii!*/
+     background-color: #DDD;
+     margin:10px 0px 0px 230px;
+     padding:20px;
+    }
+    #footer { 
+     margin-top:10px;
+     clear: both;
+     background: #555;
+     padding: 10px;
+    }
 
 /*END MAIN PAGE*/
 .clear { clear: both; background: none; }
@@ -166,12 +170,10 @@ select > option{
     ______________________
 */
 
-.static h1{
-	color:#0398CA;
-}
 
 #iframe{
     width:80%;
     height:600px;
     border:0px;
 }
+
