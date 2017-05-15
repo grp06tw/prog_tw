@@ -9,8 +9,7 @@ class PublicController extends Zend_Controller_Action {
     }
     
     public function indexAction() {
-        $this->view->assign(array('text' => $this->_testo)
-                );
+        $this->view->assign(array('text' => $this->_testo));
     }
     
     
