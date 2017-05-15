@@ -1,7 +1,7 @@
 <?php echo $this->doctype() ?>
 <html>
     <head>
-	<?= $this->headMeta(); ?>
+	<?= $this->headMeta(); ?> <!esegue i wiew hepler inizializzati dal bootstrap >
         <?= $this->headLink(); ?>
         <?= $this->headTitle(); ?>
     </head>
@@ -54,7 +54,9 @@
                                 al primo avvio, o ad un eventuale ricaricamento della pagina home
                                 troveremo il contenuto del file index.phtml>
                     
-                    <?php echo $this->layout()->content; ?>
+                    <?php echo $this->layout()->content; ?> <!inserisce nella pagina il contenuto della variabile content
+                                                              nella quale viene inserito il file della vista associata al controller/action
+                                                              così da essere integrato nel layout>
                     
                     <div class="clear"> </div>
 		</div>
