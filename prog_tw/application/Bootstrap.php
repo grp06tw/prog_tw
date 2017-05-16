@@ -2,6 +2,28 @@
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+    protected $_logger;
+    protected $_view;
+
+    protected function _initLogging()
+    {
+        $writer = new Zend_Log_Writer_Stream(APPLICATION_PATH . '/data/log/logFile.log');        
+        $logger = new Zend_Log($writer); 
+
+        //la prossima ints mi permette di utilizzare l'oggetto logger,
+        // di classe Zend_log, non solo qui nel bootstrap, dove è stato creato,
+        //ma lo metto nell'oggetto pubblico Zend_Registry (singleton)
+        //accessibile da tutti gli oggetti del progetto, rendendolo disponibile in
+        //qualunque parte della mia application
+        Zend_Registry::set('log', $logger);
+        
+        //in questo modo (non è necessario perche sta gia qui, ma lo farò in tutti gli altri casi)
+        //richiamo  il logger dallo Zend_Registry
+        $this->_logger = $logger;
+        
+        //così faccio stampare nel file di log una nuova stringa tramite il metodo info()
+    	$this->_logger->info('Bootstrap ' . __METHOD__);
+    }
      
       protected function _initRequest()
 	// Aggiunge un'istanza di Zend_Controller_Request_Http nel Front_Controller
