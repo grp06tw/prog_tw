@@ -23,4 +23,14 @@ class PublicController extends Zend_Controller_Action {
         $page = $this->_getParam('staticPage');
         $this->render($page);
     }
+    
+    public function aziendeAction() {
+        $this->view->assign(array('text' => "LOREM IPSUM"));
+        
+    }
+    
+    public function faqAction() {
+        $this->view->assign(array('text' => "LOREM IPSUM"));
+        
+    }
 }
