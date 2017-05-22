@@ -18,6 +18,6 @@ PER LA SECONDA REVISIONE
 
 -documentazione, possibilmente ogni volta che si fa qualcosa di nuovo aggiungere al file documentazione
 
--far funzionare il debuggher, fare il debug su almeno un file php che contenga un ciclo for e una funzione (xdebug)
+-FATTO: far funzionare il debuggher, fare il debug su almeno un file php che contenga un ciclo for e una funzione (xdebug)
 
 -stupiamolo con qualcosa
