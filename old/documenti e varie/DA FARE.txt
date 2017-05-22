@@ -14,10 +14,14 @@ PER LA SECONDA REVISIONE
 
 -FATTO: fare i link per rendere il sito navigabile
 
--gestire il layout per la modifica di qualcosa (che poi potremo utilizzare per utenti, promozioni, aziende(?)), menù cliccabile con il CRUD, crea, leggi, modifica, elimina
+-(ALE)gestire il layout per la modifica di qualcosa (che poi potremo utilizzare per utenti, promozioni, aziende(?)), menù cliccabile con il CRUD, crea, leggi, modifica, elimina
 
 -documentazione, possibilmente ogni volta che si fa qualcosa di nuovo aggiungere al file documentazione
 
 -FATTO: far funzionare il debuggher, fare il debug su almeno un file php che contenga un ciclo for e una funzione (xdebug)
 
 -stupiamolo con qualcosa
+
+
+
+ripensa

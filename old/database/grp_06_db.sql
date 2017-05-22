@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 21, 2017 alle 09:17
+-- Creato il: Mag 22, 2017 alle 16:23
 -- Versione del server: 10.1.19-MariaDB
 -- Versione PHP: 5.6.28
 
@@ -34,8 +34,16 @@ CREATE TABLE `azienda` (
   `indirizzo` varchar(100) COLLATE utf8_bin NOT NULL,
   `localizzazione` text COLLATE utf8_bin,
   `descrizione` text COLLATE utf8_bin NOT NULL,
-  `ID_Utente` int(10) NOT NULL
+  `ID_Utente` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dump dei dati per la tabella `azienda`
+--
+
+INSERT INTO `azienda` (`ID_Azienda`, `ragione_sociale`, `nome`, `logo`, `indirizzo`, `localizzazione`, `descrizione`, `ID_Utente`) VALUES
+(1, 'ragionesociale', 'nomeAzienda', 'default.jpg', 'indirizzo', NULL, 'descrizione', NULL),
+(2, 'ragioneAzienda2', 'nomeAzienda"', 'default.jpg', 'indirizzo2', NULL, 'descrizione seconda azienda', NULL);
 
 -- --------------------------------------------------------
 
@@ -47,6 +55,15 @@ CREATE TABLE `categoria` (
   `ID_Categoria` int(10) NOT NULL,
   `nome` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dump dei dati per la tabella `categoria`
+--
+
+INSERT INTO `categoria` (`ID_Categoria`, `nome`) VALUES
+(1, 'Elettronica'),
+(2, 'Abbigliamento'),
+(3, 'Giardinaggio');
 
 -- --------------------------------------------------------
 
@@ -97,13 +114,19 @@ CREATE TABLE `promozione` (
   `sconto` int(2) NOT NULL,
   `inizio` date NOT NULL,
   `fine` date NOT NULL,
-  `tipologia` varchar(30) COLLATE utf8_bin DEFAULT NULL,
   `descrizione` text COLLATE utf8_bin NOT NULL,
-  `immagine` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `immagine` varchar(100) COLLATE utf8_bin DEFAULT 'default.jpg',
   `ID_Categoria` int(10) NOT NULL,
   `ID_Azienda` int(10) NOT NULL,
   `ID_Combo` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dump dei dati per la tabella `promozione`
+--
+
+INSERT INTO `promozione` (`ID_Promozione`, `titolo`, `prezzo`, `sconto`, `inizio`, `fine`, `descrizione`, `immagine`, `ID_Categoria`, `ID_Azienda`, `ID_Combo`) VALUES
+(1, 'promozione1', 10000, 10, '2017-05-09', '2018-05-31', 'pomozione per l''acquisto di un bel niente scontato', 'default.jpg', 1, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -113,6 +136,7 @@ CREATE TABLE `promozione` (
 
 CREATE TABLE `utente` (
   `ID_Utente` int(10) NOT NULL,
+  `Username` varchar(30) COLLATE utf8_bin NOT NULL,
   `password` varchar(30) COLLATE utf8_bin NOT NULL,
   `nome` varchar(30) COLLATE utf8_bin NOT NULL,
   `cognome` varchar(30) COLLATE utf8_bin NOT NULL,
@@ -123,6 +147,13 @@ CREATE TABLE `utente` (
   `indirizzo` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `lvl_accesso` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dump dei dati per la tabella `utente`
+--
+
+INSERT INTO `utente` (`ID_Utente`, `Username`, `password`, `nome`, `cognome`, `genere`, `eta`, `telefono`, `email`, `indirizzo`, `lvl_accesso`) VALUES
+(1, 'admin', 'admin', 'nome', 'cognome', 'm', 20, NULL, 'mail', NULL, 1);
 
 --
 -- Indici per le tabelle scaricate
@@ -185,12 +216,12 @@ ALTER TABLE `utente`
 -- AUTO_INCREMENT per la tabella `azienda`
 --
 ALTER TABLE `azienda`
-  MODIFY `ID_Azienda` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Azienda` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT per la tabella `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `ID_Categoria` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Categoria` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT per la tabella `combo`
 --
@@ -210,12 +241,12 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT per la tabella `promozione`
 --
 ALTER TABLE `promozione`
-  MODIFY `ID_Promozione` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Promozione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT per la tabella `utente`
 --
 ALTER TABLE `utente`
-  MODIFY `ID_Utente` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Utente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Limiti per le tabelle scaricate
 --
