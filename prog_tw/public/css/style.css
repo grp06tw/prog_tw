@@ -50,14 +50,15 @@ select > option{
     }
 
     #logo{
-            height: 150px;
-            margin-left:10px;
+            padding:25px;
+            height: 100px;
+            margin-right:10px;
             float:left;
             border:0px;
     }
             #img_logo{
 
-            height: 150px;	
+            height: 100px;	
     }
 
     .src{
