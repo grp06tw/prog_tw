@@ -1,0 +1,37 @@
+<ul>
+    <!HOME>
+    <li>
+        <p class="p_menu"><a href="<?= $this->url(array(
+                                    'controller' => 'public',
+                                    'action'     => 'index',
+                                    ), 
+                                    'default',true);?>" title="Home">Home	</a></p>
+    </li>
+    <!AZIENDE>
+    <li>
+        <p class="p_menu"><a href="<?= $this->url(array(
+                                    'controller' => 'public',
+                                    'action'     => 'aziende',                                    
+                                    ), 
+                                    'default',true);?>" title="Aziende">Aziende	</a></p>
+    </li>
+    <!CHI SIAMO>
+    <li>
+        <p class="p_menu"><a href="<?= $this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'viewstatic',
+                        'staticPage' => 'who'), 
+                        'default',true
+                        ); ?>" title="Chi Siamo">Chi Siamo	</a></p>
+    </li>
+    <!DOVE SIAMO>
+    <li>
+        <p class="p_menu"><a href="<?= $this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'viewstatic',
+                        'staticPage' => 'where'), 
+                        'default',true
+                        ); ?>" title="Dove Siamo">Dove Trovarci	</a></p>
+    </li>
+    
+</ul>
