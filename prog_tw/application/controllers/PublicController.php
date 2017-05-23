@@ -11,6 +11,7 @@ class PublicController extends Zend_Controller_Action {
         //imposto come layouy il file main.phtml
         $this->_helper->layout->setLayout('main');
         $this->view->assign(array('menu' => "_menu.phtml"));
+        $this->view->assign(array('topbar' => "_topbar.phtml"));
     }
     
     public function indexAction() {
@@ -30,11 +31,14 @@ class PublicController extends Zend_Controller_Action {
     
     public function aziendeAction() {
         $this->view->assign(array('text' => "LOREM IPSUM"));
-        $this->view->assign(array('menu' => "_menu2.phtml"));
     }
     
     public function faqAction() {
-        $this->view->assign(array('text' => "LOREM IPSUM"));
-        
+        $this->view->assign(array('text' => "LOREM IPSUM"));  
+    }
+    
+    public function reservedareaAction() {
+        $this->view->assign(array('menu' => "_menuadmin.phtml"));
+        $this->view->assign(array('text' => "LOREM IPSUM"));  
     }
 }
