@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 22, 2017 alle 16:23
+-- Creato il: Mag 24, 2017 alle 16:32
 -- Versione del server: 10.1.19-MariaDB
 -- Versione PHP: 5.6.28
 
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `grp_06_db`
@@ -126,7 +126,11 @@ CREATE TABLE `promozione` (
 --
 
 INSERT INTO `promozione` (`ID_Promozione`, `titolo`, `prezzo`, `sconto`, `inizio`, `fine`, `descrizione`, `immagine`, `ID_Categoria`, `ID_Azienda`, `ID_Combo`) VALUES
-(1, 'promozione1', 10000, 10, '2017-05-09', '2018-05-31', 'pomozione per l''acquisto di un bel niente scontato', 'default.jpg', 1, 2, NULL);
+(1, 'promozione1', 10000, 10, '2017-05-09', '2018-05-31', 'pomozione per l''acquisto di un bel niente scontato', 'default.jpg', 1, 2, NULL),
+(2, 'promo2', 222, 10, '2017-05-15', '2017-12-24', 'fgrtjykuhhgyjthrgjkkht', 'default.jpg', 2, 2, NULL),
+(3, 'promo3', 45, 7, '2017-05-16', '2017-12-24', 'm,iokjbhgvrederftgyhujikiytrc', 'default.jpg', 3, 1, NULL),
+(4, 'promo4', 222, 50, '2017-05-15', '2017-12-24', 'fgrtjykuhhgyjthrgjkkht', 'default.jpg', 2, 2, NULL),
+(5, 'promo5', 45, 3, '2017-05-16', '2017-12-24', 'm,iokjbhgvrederftgyhujikiytrc', 'default.jpg', 3, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -241,7 +245,7 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT per la tabella `promozione`
 --
 ALTER TABLE `promozione`
-  MODIFY `ID_Promozione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_Promozione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT per la tabella `utente`
 --
