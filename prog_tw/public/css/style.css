@@ -189,7 +189,7 @@ select > option{
     margin-bottom: 15px;
 }
 
-    #img_promo
+    .img_promo
     {
         height: 120px;
         width: 120px;
@@ -214,31 +214,22 @@ select > option{
     #pricebox
     {
         text-align: right;
-        /*height: 60px;
-        width: 100px;
-        background-color: #B0F76D;
-        */
         float: right;
         margin: -30px 0px 0px 10px;
     }
     
-        #price
+        .price
         {
             font-size: 25px;
         }
 
-        #discount
+        .discount
         {
             font-size: 20px;
         }
     
     #desc
     {
-        /*text-align: left;
-        width: 60%;
-        background-color: #B0F76D;
-        padding: 10px;
-        */
         height: 150px;
         margin: 35px 110px 0px 145px;
     }

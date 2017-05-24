@@ -27,16 +27,8 @@
 <!-- fine div della promozione-->
         <?php endforeach;?>
 
-<!-- paginator -->
+<!-- paginator-- >
   <?php if($this->promozioni instanceof Zend_Paginator) {
 	  		echo $this->paginationControl($this->promozioni,'Sliding','public/_paginator.phtml');
 	  } 
 	  ?>
-
-<!-- 
-<br><br>
-index.phtml
-<br><br>
-testo creato dal controller:
-<br><br>
--->

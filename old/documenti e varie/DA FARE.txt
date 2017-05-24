@@ -23,5 +23,11 @@ PER LA SECONDA REVISIONE
 -stupiamolo con qualcosa
 
 
+- aggiungi bottoni per visualizzazione per categoria e per azienda
+
+- sistemare menù area riservata, appena si clicca l'area riservata ci deve essere una index, poi si può cliccare sugli elementi del crud
+
+
+
 
 ripensa
