@@ -1,0 +1,54 @@
+                                          <!inizio del div della promozione>
+        
+        <?php foreach ($this->promozioni as $promo) : ?>
+             <div id="promo">  
+                            <div id="tit">
+                                <h2> <?= $promo->titolo ?> </h3>
+                            </div>
+
+                            <img id="img_promo" src="/prog_tw/public/img/carrello.jpg">     
+
+                            <div id="pricebox">
+
+                                <div id="price">
+                                    25000 €
+                                </div>
+
+                                <div id="discount">
+                                    sconto del <b>50%</b><br>
+                                    <del>50000</del> €
+                                </div>
+
+                            </div>
+
+                            <div id="desc">
+
+                                I Cerchi dal II al IX sono ripartiti in tre zone,
+                                dove sono puniti rispettivamente i peccati di eccesso (II-VI),
+                                di violenza (VII), di frode (VIII-IX).
+                                gli indovini camminano con la testa rovesciata all'indietro,
+                                per aver voluto vedere troppo avanti quand'erano vivi;
+                                i ladri hanno le mani legate dietro la schiena da orribili serpenti
+                                , per averle usate malamente sulla Terra, e così via.
+                                Non sempre il contrappasso ha un significato chiaro e privo di ambiguità.
+
+                            </div>
+
+                            <input id="submit_buy" type="submit" value="Ottieni">
+
+                        </div> 
+<!-- fine div della promozione-->
+        <?php endforeach;?>
+                                        
+<br><br>
+index.phtml
+<br><br>
+testo creato dal controller:
+<br><br>
+
+
+<!-- paginator-- >
+  <?php if($this->promozioni instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->promozioni,'Sliding','public/_paginator.phtml');
+	  } 
+	  ?>

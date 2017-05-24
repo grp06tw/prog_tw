@@ -12,7 +12,6 @@ class IndexController extends Zend_Controller_Action
     {
        $this->_helper->redirector('index','public');
        //mi redirige all'action index del PublicController
-        
     }
 
 

@@ -63,7 +63,7 @@ class Application_Form_Staff_Promo_Add extends App_Form_Abstract
                                     'destination' => APPLICATION_PATH . '/../public/img/promo',
                                     'validators' => array( 
                                         array('Count', false, 1),
-                                        array('Size', false, 102400),
+                                        array('Size', false, 1048576),
                                         array('Extension', false, array('jpg', 'gif'))),
                                     'decorators' => $this->fileDecorators,
 			));
@@ -73,21 +73,11 @@ class Application_Form_Staff_Promo_Add extends App_Form_Abstract
 		foreach ($cats as $cat) {
 			$categories[$cat -> ID_Categoria] = $cat->nome;
 		}
-		$this->addElement('select', 'categoria', array(
+		$this->addElement('select', 'ID_categoria', array(
                                     'label' => 'Categoria',
                                     'required' => true,
                                     'multiOptions' => $categories,
                                     'decorators' => $this->elementDecorators,
-		));
-
-		
-
-		$this->addElement('text', 'descShort', array(
-                        'label' => 'Descrizione Breve',
-                        'required' => true,
-                        'filters' => array('StringTrim'),
-                        'validators' => array(array('StringLength',true, array(1,30))),
-			'decorators' => $this->elementDecorators,
 		));
 
 //AZIENDA 		
@@ -97,14 +87,14 @@ class Application_Form_Staff_Promo_Add extends App_Form_Abstract
 		foreach ($az as $azienda) {
 			$aziende[$azienda -> ID_Azienda] = $azienda->nome;
 		}
-		$this->addElement('select', 'azienda', array(
+		$this->addElement('select', 'ID_azienda', array(
                                     'label' => 'Azienda',
                                     'required' => true,
                                     'multiOptions' => $aziende,
                                     'decorators' => $this->elementDecorators,
 		));
 
-		
+//SUBMIT 		
 		$this->addElement('submit', 'add', array(
                                     'label' => 'Aggiungi Promozione',
                                     'decorators' => $this->buttonDecorators,
