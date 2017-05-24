@@ -11,12 +11,35 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract
 	public function init()
     {
     }
+    
+   //ORDER o PER CATEGORIA o PER AZIENDA
+    
+    // Estrae tutte le promozioni
+    public function getProms($paged=null, $order=null)
+    {
+		$select = $this->select();
+                              
+                    if (true === is_array($order)) {
+                        $select->order($order);
+                    }
+                    
+                if (null !== $paged) {
+			$adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+			$paginator = new Zend_Paginator($adapter);
+			$paginator->setItemCountPerPage(2)
+		          	  ->setCurrentPageNumber((int) $paged);
+			return $paginator;
+		}
+        return $this->fetchAll($select);
+    }
+    
 
-	// Estrae i prodotti della categoria $categoryId, eventualmente paginati ed ordinati
-    public function getProdsByCat($categoryId, $paged=null, $order=null)
+	// Estrae le promozioni della categoria $categoryId, eventualmente paginati ed ordinati
+    public function getPromsByCat($categoryId, $paged=null, $order=null)
     {
         $select = $this->select()
-        			       ->where('catId IN(?)', $categoryId);
+                        ->where('catId IN(?)', $categoryId);
+        
         if (true === is_array($order)) {
             $select->order($order);
         }
@@ -30,23 +53,12 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract
         return $this->fetchAll($select);
     } 
 
-	// Estrae i prodotti IN SCONTO della categoria $categoryId, eventualmente paginati ed ordinati
-    public function getDiscProds($categoryId, $paged=null, $order=null)
+    
+        //CRUD
+    
+     public function insertPromo($promo)
     {
-        $select = $this->select()
-        			   ->where('catId IN(?)', $categoryId)
-        			   ->where('discounted = 1');
-        if (true === is_array($order)) {
-            $select->order($order);
-        }
-		if (null !== $paged) {
-			$adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
-			$paginator = new Zend_Paginator($adapter);
-			$paginator->setItemCountPerPage(2)
-		          	  ->setCurrentPageNumber((int) $paged);
-			return $paginator;
-		}
-        return $this->fetchAll($select);
-    } 
+    	$this->insert($promo);
+    }
 }
 

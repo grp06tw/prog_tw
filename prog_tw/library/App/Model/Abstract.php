@@ -4,10 +4,11 @@ abstract class App_Model_Abstract
 {	
 	protected $_resources = array();
 	
+        //aggiunge la risorsa e rinomina il percorso
 	public function getResource($name) 
 	{
 		if (!isset($this->_resources[$name])) {
-            $class = implode('_', array(
+                    $class = implode('_', array(
                     $this->_getNamespace(),
                     'Resource',
                     $name));                    

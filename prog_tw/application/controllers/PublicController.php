@@ -1,9 +1,7 @@
 <?php
 
 class PublicController extends Zend_Controller_Action {
-
-    protected $_testo = '<p>Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus placerat consectetuer. Donec ipsum. Proin imperdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in consectetuer hendrerit, urna elit eleifend nunc, ut consectetuer nisl felis ac diam. Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Phasellus pellentesque. Mauris quam enim, molestie in, rhoncus ut, lobortis a, est. </p><p>Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus placerat consectetuer. Donec ipsum. Proin imperdiet est. Phasellus dapibus semper urna. Pellentesque ornare, orci in consectetuer hendrerit, urna elit eleifend nunc, ut consectetuer nisl felis ac diam. Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Phasellus pellentesque. Mauris quam enim, molestie in, rhoncus ut, lobortis a, est.</p>';
-
+    
     protected $_logger;
 
     
@@ -15,7 +13,20 @@ class PublicController extends Zend_Controller_Action {
     }
     
     public function indexAction() {
-        $this->view->assign(array('text' => $this->_testo));
+        $this->_catalogModel = new Application_Model_Catalog(); //Instanzio il model
+        
+      
+        
+        $paged = $this->_getParam('page', 1);
+        $ordine = $this->_getParam('order', null);//da modificare
+        
+        $promozioni=$this->_catalogModel->getProms($paged,$ordine);
+        
+        
+        $this->view->assign(array(
+            		'promozioni' => $promozioni
+            		)
+        );
     }
     
     
@@ -38,7 +49,6 @@ class PublicController extends Zend_Controller_Action {
     }
     
     public function reservedareaAction() {
-        $this->view->assign(array('menu' => "_menuadmin.phtml"));
-        $this->view->assign(array('text' => "LOREM IPSUM"));  
+        $this->_helper->redirector('index','staff');
     }
 }

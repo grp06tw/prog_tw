@@ -9,6 +9,11 @@ class Application_Resource_Azienda extends Zend_Db_Table_Abstract
 	public function init()
     {
     }
-      
+      public function getAziende()
+    {
+		$select = $this->select()
+                               ->order('nome');
+        return $this->fetchAll($select);
+    }
 }
 

@@ -124,17 +124,16 @@ select > option{
 #menu {
  
  background-color: #DDD;
- padding:10px;
- width:200px;
+ width:220px;
  float: left;
 }
 
 	#menu > ul >li{
 		
 		text-align:center;
-		padding:8%;
+                padding:8% 0%;
 		height:20px;
-		margin:5px;
+                margin:5px;
 		background-color:#555;
 	}
 	

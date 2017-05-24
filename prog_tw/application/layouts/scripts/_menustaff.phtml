@@ -10,7 +10,11 @@
         </li>
         <!Aggiungi Promozione>
         <li>
-            <p class="p_menu"><a href="" title="Aziende">Aggiungi Promozione	</a></p>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'staff',
+                                        'action'     => 'newpromo',
+                                        ), 
+                                        'default',true);?>" title="AddPromo">Aggiungi Promozione	</a></p>
         </li>
         <!Elimina Promozione>
         <li>
