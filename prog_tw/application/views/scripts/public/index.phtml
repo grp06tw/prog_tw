@@ -1,3 +1,34 @@
-<?php
+<!inizio del div della promozione>
+        
+        <?php foreach ($this->promozioni as $promo) : ?>
+             <div id="promo">  
+                            <div id="tit">
+                                <h2> <?= $promo->titolo ?> </h3>
+                            </div>
+                               
+                            <!-- prende il css dalla classe .img_promo-->
+                            <?= $this->promoImg($promo->immagine) ?>
 
-//non fa niente perchè nella init del controlIndex rimanda direttamente alla action che visualizza le promozioni
+                            <div id="pricebox">
+
+                                <?= $this->Price($promo) ?>
+
+                            </div>
+
+                            <div id="desc">
+
+                                <?= $promo->descrizione ?>
+
+                            </div>
+
+                            <input id="submit_buy" type="submit" value="Ottieni">
+
+                        </div> 
+<!-- fine div della promozione-->
+        <?php endforeach;?>
+
+<!-- paginator -->
+  <?php if($this->promozioni instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->promozioni,'Sliding','public/paginator/_paginator.phtml');
+	  } 
+	  ?>
