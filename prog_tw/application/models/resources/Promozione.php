@@ -52,13 +52,29 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract
 		}
         return $this->fetchAll($select);
     } 
+    
+    
+    public function getPromoByID($id)
+    {
+        return $this->find($id)->current();
+    } 
 
     
-        //CRUD
-    
-     public function insertPromo($promo)
+    //INSERT
+    public function insertPromo($promo)
     {
     	$this->insert($promo);
+    }
+    
+    //DELETE
+    public function delPromo($promo)
+    {
+        $this->delete("ID_Promozione = ".$promo["ID_Promozione"]);
+    }
+    //UPDATE
+    public function updatePromo($promo)
+    {
+	$this->update($promo, "ID_Promozione = ".$promo["ID_Promozione"]);
     }
 }
 

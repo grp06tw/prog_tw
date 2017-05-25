@@ -1,5 +1,5 @@
 <?php
-class Application_Form_Staff_Promo_Delete extends App_Form_Abstract
+class Application_Form_Staff_Promo_Select extends App_Form_Abstract
 {
 	protected $_staffModel;
 
@@ -7,7 +7,7 @@ class Application_Form_Staff_Promo_Delete extends App_Form_Abstract
 	{
 		$this->_staffModel = new Application_Model_Staff();
 		$this->setMethod('post');
-		$this->setName('deletepromo');
+		$this->setName('selectpromo');
 		$this->setAction('');
 		$this->setAttrib('enctype', 'multipart/form-data');
                 
@@ -25,8 +25,8 @@ class Application_Form_Staff_Promo_Delete extends App_Form_Abstract
 		));
 
 //SUBMIT 		
-		$this->addElement('submit', 'delete', array(
-                                    'label' => 'Elimina Promozione',
+		$this->addElement('submit', 'update', array(
+                                    'label' => 'Modifica Promozione',
                                     'decorators' => $this->buttonDecorators,
 		));
 

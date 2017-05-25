@@ -11,15 +11,21 @@ class StaffController extends Zend_Controller_Action
 		$this->_helper->layout->setLayout('main');
 		$this->_staffModel = new Application_Model_Staff();
 		$this->view->newpromoForm = $this->getAddPromoForm();
+                $this->view->deletepromoForm = $this->getDeletePromoForm();
+                $this->view->selectupdateForm = $this->getSelectUpdateForm();
                 $this->view->assign(array('menu' => "_menustaff.phtml"));
-                 $this->view->assign(array('topbar' => "_topbar.phtml"));
+                $this->view->assign(array('topbar' => "_topbar.phtml"));
 	}
 
 	public function indexAction()
 	{}
         
+     
         
-        public function newpromoAction()//VAFFF***O
+        
+        //ADD PROMO       
+       
+        public function newpromoAction()
 	{}
         
         
@@ -45,6 +51,105 @@ class StaffController extends Zend_Controller_Action
 		$this->_form->setAction($urlHelper->url(array(
 				'controller' => 'staff',
 				'action' => 'addpromo'),
+				'default'
+				));
+		return $this->_form;
+	}
+        
+        
+        
+        //DELETE PROMO
+        
+         public function deletepromoAction()
+	{}
+        
+        
+	public function delpromoAction()
+	{
+		if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index');
+		}
+		$form=$this->_form;
+		if (!$form->isValid($_POST)) {
+			$form->setDescription('operazione non riuscita');
+			return $this->render('deletepromo');
+		}
+		$values = $form->getValues();
+		$this->_staffModel->delPromo($values);
+		$this->_helper->redirector('deletepromo');
+	}
+
+	private function getDeletePromoForm()
+	{
+		$urlHelper = $this->_helper->getHelper('url');
+		$this->_form = new Application_Form_Staff_Promo_Delete;
+		$this->_form->setAction($urlHelper->url(array(
+				'controller' => 'staff',
+				'action' => 'delpromo'),
+				'default'
+				));
+		return $this->_form;
+	}
+        
+        
+         //UPDATE PROMO
+        
+         public function updatepromoAction()
+	{}
+        
+        
+	public function updpromoAction()
+	{
+		if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index');
+		}
+		$form=$this->_form;
+		if (!$form->isValid($_POST)) {
+			$form->setDescription('operazione non riuscita');
+			return $this->render('updatepromo');
+		}
+		$values = $form->getValues();
+		//UPDATE
+                $this->_staffModel->updatePromo($values);
+		$this->_helper->redirector('updatepromo');
+	}
+
+     
+        //Seleziona la promo da modificare
+        private function getSelectUpdateForm(){
+		$urlHelper = $this->_helper->getHelper('url');
+		$this->_form = new Application_Form_Staff_Promo_Select();
+		$this->_form->setAction($urlHelper->url(array(
+				'controller' => 'staff',
+				'action' => 'popolate'),
+				'default'
+				));
+		return $this->_form;
+	}
+        
+        public function popolateAction()
+	{
+		 if (!$this->getRequest()->isPost()) {
+			$this->_helper->redirector('index');
+		}
+		$form=$this->_form;
+		if (!$form->isValid($_POST)) {
+			$form->setDescription('operazione non riuscita');
+			return $this->render('updatepromo');
+		}
+		$values = $form->getValues();
+                $this->view->updatepromoForm = $this->getUpdatePromoForm($values);
+	}
+
+        
+        
+        	private function getUpdatePromoForm($values)
+	{
+		$urlHelper = $this->_helper->getHelper('url');
+		$this->_form = new Application_Form_Staff_Promo_Add($values);
+		$this->_form->setAction($urlHelper->url(array(
+				'controller' => 'staff',
+				'action' => 'updpromo'),
 				'default'
 				));
 		return $this->_form;
