@@ -10,12 +10,10 @@ class PublicController extends Zend_Controller_Action {
         $this->_helper->layout->setLayout('main');
         $this->view->assign(array('menu' => "_menu.phtml"));
         $this->view->assign(array('topbar' => "_topbar.phtml"));
+        $this->_catalogModel = new Application_Model_Catalog();
     }
     
     public function indexAction() {
-        $this->_catalogModel = new Application_Model_Catalog(); //Instanzio il model
-        
-      
         
         $paged = $this->_getParam('page', 1);
         $ordine = $this->_getParam('order', null);//da modificare
@@ -27,8 +25,25 @@ class PublicController extends Zend_Controller_Action {
             		'promozioni' => $promozioni
             		)
         );
+        
+        
     }
     
+    public function promoAction() {
+        
+        $paged = $this->_getParam('page', 1);
+        $ordine = $this->_getParam('order', null);//da modificare
+        
+        $promozioni=$this->_catalogModel->getProms($paged,$ordine);
+        
+        
+        $this->view->assign(array(
+            		'promozioni' => $promozioni
+            		)
+        );
+        
+        
+    }
     
      public function viewstaticAction() {
          //mi permette di impostare la view da visualizare
@@ -41,7 +56,24 @@ class PublicController extends Zend_Controller_Action {
     }
     
     public function aziendeAction() {
-        $this->view->assign(array('text' => "LOREM IPSUM"));
+        //$this->view->assign(array('text' => "LOREM IPSUM"));
+        
+        
+        // controlla se _catalogModel è già istanziato
+        // if(!_catalogModel)
+        
+        $paged = $this->_getParam('page', 1);
+        $ordine = $this->_getParam('order', null);//da modificare
+        
+        $aziende=$this->_catalogModel->getAziende($paged,$ordine);
+        
+        
+        $this->view->assign(array(
+            		'aziende' => $aziende
+            		)
+        );
+        
+        $this->view->assign(array('aziende','public'));
     }
     
     public function faqAction() {

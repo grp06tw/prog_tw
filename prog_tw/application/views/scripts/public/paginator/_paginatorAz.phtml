@@ -1,0 +1,27 @@
+<?php if ($this->pageCount > 1): ?>
+    <div id="pagination">
+        <?php echo $this->firstItemNumber; ?> - <?= $this->lastItemNumber; ?> di <?= $this->totalItemCount; ?> ---
+
+        <!-- Link alla prima pagina -->
+        <?php if (isset($this->previous)): ?>
+          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'aziende', 'page' => $this->first)); ?>">Inizio</a> |
+        
+        <!-- Link alla pagina precedente -->
+          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'aziende', 'page' => $this->previous)); ?>">&lt; Precedente</a> |
+        
+        <?php else: ?>
+           Inizio |  &lt; Precedente |
+        <?php endif; ?>
+
+        <!-- Link alla pagina successiva -->
+        <?php if (isset($this->next)): ?>
+          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'aziende', 'page' => $this->next)); ?>">Successivo &gt;</a> |
+
+        <!-- Link all'ultima pagina -->
+       
+          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'aziende', 'page' => $this->last)); ?>">Fine</a>
+        <?php else: ?>
+          Successivo &gt; | Fine
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

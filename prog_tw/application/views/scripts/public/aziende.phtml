@@ -1,6 +1,24 @@
-     visualizza.phtml
-<br><br>
-testo creato dal controller:
-<br><br>
-<?php
-    echo $this->text;
+
+<?php foreach ($this->aziende as $az) : ?>
+    <div id="promo">  
+        <div id="tit">
+            <h2> <?= $az->nome ?> </h3>
+        </div>
+
+        <!-- prende il css dalla classe .img_promo-->
+        <?= $this->promoImg($az->logo) ?>
+
+        <div id="desc">
+
+            <?= $az->descrizione ?>
+
+        </div>
+
+    </div> 
+
+ <?php endforeach;?>
+
+  <?php if($this->aziende instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->aziende,'Sliding','public/paginator/_paginatorAz.phtml');
+	  } 
+	  ?>
