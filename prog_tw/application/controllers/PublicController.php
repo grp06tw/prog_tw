@@ -14,19 +14,7 @@ class PublicController extends Zend_Controller_Action {
     }
     
     public function indexAction() {
-        
-        $paged = $this->_getParam('page', 1);
-        $ordine = $this->_getParam('order', null);//da modificare
-        
-        $promozioni=$this->_catalogModel->getProms($paged,$ordine);
-        
-        
-        $this->view->assign(array(
-            		'promozioni' => $promozioni
-            		)
-        );
-        
-        
+        $this->_helper->redirector('promo','public');
     }
     
     public function promoAction() {
@@ -59,8 +47,8 @@ class PublicController extends Zend_Controller_Action {
         //$this->view->assign(array('text' => "LOREM IPSUM"));
         
         
-        // controlla se _catalogModel è già istanziato
-        // if(!_catalogModel)
+        // controlla se _catalogModel è già istanziato (?)
+        //if(NULL === _catalogModel)
         
         $paged = $this->_getParam('page', 1);
         $ordine = $this->_getParam('order', null);//da modificare
