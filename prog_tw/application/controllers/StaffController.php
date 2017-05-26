@@ -108,7 +108,9 @@ class StaffController extends Zend_Controller_Action
 			return $this->render('updatepromo');
 		}
 		$values = $form->getValues();
-                $this->view->updatepromoForm = $this->getUpdatePromoForm($values);
+                $app=$this->_staffModel->getPromoById($values);
+                $prova=$app["ID_Promozione"];
+                $this->view->updatepromoForm = $this->getUpdatePromoForm($app->toArray());
 	}
 
         
@@ -156,7 +158,8 @@ class StaffController extends Zend_Controller_Action
         	private function getUpdatePromoForm($values)
 	{
 		$urlHelper = $this->_helper->getHelper('url');
-		$this->_addform = new Application_Form_Staff_Promo_Add($values);
+		$this->_addform = new Application_Form_Staff_Promo_Add();
+                $this->_addform->populate($values);
 		$this->_addform->setAction($urlHelper->url(array(
 				'controller' => 'staff',
 				'action' => 'updpromo'),
