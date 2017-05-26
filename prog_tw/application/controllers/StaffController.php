@@ -37,7 +37,7 @@ class StaffController extends Zend_Controller_Action
 			$this->_helper->redirector('index');
 		}
 		$form=$this->_addform;
-		if (!$form->isValid($_POST)) {
+		if (!$form->isValid($request->getPost())) {
 			$form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
 			return $this->render('newpromo');
 		}
@@ -61,7 +61,7 @@ class StaffController extends Zend_Controller_Action
 			$this->_helper->redirector('index');
 		}
 		$form=$this->_delform;
-		if (!$form->isValid($_POST)) {
+		if (!$form->isValid($request->getPost())) {
 			$form->setDescription('operazione non riuscita');
 			return $this->render('deletepromo');
 		}
@@ -84,7 +84,7 @@ class StaffController extends Zend_Controller_Action
 			$this->_helper->redirector('index');
 		}
 		$form=$this->_addform;
-		if (!$form->isValid($_POST)) {
+		if (!$form->isValid($request->getPost())) {
 			$form->setDescription('operazione non riuscita');
 			return $this->render('updatepromo');
 		}
@@ -103,7 +103,7 @@ class StaffController extends Zend_Controller_Action
 			$this->_helper->redirector('index');
 		}
 		$form=$this->_selform;
-		if (!$form->isValid($_POST)) {
+		if (!$form->isValid($request->getPost())) {
 			$form->setDescription('operazione non riuscita');
 			return $this->render('updatepromo');
 		}
