@@ -36,7 +36,6 @@ class Application_Form_Staff_Promo_Add extends App_Form_Abstract
                 
             //ID  -> Serve per la update
                 $this->addElement('hidden', 'ID_Promozione', array(
-                                    'attribs'    => array('disabled' => 'disabled'),
                                     'filters' => array('StringTrim'),
                                     'show' => 'none',
                                     'decorators' => $this->elementDecorators,

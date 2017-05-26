@@ -6,7 +6,7 @@
                                         'controller' => 'public',
                                         'action'     => 'index',
                                         ), 
-                                        'default',true);?>" title="Promozioni">Promozioni	</a></p>
+                                        'default',true);?>" title="Home">Home	</a></p>
         </li>
         <!AZIENDE>
         <li>
@@ -45,15 +45,24 @@
                                         'action'     => 'faq',                                    
                                         ), 
                                         'default',true);?>" title="FAQ">FAQ		</a></p>
-        </li>
+        </li>   
         
-        <!LOGIN>
+         <!PROFILO>
         <li>
             <p class="p_menu"><a href="<?= $this->url(array(
                                         'controller' => 'public',
-                                        'action'     => 'reservedarea',                                    
+                                        'action'     => 'modificaprofilo',                                    
                                         ), 
-                                        'default',true);?>" title="Accedi al sito">Login		</a></p>
+                                        'default',true);?>" title="Modifica il tuo Profilo">Il tuo Profilo		</a></p>
+        </li>
+        
+        <!LOGOUT>
+        <li>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'logout',                                    
+                                        ), 
+                                        'default',true);?>" title="Fai il logout">Logout		</a></p>
         </li>
     </ul>
 </div>
