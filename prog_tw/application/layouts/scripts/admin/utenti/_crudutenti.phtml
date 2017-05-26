@@ -1,0 +1,39 @@
+<div id="menu">
+    <ul>
+        <!INDIETRO>
+        <li>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'reservedarea',
+                                        ), 
+                                        'default',true);?>" title="Torna alla home di area riservata">Indietro	</a></p>
+        </li>
+        <!Aggiungi Utente>
+        <li>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'newutente',
+                                        ), 
+                                        'default',true);?>" title="Aggiungi una nuova Utente">Aggiungi Utente	</a></p>
+        </li>
+        <!Elimina Utente>
+        <li>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'deleteutente',
+                                        ), 
+                                        'default',true);?>" title="Elimina una Utente">Elimina Utente	</a></p>
+        </li>
+
+        <!Modifica Utente>
+        <li>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'updateutente',
+                                        ), 
+                                        'default',true);?>" title="Modifica una Utente">Modifica Utente	</a></p>
+        </li>
+
+
+    </ul>
+</div>

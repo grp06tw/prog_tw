@@ -1,0 +1,57 @@
+<div id="menu">
+    <ul>
+        <!HOME>
+        <li>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'index',
+                                        ), 
+                                        'default',true);?>" title="Home">Home	</a></p>
+        </li>
+        <!CRUD AZIENDE>
+        <li>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'aziende',
+                                        ), 
+                                        'default',true);?>" title="Aggiungi una nuova Promozione">Aggiungi Promozione	</a></p>
+        </li>
+        <!CRUD CATEGORIE>
+        <li>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'categorie',
+                                        ), 
+                                        'default',true);?>" title="Elimina una Promozione">Elimina Promozione	</a></p>
+        </li>
+
+        <!CRUD UTENTI>
+        <li>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'utenti',
+                                        ), 
+                                        'default',true);?>" title="Modifica una Promozione">Modifica Promozione	</a></p>
+        </li>
+        
+        <!CRUD FAQ>
+        <li>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'faq',
+                                        ), 
+                                        'default',true);?>" title="Modifica una Promozione">Modifica Promozione	</a></p>
+        </li>
+        
+        <!STATISTICHE>
+        <li>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'stats',
+                                        ), 
+                                        'default',true);?>" title="Modifica una Promozione">Modifica Promozione	</a></p>
+        </li>
+
+
+    </ul>
+</div>
