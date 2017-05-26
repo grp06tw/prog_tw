@@ -3,13 +3,15 @@
 class PublicController extends Zend_Controller_Action {
     
     protected $_logger;
+    protected $_logform;
+    protected $_authService;
 
-    
     public function init() {
         //imposto come layouy il file main.phtml
         $this->_helper->layout->setLayout('main');
         $this->view->assign(array('menu' => "_menu.phtml"));
         $this->view->assign(array('topbar' => "_topbar.phtml"));
+        $this->view->loginForm = $this->getLoginForm();
         $this->_catalogModel = new Application_Model_Catalog();
     }
     
@@ -83,6 +85,39 @@ class PublicController extends Zend_Controller_Action {
     public function reservedareaAction() {
         $this->_helper->redirector('index','staff');
     }
-    
+  
+    //LOGIN
+    public function loginAction()
+    {}
+
+    public function authenticateAction()
+    {        
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
+            return $this->_helper->redirector('login');
+        }
+        $form = $this->_logform;
+        if (!$form->isValid($request->getPost())) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+        	    return $this->render('login');
+        }
+        if (false === $this->_authService->authenticate($form->getValues())) {
+            $form->setDescription('Autenticazione fallita. Riprova');
+            return $this->render('login');
+        }
+        return $this->_helper->redirector('index', $this->_authService->getIdentity()->role);
+    }
+	
+    private function getLoginForm()
+        {
+    		$urlHelper = $this->_helper->getHelper('url');
+		$this->_logform = new Application_Form_Public_Login();
+    		$this->_logform->setAction($urlHelper->url(array(
+			'controller' => 'public',
+			'action' => 'authenticate'),
+			'default'
+		));
+		return $this->_logform;
+        }
     
 }
