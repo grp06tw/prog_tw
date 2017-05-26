@@ -65,8 +65,13 @@ select > option{
                     height:100%;
                     float:left;
     }
-
+	
 	/* SEARCH */
+	
+	#forl_src > #cat_src ,#submit_src , #login > .submit{
+		background-color: #75B60C;
+		color: black;
+	}
 
 	#div_src {
 		position: relative;
@@ -113,7 +118,6 @@ select > option{
 
 		
 * { padding: 0; margin: 0; }
-
 
 /*END HEADER*/
 
@@ -245,3 +249,18 @@ select > option{
         */
         float: right;
     }
+	
+/* ________________________
+        STILE PAGINATOR
+___________________________
+*/
+
+#pagination {
+	text-align :center;
+        background-color: #8B9898;
+        border-radius: 5px;
+}
+
+#pagination a {
+	/*border-bottom:none*/
+}
