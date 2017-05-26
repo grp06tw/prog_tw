@@ -3,9 +3,9 @@
     ______________________
 */
 ul {
-list-style-type: none;
-padding-left: 0;
-margin-left: 0;
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
 }
 
 a:link, a:visited {
@@ -20,12 +20,12 @@ a:hover, a:active {
 }
 
 input,select{	
-	/*color: #F58529;*/
-        color: #0398CA;
-	font-weight:bold;
+    /*color: #F58529;*/
+    color: #0398CA;
+    font-weight:bold;
 }
 select > option{
-		font-weight:normal;
+    font-weight:normal;
 }
 
 /*  ______________________
@@ -34,130 +34,130 @@ select > option{
 */
 
 #wrapper{
-	margin:10px;
-	min-width: 1020px;
+    margin:10px;
+    min-width: 1020px;
 }
 
-    /*HEADER*/
+/*HEADER*/
 
 
-    #header {
+#header {
 
-     background-color:#555;
-     padding: 10px;
-     height: 150px;
-     margin: 10px 0px 0px 0px;
-    }
+    background-color:#555;
+    padding: 10px;
+    height: 150px;
+    margin: 10px 0px 0px 0px;
+}
 
-    #logo{
-            padding:25px;
-            height: 100px;
-            margin-right:10px;
-            float:left;
-            border:0px;
-    }
-            #img_logo{
+#logo{
+    padding:25px;
+    height: 100px;
+    margin-right:10px;
+    float:left;
+    border:0px;
+}
+#img_logo{
 
-            height: 100px;	
-    }
+    height: 100px;	
+}
 
-    .src{
-                    height:100%;
-                    float:left;
-    }
-	
-	/* SEARCH */
-	
-	#forl_src > #cat_src ,#submit_src , #login > .submit{
-		background-color: #75B60C;
-		color: black;
-	}
+.src{
+    height:100%;
+    float:left;
+}
 
-	#div_src {
-		position: relative;
-		margin-top: 55px;
-		margin-left: 200px;
-		height: 150px;
-		min-width:800px;
-		
-	}
+/* SEARCH */
 
-		#form_src{
-			padding:0px;
-			margin:0px;
-			display: inline;
-			height:50px;
-		}
-			#cat_src{
-				height:100%;
-				width:150px;
-				border:0px;
-				background-color:#DDD;
-				margin-right:-4px;
-				padding:10px;
-			}
-			#desc_src{
-				padding-left:20px;
-				height:100%;
-				border:0px;
-				margin-right:-5px;
-				min-width:300px;
-				width:40%;
-			}
-			#submit_src, .submit{
-				height:100%;
-				border:0px;
-				width:100px;
-			}
+#forl_src > #cat_src ,#submit_src , #login > .submit{
+    background-color: #75B60C;
+    color: black;
+}
 
-                #login{
-                        float:right;
-                        height:50px;	
-                }
+#div_src {
+    position: relative;
+    margin-top: 55px;
+    margin-left: 200px;
+    height: 150px;
+    min-width:800px;
+
+}
+
+#form_src{
+    padding:0px;
+    margin:0px;
+    display: inline;
+    height:50px;
+}
+#cat_src{
+    height:100%;
+    width:150px;
+    border:0px;
+    background-color:#DDD;
+    margin-right:-4px;
+    padding:10px;
+}
+#desc_src{
+    padding-left:20px;
+    height:100%;
+    border:0px;
+    margin-right:-5px;
+    min-width:300px;
+    width:40%;
+}
+#submit_src, .submit{
+    height:100%;
+    border:0px;
+    width:100px;
+}
+
+#login{
+    float:right;
+    height:50px;	
+}
 
 
-		
+
 * { padding: 0; margin: 0; }
 
 /*END HEADER*/
 
 /*MAIN PAGE*/
 #main_page{
-  
+
 }
 #menu {
- 
- background-color: #DDD;
- width:220px;
- float: left;
+
+    background-color: #DDD;
+    width:220px;
+    float: left;
 }
 
-	#menu > ul >li{
-		
-		text-align:center;
-                padding:8% 0%;
-		height:20px;
-                margin:5px;
-		background-color:#555;
-	}
-	
-	.p_menu{
-		font-weight:bold;
-		font-size:14pt;
-	}
+#menu > ul >li{
+
+    text-align:center;
+    padding:8% 0%;
+    height:20px;
+    margin:5px;
+    background-color:#555;
+}
+
+.p_menu{
+    font-weight:bold;
+    font-size:14pt;
+}
 
 
 
 #page { 
- background-color: #DDD;
- margin:10px 0px 0px 230px;
- padding:20px;
+    background-color: #DDD;
+    margin:10px 0px 0px 230px;
+    padding:20px;
 }
 #footer { 
- margin-top:10px;
- clear: both;
- background: #555;
- padding: 10px;
+    margin-top:10px;
+    clear: both;
+    background: #555;
+    padding: 10px;
 }
 
 /*END MAIN PAGE*/
@@ -171,7 +171,7 @@ select > option{
 */
 
 .static h1{
-	color:#0398CA;
+    color:#0398CA;
 }
 
 #iframe{
@@ -193,74 +193,74 @@ select > option{
     margin-bottom: 15px;
 }
 
-    .img_promo
-    {
-        height: 120px;
-        width: 120px;
-        margin-top: 40px;
-        float:left;
-    }
-    
-    #tit
-    {
-        padding: 10px;
-        height: 20px;
-        width: 60%;
-    }
-    
-        h2 
-        {
-            color: #313837;
-            font-size: 30px;
-            margin-left: 130px;
-        }
-    
-    #pricebox
-    {
-        text-align: right;
-        float: right;
-        margin: -30px 0px 0px 10px;
-    }
-    
-        .price
-        {
-            font-size: 25px;
-        }
+.img_promo
+{
+    height: 120px;
+    width: 120px;
+    margin-top: 40px;
+    float:left;
+}
 
-        .discount
-        {
-            font-size: 20px;
-        }
-    
-    #desc
-    {
-        height: 150px;
-        margin: 35px 110px 0px 145px;
-    }
-    
-    #submit_buy
-    {
-        height:30px;
-        width:100px;
-        border:0px;
-        margin-top: -30px;
-        /*
-        position: absolute;
-        */
-        float: right;
-    }
-	
+#tit
+{
+    padding: 10px;
+    height: 20px;
+    width: 60%;
+}
+
+h2 
+{
+    color: #313837;
+    font-size: 30px;
+    margin-left: 130px;
+}
+
+#pricebox
+{
+    text-align: right;
+    float: right;
+    margin: -30px 0px 0px 10px;
+}
+
+.price
+{
+    font-size: 25px;
+}
+
+.discount
+{
+    font-size: 20px;
+}
+
+#desc
+{
+    height: 150px;
+    margin: 35px 110px 0px 145px;
+}
+
+#submit_buy
+{
+    height:30px;
+    width:100px;
+    border:0px;
+    margin-top: -30px;
+    /*
+    position: absolute;
+    */
+    float: right;
+}
+
 /* ________________________
         STILE PAGINATOR
 ___________________________
 */
 
 #pagination {
-	text-align :center;
-        background-color: #8B9898;
-        border-radius: 5px;
+    text-align :center;
+    background-color: #8B9898;
+    border-radius: 5px;
 }
 
 #pagination a {
-	/*border-bottom:none*/
+    /*border-bottom:none*/
 }
