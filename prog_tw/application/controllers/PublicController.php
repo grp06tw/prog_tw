@@ -85,7 +85,7 @@ class PublicController extends Zend_Controller_Action {
     public function reservedareaAction() {
         $this->_helper->redirector('index','staff');
     }
-    
+  
     //LOGIN
     public function loginAction()
     {}
@@ -118,7 +118,6 @@ class PublicController extends Zend_Controller_Action {
 			'default'
 		));
 		return $this->_logform;
-        }   
-    
+        }
     
 }
