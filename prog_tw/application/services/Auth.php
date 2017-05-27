@@ -50,7 +50,7 @@ class Application_Service_Auth
     {
 	$authAdapter = new Zend_Auth_Adapter_DbTable(
 		Zend_Db_Table_Abstract::getDefaultAdapter(),
-		'utente',
+		'Utente',
 		'Username',
 		'password'
 	);
