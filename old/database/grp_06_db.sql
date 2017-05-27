@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 27, 2017 alle 16:16
+-- Creato il: Mag 27, 2017 alle 16:34
 -- Versione del server: 10.1.19-MariaDB
 -- Versione PHP: 5.6.28
 
@@ -19,17 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `grp_06_db`
 --
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `acl`
---
-
-CREATE TABLE `acl` (
-  `ID_acl` int(1) NOT NULL,
-  `classe` varchar(15) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -179,12 +168,6 @@ INSERT INTO `utente` (`ID_Utente`, `Username`, `password`, `nome`, `cognome`, `g
 --
 
 --
--- Indici per le tabelle `acl`
---
-ALTER TABLE `acl`
-  ADD PRIMARY KEY (`ID_acl`);
-
---
 -- Indici per le tabelle `azienda`
 --
 ALTER TABLE `azienda`
@@ -238,11 +221,6 @@ ALTER TABLE `utente`
 -- AUTO_INCREMENT per le tabelle scaricate
 --
 
---
--- AUTO_INCREMENT per la tabella `acl`
---
-ALTER TABLE `acl`
-  MODIFY `ID_acl` int(1) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT per la tabella `azienda`
 --
