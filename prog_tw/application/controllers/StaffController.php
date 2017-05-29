@@ -37,7 +37,7 @@ class StaffController extends Zend_Controller_Action
 			$this->_helper->redirector('index');
 		}
 		$form=$this->_addform;
-		if (!$form->isValid($request->getPost())) {
+		if (!$form->isValid($_POST)) {
 			$form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
 			return $this->render('newpromo');
 		}
@@ -61,7 +61,7 @@ class StaffController extends Zend_Controller_Action
 			$this->_helper->redirector('index');
 		}
 		$form=$this->_delform;
-		if (!$form->isValid($request->getPost())) {
+		if (!$form->isValid($_POST)) {
 			$form->setDescription('operazione non riuscita');
 			return $this->render('deletepromo');
 		}
@@ -84,7 +84,7 @@ class StaffController extends Zend_Controller_Action
 			$this->_helper->redirector('index');
 		}
 		$form=$this->_addform;
-		if (!$form->isValid($request->getPost())) {
+		if (!$form->isValid($_POST)) {
 			$form->setDescription('operazione non riuscita');
 			return $this->render('updatepromo');
 		}
@@ -103,12 +103,14 @@ class StaffController extends Zend_Controller_Action
 			$this->_helper->redirector('index');
 		}
 		$form=$this->_selform;
-		if (!$form->isValid($request->getPost())) {
+		if (!$form->isValid($_POST)) {
 			$form->setDescription('operazione non riuscita');
 			return $this->render('updatepromo');
 		}
 		$values = $form->getValues();
-                $this->view->updatepromoForm = $this->getUpdatePromoForm($values);
+                $app=$this->_staffModel->getPromoById($values);
+                $prova=$app["ID_Promozione"];
+                $this->view->updatepromoForm = $this->getUpdatePromoForm($app->toArray());
 	}
 
         
@@ -156,7 +158,8 @@ class StaffController extends Zend_Controller_Action
         	private function getUpdatePromoForm($values)
 	{
 		$urlHelper = $this->_helper->getHelper('url');
-		$this->_addform = new Application_Form_Staff_Promo_Add($values);
+		$this->_addform = new Application_Form_Staff_Promo_Add();
+                $this->_addform->populate($values);
 		$this->_addform->setAction($urlHelper->url(array(
 				'controller' => 'staff',
 				'action' => 'updpromo'),

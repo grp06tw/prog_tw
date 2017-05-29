@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 25, 2017 alle 15:09
+-- Creato il: Mag 27, 2017 alle 16:34
 -- Versione del server: 10.1.19-MariaDB
 -- Versione PHP: 5.6.28
 
@@ -19,26 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `grp_06_db`
 --
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `acl`
---
-
-CREATE TABLE `acl` (
-  `ID_acl` int(1) NOT NULL,
-  `classe` varchar(15) CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dump dei dati per la tabella `acl`
---
-
-INSERT INTO `acl` (`ID_acl`, `classe`) VALUES
-(1, 'user'),
-(2, 'staff'),
-(3, 'admin');
 
 -- --------------------------------------------------------
 
@@ -171,27 +151,21 @@ CREATE TABLE `utente` (
   `telefono` varchar(15) COLLATE utf8_bin DEFAULT NULL,
   `email` varchar(30) COLLATE utf8_bin NOT NULL,
   `indirizzo` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `ID_acl` int(1) NOT NULL DEFAULT '1'
+  `role` varchar(10) COLLATE utf8_bin NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dump dei dati per la tabella `utente`
 --
 
-INSERT INTO `utente` (`ID_Utente`, `Username`, `password`, `nome`, `cognome`, `genere`, `eta`, `telefono`, `email`, `indirizzo`, `ID_acl`) VALUES
-(1, 'admin', 'admin', 'ammministratore', 'di prova', 'm', 20, NULL, 'mail', NULL, 3),
-(2, 'staff', 'staff', 'staff', 'di prova', 'f', 20, NULL, 'mailstaff', NULL, 2),
-(3, 'user', 'user', 'mario', 'rossi', 'm', 30, '0349', 'maiil', 'indirizzo', 1);
+INSERT INTO `utente` (`ID_Utente`, `Username`, `password`, `nome`, `cognome`, `genere`, `eta`, `telefono`, `email`, `indirizzo`, `role`) VALUES
+(1, 'admin', 'admin', 'ammministratore', 'di prova', 'm', 20, NULL, 'mail', NULL, 'admin'),
+(2, 'staff', 'staff', 'staff', 'di prova', 'f', 20, NULL, 'mailstaff', NULL, 'staff'),
+(3, 'user', 'user', 'mario', 'rossi', 'm', 30, '0349', 'maiil', 'indirizzo', 'role');
 
 --
 -- Indici per le tabelle scaricate
 --
-
---
--- Indici per le tabelle `acl`
---
-ALTER TABLE `acl`
-  ADD PRIMARY KEY (`ID_acl`);
 
 --
 -- Indici per le tabelle `azienda`
@@ -241,17 +215,12 @@ ALTER TABLE `promozione`
 --
 ALTER TABLE `utente`
   ADD PRIMARY KEY (`ID_Utente`),
-  ADD KEY `ID_acl` (`ID_acl`);
+  ADD KEY `ID_acl` (`role`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
 
---
--- AUTO_INCREMENT per la tabella `acl`
---
-ALTER TABLE `acl`
-  MODIFY `ID_acl` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT per la tabella `azienda`
 --
@@ -312,12 +281,6 @@ ALTER TABLE `promozione`
   ADD CONSTRAINT `promozione_ibfk_1` FOREIGN KEY (`ID_Combo`) REFERENCES `combo` (`ID_Combo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `promozione_ibfk_2` FOREIGN KEY (`ID_Azienda`) REFERENCES `azienda` (`ID_Azienda`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `promozione_ibfk_3` FOREIGN KEY (`ID_Categoria`) REFERENCES `categoria` (`ID_Categoria`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limiti per la tabella `utente`
---
-ALTER TABLE `utente`
-  ADD CONSTRAINT `utente_ibfk_1` FOREIGN KEY (`ID_acl`) REFERENCES `acl` (`ID_acl`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

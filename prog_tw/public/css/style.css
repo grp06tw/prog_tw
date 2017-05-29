@@ -67,11 +67,11 @@ select > option{
     }
 	
 	/* SEARCH */
-	
+	 /*
 	#forl_src > #cat_src ,#submit_src , #login > .submit{
 		background-color: #75B60C;
 		color: black;
-	}
+	}*/
 
 	#div_src {
 		position: relative;
