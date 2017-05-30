@@ -2,54 +2,79 @@
     <ul>
         <!HOME>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'public',
-                                        'action'     => 'index',
-                                        ), 
-                                        'default',true);?>" title="Home">Home	</a></p>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'promo',
+                    'logged' => 'admin'
+                        ), 'default', true);
+                ?>" title="Home">Home	</a></p>
         </li>
         <!CRUD AZIENDE>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'aziende',
-                                        ), 
-                                        'default',true);?>" title="Aggiungi una nuova Promozione">Aggiungi Promozione	</a></p>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'admin',
+                    'action' => 'aziende',
+                        ), 'default', true);
+                ?>" title="Gestisci Aziende">Gestisci Aziende	</a></p>
         </li>
         <!CRUD CATEGORIE>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'categorie',
-                                        ), 
-                                        'default',true);?>" title="Elimina una Promozione">Elimina Promozione	</a></p>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'admin',
+                    'action' => 'categorie',
+                        ), 'default', true);
+                ?>" title="Gestisci Categorie">Gestisci Categorie	</a></p>
         </li>
 
         <!CRUD UTENTI>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'utenti',
-                                        ), 
-                                        'default',true);?>" title="Modifica una Promozione">Modifica Promozione	</a></p>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'admin',
+                    'action' => 'utenti',
+                        ), 'default', true);
+                ?>" title="Gestisci Utenti">Gestisci Utenti	</a></p>
         </li>
-        
+
         <!CRUD FAQ>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'faq',
-                                        ), 
-                                        'default',true);?>" title="Modifica una Promozione">Modifica Promozione	</a></p>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'admin',
+                    'action' => 'faq',
+                        ), 'default', true);
+                ?>" title="Gestisci Faq">Gestisci FAQ	</a></p>
         </li>
-        
+
         <!STATISTICHE>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'stats',
-                                        ), 
-                                        'default',true);?>" title="Modifica una Promozione">Modifica Promozione	</a></p>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'admin',
+                    'action' => 'stats',
+                        ), 'default', true);
+                ?>" title="Accedi alle Statistiche">Statistiche	</a></p>
+        </li>
+        <!PROFILO>
+        <li>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'modificaprofilo',
+                        ), 'default', true);
+                ?>" title="Modifica il tuo Profilo">Il tuo Profilo		</a></p>
+        </li>
+        <!LOGOUT>
+        <li>
+            <p class="p_menu"><a href="<?=
+                                 $this->url(array(
+                                     'controller' => 'admin',
+                                     'action' => 'logout',
+                                         ), 'default', true);
+                                 ?>" title="Fai il logout">Logout		</a></p>
         </li>
 
 

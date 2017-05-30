@@ -9,7 +9,18 @@ class Application_Resource_Utente extends Zend_Db_Table_Abstract
 	public function init()
     {
     }
-      
+    
+    
+    public function getUsers($where = null)
+    {
+        if($where){
+    	return $this->fetchAll($this->select()->where('role = "staff"'));
+        }
+        else{
+            return $this->fetchAll($this->select());
+        }
+    }
+    
     public function getUserLogin($usrName)
     {
         return $this->fetchRow($this->select()->where('Username = ?', $usrName));

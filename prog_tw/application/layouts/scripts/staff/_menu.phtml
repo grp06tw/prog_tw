@@ -1,0 +1,81 @@
+<div id="menu">
+    <ul>
+        <!HOME>
+        <li>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'promo',
+                    'logged' => 'staff'
+                        ), 'default', true);
+                ?>" title="Promozioni">Promozioni	</a></p>
+        </li>
+        <!AZIENDE>
+        <li>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'aziende',
+                    'logged' => 'staff'
+                        ), 'default', true);
+                ?>" title="Aziende">Aziende	</a></p>
+        </li>
+        <!CHI SIAMO>
+        <li>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'viewstatic',
+                    'staticPage' => 'who',
+                    'logged' => 'staff'
+                    ), 'default', true
+                );
+                ?>" title="Chi Siamo">Chi Siamo	</a></p>
+        </li>
+        <!DOVE SIAMO>
+        <li>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'viewstatic',
+                    'staticPage' => 'where',
+                    'logged' => 'staff'
+                    ), 'default', true
+                );
+                ?>" title="Dove Siamo">Dove Trovarci	</a></p>
+        </li>
+        <!CONTATTACI>
+        <li>
+            <p class="p_menu"><a href="mailto:s1071182@studenti.univpm.it" title="Contatti">Contattaci</a></p>
+        </li>
+        <!FAQ>
+        <li>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'faq',
+                    'logged' => 'staff'
+                        ), 'default', true);
+                ?>" title="FAQ">FAQ		</a></p>
+        </li>   
+
+        <!AREA RISERVATA>
+        <li>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'staff',
+                    'action' => 'index',
+                        ), 'default', true);
+                ?>" title="Accedi all'area riservata">Area Riservata		</a></p>
+        </li>
+        <!LOGOUT>
+        <li>
+            <p class="p_menu"><a href="<?=
+                                 $this->url(array(
+                                     'controller' => 'staff',
+                                     'action' => 'logout',
+                                         ), 'default', true);
+                ?>" title="Fai il logout">Logout		</a></p>
+        </li>
+    </ul>
+</div>

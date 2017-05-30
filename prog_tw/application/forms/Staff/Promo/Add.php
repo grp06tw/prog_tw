@@ -71,7 +71,7 @@ class Application_Form_Staff_Promo_Add extends App_Form_Abstract
 		));
 //IMMAGINE                
                 $this->addElement('file', 'immagine', array(
-                                    'label' => 'Immagine' . $this->_promo["immagine"],
+                                    'label' => 'Immagine',
                                     'destination' => APPLICATION_PATH . '/../public/img/promo',
                                     'validators' => array( 
                                         array('Count', false, 1),
