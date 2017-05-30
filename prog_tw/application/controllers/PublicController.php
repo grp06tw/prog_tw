@@ -6,13 +6,23 @@ class PublicController extends Zend_Controller_Action {
     protected $_logform;
     protected $_authService;
     protected $_catalogModel;
+    protected $_logged;
 
     public function init() {
         //imposto come layouy il file main.phtml
         $this->_helper->layout->setLayout('main');
-        $this->view->assign(array('menu' => "_menu.phtml"));
-        $this->view->assign(array('topbar' => "_topbar.phtml"));
-        $this->view->loginForm = $this->getLoginForm();
+        $this->_logged=$this->_getParam('logged');
+        if($this->_logged){
+            $this->view->assign(array('menu' => $this->_logged."/_menu.phtml"));
+            $this->view->assign(array('topbar' => $this->_logged."/_topbar.phtml"));
+        }
+        else{
+            $this->view->assign(array('menu' => "_menu.phtml"));
+            $this->view->loginForm = $this->getLoginForm();
+            $this->view->assign(array('topbar' => "_topbar.phtml"));
+        }
+        
+        
         $this->_catalogModel = new Application_Model_Catalog();
         $this->_authService = new Application_Service_Auth();
     }

@@ -1,15 +1,36 @@
 <?php
 
-class Application_Model_Admin extends App_Model_Abstract
-{ 
+class Application_Model_Admin extends App_Model_Abstract {
 
-	public function __construct()
-    {
+    public function __construct() {
+        
     }
-    
-    public function getUserByName($info)
-    {
-    	return $this->getResource('Utente')->getUserLogin($info);
+
+    //USERS
+    public function getUsers($where = null) {
+        return $this->getResource('Utente')->getUsers($where);
+        
+    }
+
+    public function getUserByName($info) {
+        return $this->getResource('Utente')->getUserLogin($info);
+    }
+
+    //AZIENDA
+    public function getAziende() {
+        return $this->getResource('Azienda')->getAziende();
+    }
+
+    public function saveAzienda($values) {
+        return $this->getResource('Azienda')->insertAzienda($values);
+    }
+
+    public function delAzienda($values) {
+        return $this->getResource('Azienda')->deleteAzienda($values);
+    }
+
+    public function upAzienda($values) {
+        return $this->getResource('Azienda')->updateAzienda($values);
     }
 
 }

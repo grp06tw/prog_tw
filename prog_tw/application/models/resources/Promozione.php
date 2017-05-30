@@ -63,6 +63,9 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract
     //INSERT
     public function insertPromo($promo)
     {
+        if($promo['immagine']==null){
+             $promo['immagine']='default.jpg';
+         }
     	$this->insert($promo);
     }
     

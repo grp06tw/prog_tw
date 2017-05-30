@@ -4,24 +4,129 @@ class AdminController extends Zend_Controller_Action {
 
     protected $_adminModel;
     protected $_authService;
-    protected $_form;
+    protected $_newAzform;
+    protected $_delAzform;
+    protected $_upAzform;
 
     public function init() {
         $this->_helper->layout->setLayout('main');
-        //$this->view->assign(array('menu' => "admin/_reservedmenu.phtml"));
-        //$this->view->assign(array('topbar' => "_topbar.phtml"));
+        $this->view->assign(array('menu' => "admin/_reservedmenu.phtml"));
+        $this->view->assign(array('topbar' => "_topbar.phtml"));
         $this->_adminModel = new Application_Model_Admin();
-        //$this->view->productForm = $this->getProductForm();    	 
         $this->_authService = new Application_Service_Auth();
+
+        $this->view->newaziendaform = $this->getAddAziendaForm();
+        $this->view->delaziendaform = $this->getDelAziendaForm();
+        $this->view->upaziendaform = $this->getUpAziendaForm();
     }
 
     public function indexAction() {
         
     }
 
-    public function logoutAction() {
-        $this->_authService->clear();
-        return $this->_helper->redirector('index', 'public');
+    //AZIENDE
+    public function aziendeAction() {
+        $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
+    }
+
+    //NEW
+    public function newaziendaAction() {
+        $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
+        $this->view->newaziendaform = $this->getAddAziendaForm();
+    }
+
+    public function addaziendaAction() {
+        $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('newazienda');
+        }
+        $form = $this->_newform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('newazienda');
+        }
+        $values = $form->getValues();
+        $this->_adminModel->saveAzienda($values);
+        $this->_helper->redirector('newazienda');
+    }
+
+//DELeTE 
+    public function deleteaziendaAction() {
+        $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
+    }
+
+    public function delaziendaAction() {
+        $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('deleteazienda');
+        }
+        $form = $this->_delAzform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('operazione non riuscita');
+            return $this->render('deleteazienda');
+        }
+        $values = $form->getValues();
+        $this->_adminModel->delAzienda($values);
+        $this->_helper->redirector('deleteazienda');
+    }
+    
+    
+    //UPDATE
+
+    public function updateaziendaAction() {
+        $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
+    }
+
+//GET
+    private function getAddAziendaForm() {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_newform = new Application_Form_Admin_Azienda_Add();
+        $this->_newform->setAction($urlHelper->url(array(
+                    'controller' => 'admin',
+                    'action' => 'addazienda'), 'default'
+        ));
+        return $this->_newform;
+    }
+
+    private function getDelAziendaForm() {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_delAzform = new Application_Form_Admin_Azienda_Delete();
+        $this->_delAzform->setAction($urlHelper->url(array(
+                    'controller' => 'admin',
+                    'action' => 'delazienda'), 'default'
+        ));
+        return $this->_delAzform;
+    }
+
+    private function getUpAziendaForm() {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_upAzform = new Application_Form_Admin_Azienda_Select();
+        $this->_upAzform->setAction($urlHelper->url(array(
+                    'controller' => 'staff',
+                    'action' => 'popolate'), 'default'
+        ));
+        return $this->_upAzform;
+    }
+
+    //UTENTI
+    public function categorieAction() {
+        $this->view->assign(array('menu' => "admin/categorie/_crudcategorie.phtml"));
+    }
+
+    //CATEGORIE
+    public function utentiAction() {
+        $this->view->assign(array('menu' => "admin/utenti/_crudutenti.phtml"));
+    }
+
+    //FAQ
+    public function faqAction() {
+        $this->view->assign(array('menu' => "admin/faq/_crudfaq.phtml"));
+    }
+
+    //STATISTICHE
+
+    public function statsAction() {
+        
     }
 
     public function newproductAction() {
@@ -42,14 +147,9 @@ class AdminController extends Zend_Controller_Action {
         $this->_helper->redirector('index');
     }
 
-    private function getProductForm() {
-        $urlHelper = $this->_helper->getHelper('url');
-        $this->_form = new Application_Form_Admin_Product_Add();
-        $this->_form->setAction($urlHelper->url(array(
-                    'controller' => 'admin',
-                    'action' => 'addProduct'), 'default'
-        ));
-        return $this->_form;
+    public function logoutAction() {
+        $this->_authService->clear();
+        return $this->_helper->redirector('index', 'public');
     }
 
 }
