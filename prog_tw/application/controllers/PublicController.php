@@ -76,7 +76,20 @@ class PublicController extends Zend_Controller_Action {
     }
 
     public function faqAction() {
-        $this->view->assign(array('text' => "LOREM IPSUM"));
+        
+        $paged = $this->_getParam('page', 1);
+        $ordine = $this->_getParam('order', null); //da modificare
+
+        $faqs = $this->_catalogModel->getFaq($paged, $ordine);
+
+
+        $this->view->assign(array(
+            'faq' => $faqs
+                )
+        );
+
+        $this->view->assign(array('faq', 'public'));
+        
     }
 
     public function reservedareaAction() {

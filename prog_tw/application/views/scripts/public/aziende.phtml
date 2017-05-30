@@ -1,12 +1,12 @@
 
 <?php foreach ($this->aziende as $az) : ?>
-    <div id="promo">  
+    <div id="elemento">  
         <div id="tit">
-            <h2> <?= $az->nome ?> </h3>
+            <h2> <?= $az->nome ?> </h2>
         </div>
 
         <!-- prende il css dalla classe .img_promo-->
-        <?= $this->promoImg($az->logo) ?>
+        <?= $this->aziendaImg($az->logo) ?>
 
         <div id="desc">
 
