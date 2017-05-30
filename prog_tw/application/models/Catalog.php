@@ -38,4 +38,9 @@ class Application_Model_Catalog extends App_Model_Abstract
     {       
         return $this->getResource('Azienda')->getAziende($paged, $order);
     }
+    
+    public function getFaq($paged=null, $order=null)
+    {       
+        return $this->getResource('Faq')->getFaq($paged, $order);
+    }
 }
