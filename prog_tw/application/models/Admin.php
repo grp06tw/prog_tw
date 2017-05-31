@@ -20,6 +20,10 @@ class Application_Model_Admin extends App_Model_Abstract {
     public function getAziende() {
         return $this->getResource('Azienda')->getAziende();
     }
+    
+     public function getAziendaById($id) {
+        return $this->getResource('Azienda')->getAziendaById($id);
+    }
 
     public function saveAzienda($values) {
         return $this->getResource('Azienda')->insertAzienda($values);
