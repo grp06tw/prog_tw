@@ -4,7 +4,7 @@ abstract class App_Model_Abstract
 {	
 	protected $_resources = array();
 	
-        //aggiunge la risorsa e rinomina il percorso
+        //aggiunge la risorsa(controller(?)) e rinomina il percorso, deve comporre il nome della classe
 	public function getResource($name) 
 	{
 		if (!isset($this->_resources[$name])) {

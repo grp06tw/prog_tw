@@ -1,6 +1,17 @@
 
- <h3>login</h3>
- <p>Utilizza questa form per l'autenticazione</p>
- <br>
+<h3>login</h3>
+<p>Utilizza questa form per l'autenticazione</p>
+<br>
 
- <?=$this->loginForm; ?>
+<?= $this->loginForm; ?>
+
+<br>
+<p>Se non sei registrato
+
+    <a href="<?=
+    $this->url(array(
+        'controller' => 'public',
+        'action' => 'signin',
+            ), 'default', true);
+    ?>" title="Registrati">REGISTRATI</a>
+</p>
