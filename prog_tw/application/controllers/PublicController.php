@@ -7,6 +7,8 @@ class PublicController extends Zend_Controller_Action {
     protected $_authService;
     protected $_catalogModel;
     protected $_logged;
+    
+    //protected $_signform;
 
     public function init() {
         //imposto come layouy il file main.phtml
@@ -22,9 +24,10 @@ class PublicController extends Zend_Controller_Action {
             $this->view->assign(array('topbar' => "_topbar.phtml"));
         }
         
-        
         $this->_catalogModel = new Application_Model_Catalog();
         $this->_authService = new Application_Service_Auth();
+        
+        $this->view->signinForm = $this->getSigninForm();
     }
 
     public function indexAction() {
@@ -126,6 +129,39 @@ class PublicController extends Zend_Controller_Action {
                     'action' => 'authenticate'), 'default'
         ));
         return $this->_logform;
+    }
+    
+    //REGISTRAZIONE
+    public function signinAction() {
+        $this->view->signinForm = $this->getSigninForm();
+    }
+    
+    /*public function newuserAction() {
+        
+    }*/
+
+    public function adduserAction() {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('index'); //a cosa serve?
+        }
+        $form = $this->_signform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('signin');
+        }
+        $values = $form->getValues();
+        $this->_catalogModel->saveUser($values);
+        $this->_helper->redirector('index');
+    }
+    
+    private function getSigninForm() {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_signform = new Application_Form_Public_Signin();
+        $this->_signform->setAction($urlHelper->url(array(
+                    'controller' => 'public',
+                    'action' => 'adduser'), 'default'
+        ));
+        return $this->_signform;
     }
 
 }

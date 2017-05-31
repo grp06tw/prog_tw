@@ -244,7 +244,7 @@ select > option{
             font-size: 20px;
         }
     
-    #desc.promo
+    #desc.promo, #desc.azienda
     {
         height: 150px;
         margin: 35px 110px 0px 145px;

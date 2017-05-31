@@ -28,6 +28,21 @@ class Application_Resource_Utente extends Zend_Db_Table_Abstract
                 
     }	
     
-    //
+    //INSERT
+    public function insertUser($user)
+    {
+    	$this->insert($user);
+    }
+    
+    /*DELETE
+    public function delPromo($promo)
+    {
+        $this->delete("ID_Promozione = ".$promo["ID_Promozione"]);
+    }
+    //UPDATE
+    public function updatePromo($promo)
+    {
+	$this->update($promo, "ID_Promozione = ".$promo["ID_Promozione"]);
+    }*/
 }
 
