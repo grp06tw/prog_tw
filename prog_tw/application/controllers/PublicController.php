@@ -6,32 +6,36 @@ class PublicController extends Zend_Controller_Action {
     protected $_authService;
     protected $_catalogModel;
     protected $_logged;
+    protected $_signform;
+    protected $_searchform;
 
     public function init() {
+        //creo un istanza del model che userò per la visualizzazione delle promozioni-aziende etc
+        //questo model contiene tutte le query dell'area pubblica
+        $this->_catalogModel = new Application_Model_Catalog();
+
+        $this->_authService = new Application_Service_Auth();
+        
         //imposto come layouy il file main.phtml
         $this->_helper->layout->setLayout('main');
-        //se la richiesta è fatta da un utente registrato prendo il parametro logged che contiene
-        //al suo interno il livello di accesso
-        //e imposto i menu adatti, altrimenti assegno il menù di default
+        //se la richiesta è fatta da un utente registrato prendo il menu corrispondente, 
+        //altrimenti assegno il menù di default
         //e recupero la form di login(che non serve se l'utente è già loggato
-        $this->_logged = $this->_getParam('logged');
-        if ($this->_logged) {
-            $this->view->assign(array('menu' => $this->_logged . "/_menu.phtml"));
-            $this->view->assign(array('topbar' => $this->_logged . "/_topbar.phtml"));
+        if (isset($this->_authService->getIdentity()->role)) {
+            $prova=$this->_authService->getIdentity()->role;
+            $this->view->assign(array('menu' => $this->_authService->getIdentity()->role . "/_menu.phtml"));
+            $this->view->assign(array('topbar' => $this->_authService->getIdentity()->role . "/_topbar.phtml"));
         } else {
             $this->view->assign(array('menu' => "_menu.phtml"));
             $this->view->loginForm = $this->getLoginForm();
             $this->view->assign(array('topbar' => "_topbar.phtml"));
         }
 
-        //creo un istanza del model che userò per la visualizzazione delle promozioni-aziende etc
-        //questo model contiene tutte le query dell'area pubblica
-        $this->_catalogModel = new Application_Model_Catalog();
+        
 
-        $this->_authService = new Application_Service_Auth();
-
-        //recupero la form per la registrazione
+        //recupero la form per la registrazione e per la ricerca
         $this->view->signinForm = $this->getSigninForm();
+        $this->view->searchForm = $this->getSearchForm();
     }
 
     public function indexAction() {
@@ -195,6 +199,35 @@ class PublicController extends Zend_Controller_Action {
                     'action' => 'adduser'), 'default'
         ));
         return $this->_signform;
+    }
+
+    //****************************************
+    //                RICERCA
+    //****************************************    
+    
+    public function searchAction() {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('promo');
+        }
+        $form = $this->_searchform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('promo');
+        }
+        $values = $form->getValues();
+        $trovate=$this->_catalogModel->search($values);
+        //SONO ARRIVATO FIN QUI
+        $this->_helper->redirector('promo');
+    }
+    
+    private function getSearchForm() {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_searchform = new Application_Form_Public_Search();
+        $this->_searchform->setAction($urlHelper->url(array(
+                    'controller' => 'public',
+                    'action' => 'search'), 'default'
+        ));
+        return $this->_searchform;
     }
 
     //****************************************

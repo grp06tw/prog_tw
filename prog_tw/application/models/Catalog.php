@@ -6,6 +6,23 @@ class Application_Model_Catalog extends App_Model_Abstract {
         $this->_logger = Zend_Registry::get('log');
     }
 
+    //RICERCA
+    
+    public function search($values){
+        if($values['ID_Categoria']=='null' && $values['words']=='' ){
+                return;
+        }
+        if($values['words']=='' ){
+                return $this->getResource('Promozione')->getPromsByCat($values['ID_Categoria']);
+        }
+        if($values['ID_Categoria']=='null'){
+                return $this->getResource('Promozione')->getPromsByWord($values['words']);
+        }
+        
+        return $this->getResource('Promozione')->fullSearch($values['words'],$values['ID_Categoria']);
+    }
+    
+    
     // CATEGORIE
     public function getCats() {
         return $this->getResource('Categoria')->getCats();
