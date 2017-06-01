@@ -158,6 +158,18 @@ class PublicController extends Zend_Controller_Action {
         ));
         return $this->_logform;
     }
+    
+    // Validazione AJAX
+    public function validateloginAction() {
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_Public_Login();
+        $response = $loginform->processAjax($_POST);
+        if ($response !== null) {
+            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
+        }
+    }
 
     //****************************************
     //              REGISTRAZIONE
