@@ -6,7 +6,7 @@ class AdminController extends Zend_Controller_Action {
     protected $_authService;
     protected $_newAzform;
     protected $_delAzform;
-    protected $_upAzform;
+    protected $_selAzform;
 
     public function init() {
         $this->_helper->layout->setLayout('main');
@@ -17,7 +17,7 @@ class AdminController extends Zend_Controller_Action {
 
         $this->view->newaziendaform = $this->getAddAziendaForm();
         $this->view->delaziendaform = $this->getDelAziendaForm();
-        $this->view->upaziendaform = $this->getUpAziendaForm();
+        $this->view->selaziendaform = $this->getSelAziendaForm();
     }
 
     public function indexAction() {
@@ -69,23 +69,52 @@ class AdminController extends Zend_Controller_Action {
         $this->_adminModel->delAzienda($values);
         $this->_helper->redirector('deleteazienda');
     }
-    
-    
+
     //UPDATE
 
     public function updateaziendaAction() {
         $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
     }
 
+    public function updaziendaAction() {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('updateazienda');
+        }
+        $form = $this->_newAzform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('operazione non riuscita');
+            return $this->render('updateazienda');
+        }
+        $values = $form->getValues();
+        //UPDATE
+        $this->_adminModel->upAzienda($values);
+        $this->_helper->redirector('updateazienda');
+    }
+
+    public function popolateAction() {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('updateazienda');
+        }
+        $form = $this->_selAzform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('operazione non riuscita');
+            return $this->render('updateazienda');
+        }
+        $values = $form->getValues();
+        $app = $this->_adminModel->getAziendaById($values);
+        $prova = $app["ID_Azienda"];
+        $this->view->updateaziendaform = $this->getUpdateAziendaForm($app->toArray());
+    }
+
 //GET
     private function getAddAziendaForm() {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_newform = new Application_Form_Admin_Azienda_Add();
-        $this->_newform->setAction($urlHelper->url(array(
+        $this->_newAzform = new Application_Form_Admin_Azienda_Add();
+        $this->_newAzform->setAction($urlHelper->url(array(
                     'controller' => 'admin',
                     'action' => 'addazienda'), 'default'
         ));
-        return $this->_newform;
+        return $this->_newAzform;
     }
 
     private function getDelAziendaForm() {
@@ -98,14 +127,25 @@ class AdminController extends Zend_Controller_Action {
         return $this->_delAzform;
     }
 
-    private function getUpAziendaForm() {
+    private function getSelAziendaForm() {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_upAzform = new Application_Form_Admin_Azienda_Select();
-        $this->_upAzform->setAction($urlHelper->url(array(
-                    'controller' => 'staff',
+        $this->_selAzform = new Application_Form_Admin_Azienda_Select();
+        $this->_selAzform->setAction($urlHelper->url(array(
+                    'controller' => 'admin',
                     'action' => 'popolate'), 'default'
         ));
-        return $this->_upAzform;
+        return $this->_selAzform;
+    }
+
+    private function getUpdateAziendaForm($values) {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_newAzform = new Application_Form_Admin_Azienda_Add();
+        $this->_newAzform->populate($values);
+        $this->_newAzform->setAction($urlHelper->url(array(
+                    'controller' => 'admin',
+                    'action' => 'updazienda'), 'default'
+        ));
+        return $this->_newAzform;
     }
 
     //UTENTI
@@ -127,24 +167,6 @@ class AdminController extends Zend_Controller_Action {
 
     public function statsAction() {
         
-    }
-
-    public function newproductAction() {
-        
-    }
-
-    public function addproductAction() {
-        if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('index');
-        }
-        $form = $this->_form;
-        if (!$form->isValid($_POST)) {
-            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->render('newproduct');
-        }
-        $values = $form->getValues();
-        $this->_adminModel->saveProduct($values);
-        $this->_helper->redirector('index');
     }
 
     public function logoutAction() {

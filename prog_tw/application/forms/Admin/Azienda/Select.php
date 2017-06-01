@@ -1,32 +1,32 @@
 <?php
 class Application_Form_Admin_Azienda_Select extends App_Form_Abstract
 {
-	protected $_staffModel;
+	protected $_adminModel;
 
 	public function init()
 	{
-		$this->_staffModel = new Application_Model_Staff();
+		$this->_adminModel = new Application_Model_Admin();
 		$this->setMethod('post');
-		$this->setName('selectpromo');
+		$this->setName('selectazienda');
 		$this->setAction('');
 		$this->setAttrib('enctype', 'multipart/form-data');
                 
 //PROMOZIONE                
-		$promotions = array();
-		$promos = $this->_staffModel->getProms();
-		foreach ($promos as $promo) {
-			$promotions[$promo -> ID_Promozione] = $promo->titolo;
+		$aziende = array();
+		$az = $this->_adminModel->getAziende();
+		foreach ($az as $azienda) {
+			$aziende[$azienda -> ID_Azienda] = $azienda->nome;
 		}
-		$this->addElement('select', 'ID_Promozione', array(
-                                    'label' => 'Promozione',
+		$this->addElement('select', 'ID_Azienda', array(
+                                    'label' => 'Azienda',
                                     'required' => true,
-                                    'multiOptions' => $promotions,
+                                    'multiOptions' => $aziende,
                                     'decorators' => $this->elementDecorators,
 		));
 
 //SUBMIT 		
 		$this->addElement('submit', 'update', array(
-                                    'label' => 'Modifica Promozione',
+                                    'label' => 'Modifica Azienda',
                                     'decorators' => $this->buttonDecorators,
 		));
 

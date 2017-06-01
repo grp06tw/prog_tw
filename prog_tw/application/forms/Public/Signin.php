@@ -57,12 +57,14 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
             'decorators' => $this->radioDecorators,
         ));
 
-        $this->addElement('text', 'eta', array(
-            'label' => 'Età',
-            'filters' => array('StringTrim'),
+        for($i=(int)(date('Y'));$i>=1920;$i--) {
+			$eta[$i] = $i;
+		}
+        $this->addElement('select', 'eta', array(
+            'label' => 'Data di nascita',
             'required' => true,
-            'validators' => array(array('StringLength', true, array(1, 3))), 
-            'decorators' => $this->elementDecorators,
+            'multiOptions' => $eta,
+            'decorators' => $this->elementDecorators
         ));
         
         $this->addElement('text', 'telefono', array(
@@ -92,11 +94,10 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
             'decorators' => $this->elementDecorators,
         ));
         
-        $this->addElement('text', 'role', array(
+        $this->addElement('hidden', 'role', array(
             'required' => true,
-            'label' => 'Ruolo utente',
             'value' => 'user',
-            'readonly'=>'readonly',
+            'show' => 'none',
             'decorators' => $this->elementDecorators,
         ));
 
