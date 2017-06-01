@@ -21,15 +21,19 @@ class AdminController extends Zend_Controller_Action {
     }
 
     public function indexAction() {
-        
+        $this->view->assign(array('title' => "Area Admin"));
     }
 
-    //AZIENDE
+    //****************************************
+    //                AZIENDE
+    //****************************************
     public function aziendeAction() {
         $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
+        $this->view->assign(array('title' => "Gestisci Aziende"));
+        $this->render('index');
     }
 
-    //NEW
+    //************NEW*************
     public function newaziendaAction() {
         $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
         $this->view->newaziendaform = $this->getAddAziendaForm();
@@ -50,7 +54,7 @@ class AdminController extends Zend_Controller_Action {
         $this->_helper->redirector('newazienda');
     }
 
-//DELeTE 
+    //************DELETE*************
     public function deleteaziendaAction() {
         $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
     }
@@ -70,8 +74,7 @@ class AdminController extends Zend_Controller_Action {
         $this->_helper->redirector('deleteazienda');
     }
 
-    //UPDATE
-
+    //************UPDATE*************
     public function updateaziendaAction() {
         $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
     }
@@ -91,7 +94,7 @@ class AdminController extends Zend_Controller_Action {
         $this->_helper->redirector('updateazienda');
     }
 
-    public function popolateAction() {
+    public function popolateaziendaAction() {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('updateazienda');
         }
@@ -106,7 +109,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->updateaziendaform = $this->getUpdateAziendaForm($app->toArray());
     }
 
-//GET
+    //************GET*************
     private function getAddAziendaForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_newAzform = new Application_Form_Admin_Azienda_Add();
@@ -132,7 +135,7 @@ class AdminController extends Zend_Controller_Action {
         $this->_selAzform = new Application_Form_Admin_Azienda_Select();
         $this->_selAzform->setAction($urlHelper->url(array(
                     'controller' => 'admin',
-                    'action' => 'popolate'), 'default'
+                    'action' => 'popolateazienda'), 'default'
         ));
         return $this->_selAzform;
     }
@@ -148,27 +151,45 @@ class AdminController extends Zend_Controller_Action {
         return $this->_newAzform;
     }
 
-    //UTENTI
+    //****************************************
+    //                CATEGORIE
+    //****************************************
     public function categorieAction() {
         $this->view->assign(array('menu' => "admin/categorie/_crudcategorie.phtml"));
+        $this->view->assign(array('title' => "Gestisci Categorie"));
+        $this->render('index');
     }
 
-    //CATEGORIE
+    //****************************************
+    //                UTENTI
+    //****************************************
     public function utentiAction() {
         $this->view->assign(array('menu' => "admin/utenti/_crudutenti.phtml"));
+        $this->view->assign(array('title' => "Gestisci Utenti"));
+        $this->render('index');
     }
 
-    //FAQ
+    //****************************************
+    //                FAQ
+    //****************************************
     public function faqAction() {
         $this->view->assign(array('menu' => "admin/faq/_crudfaq.phtml"));
+        $this->view->assign(array('title' => "Gestisci FAQ"));
+        $this->render('index');
     }
 
-    //STATISTICHE
+    //****************************************
+    //                STATISTICHE
+    //****************************************
 
     public function statsAction() {
         
+        
     }
 
+    //****************************************
+    //                LOGOUT
+    //****************************************
     public function logoutAction() {
         $this->_authService->clear();
         return $this->_helper->redirector('index', 'public');

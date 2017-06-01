@@ -2,17 +2,18 @@
 
 class PublicController extends Zend_Controller_Action {
 
-    //protected $_logger;
     protected $_logform;
     protected $_authService;
     protected $_catalogModel;
     protected $_logged;
 
-    //protected $_signform;
-
     public function init() {
         //imposto come layouy il file main.phtml
         $this->_helper->layout->setLayout('main');
+        //se la richiesta è fatta da un utente registrato prendo il parametro logged che contiene
+        //al suo interno il livello di accesso
+        //e imposto i menu adatti, altrimenti assegno il menù di default
+        //e recupero la form di login(che non serve se l'utente è già loggato
         $this->_logged = $this->_getParam('logged');
         if ($this->_logged) {
             $this->view->assign(array('menu' => $this->_logged . "/_menu.phtml"));
@@ -23,22 +24,32 @@ class PublicController extends Zend_Controller_Action {
             $this->view->assign(array('topbar' => "_topbar.phtml"));
         }
 
+        //creo un istanza del model che userò per la visualizzazione delle promozioni-aziende etc
+        //questo model contiene tutte le query dell'area pubblica
         $this->_catalogModel = new Application_Model_Catalog();
+
         $this->_authService = new Application_Service_Auth();
 
+        //recupero la form per la registrazione
         $this->view->signinForm = $this->getSigninForm();
     }
 
     public function indexAction() {
-
+        //vengo rediretto all'action promo, che si occuperà di visualizzare le promo
         $this->_helper->redirector('promo', 'public');
     }
 
+    //****************************************
+    //             ACQUISTO
+    //****************************************
     public function acquistoAction() {
 
-        $this->view->assign(array('stampa'=> '_stampa.phtml'));
+        $this->view->assign(array('stampa' => '_stampa.phtml'));
     }
 
+    //****************************************
+    //              RPOMOZIONI
+    //****************************************
     public function promoAction() {
 
         $paged = $this->_getParam('page', 1);
@@ -53,6 +64,9 @@ class PublicController extends Zend_Controller_Action {
         );
     }
 
+    //****************************************
+    //     VISUALIZZATORE PAGINE STATICHE
+    //****************************************
     public function viewstaticAction() {
         //mi permette di impostare la view da visualizare
         //di default viene visualizzata la vista con il nome dell'action
@@ -63,6 +77,9 @@ class PublicController extends Zend_Controller_Action {
         $this->render($page);
     }
 
+    //****************************************
+    //                AZIENDE
+    //****************************************
     public function aziendeAction() {
         //$this->view->assign(array('text' => "LOREM IPSUM"));
         // controlla se _catalogModel è già istanziato
@@ -82,6 +99,9 @@ class PublicController extends Zend_Controller_Action {
         $this->view->assign(array('aziende', 'public'));
     }
 
+    //****************************************
+    //                FAQ
+    //****************************************
     public function faqAction() {
 
         $paged = $this->_getParam('page', 1);
@@ -98,11 +118,16 @@ class PublicController extends Zend_Controller_Action {
         $this->view->assign(array('faq', 'public'));
     }
 
+    //****************************************
+    //           AREA RISERVATA
+    //****************************************
     public function reservedareaAction() {
         $this->_helper->redirector('index', 'staff');
     }
 
-    //LOGIN
+    //****************************************
+    //                LOGIN
+    //****************************************
     public function loginAction() {
         
     }
@@ -134,7 +159,9 @@ class PublicController extends Zend_Controller_Action {
         return $this->_logform;
     }
 
-    //REGISTRAZIONE
+    //****************************************
+    //              REGISTRAZIONE
+    //****************************************
     public function signinAction() {
         $this->view->signinForm = $this->getSigninForm();
     }
@@ -150,13 +177,13 @@ class PublicController extends Zend_Controller_Action {
         }
         $values = $form->getValues();
         $this->_catalogModel->saveUser($values);
-        
+
         if (false === $this->_authService->authenticate($form->getValues())) {
             $form->setDescription('Autenticazione fallita. Riprova');
             return $this->render('login');
         }
         return $this->_helper->redirector('index', $this->_authService->getIdentity()->role);
-        
+
         //$this->_helper->redirector('index');
     }
 
@@ -170,7 +197,9 @@ class PublicController extends Zend_Controller_Action {
         return $this->_signform;
     }
 
-    //MODIFICA PROFILO UTENTE
+    //****************************************
+    //       MODIFICA PROFILO UTENTE
+    //****************************************
     function modificaprofiloAction() {
         
     }
