@@ -295,6 +295,57 @@ ___________________________
 */
 
 #flayer{
+	margin:10px;
+	min-width: 600px;
+}
+
+    #titol
+    {
+		text-align:left;
+        padding: 10px;
+        height: 50px;
+    }
+    
+        #titol>h2 
+        {
+            color: #313837;
+            font-size: 30px;
+			margin-left:0px;
+        }
+        
+    #prezz
+    {
+        align-content: center;
+        margin-left: 10px;
+		font-size: 25px;
+    }
+    
+    #descrizione
+    {
+        margin: 20px 0px 0px 10px;
+    }
+    
+/* ________________________
+        STILE ERRORI
+___________________________
+*/
+    
+.formerror {
+    background: none repeat scroll 0 0 #FFECEC;
+    border: 3px solid #f93d00;
+    height: 21px;
+    width:278px;
+    margin: 0 0 1px;
+    padding-left:7px;
+}
+
+.errors {
+	color: #f93d00;
+}
+
+.errors ul {
+	line-height: 100%;
+=======
     margin:10px;
     min-width: 600px;
 }

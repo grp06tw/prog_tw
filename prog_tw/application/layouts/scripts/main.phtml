@@ -1,38 +1,39 @@
 <?php echo $this->doctype() ?>
 <html>
     <head>
-	<?= $this->headMeta(); ?> <!esegue i wiew hepler inizializzati dal bootstrap >
-        <?= $this->headLink(); ?>
-        <?= $this->headTitle(); ?>
-    </head>
-    <body>
-        <div id="wrapper">      <!il div wrapper occupa l'intera pagina, ed è contenitore di tutti gli elementi
-                                ha una larghezza minima fissata a 920px;>	
-            
+        <?= $this->headMeta(); ?> <!esegue i wiew hepler inizializzati dal bootstrap >
+    <?= $this->headLink(); ?>
+    <?= $this->headTitle(); ?>
+    <?= $this->headScript(); ?>
+</head>
+<body>
+    <div id="wrapper">      <!il div wrapper occupa l'intera pagina, ed è contenitore di tutti gli elementi
+            ha una larghezza minima fissata a 920px;>	
+
         <?= $this->render($this->topbar) ?>
-            
-            <div id="main_page">
-                
-		<!MENU>
-                    <?= $this->render($this->menu) ?>
-		
-                
-		<div id="page"> <!Qi viene caricato dinamicamente il contenuto della pagina
-                                in base alla nostra selezione sul menu, il public controller
-                                comporrà la vista e la farà stampare
-                                al primo avvio, o ad un eventuale ricaricamento della pagina home
-                                troveremo il contenuto del file index.phtml>
-                    
-                    <?php echo $this->layout()->content; ?> <!inserisce nella pagina il contenuto della variabile content
-                                                              nella quale viene inserito il file della vista associata al controller/action
-                                                              così da essere integrato nel layout>
-                    
-                    <div class="clear"> </div>
-		</div>
-		<!-- End Right Column -->
-                <div id="footer"> This is the Footer </div>
-		  <!-- End Footer -->
+
+        <div id="main_page">
+
+            <!MENU>
+            <?= $this->render($this->menu) ?>
+
+
+            <div id="page"> <!Qi viene caricato dinamicamente il contenuto della pagina
+                    in base alla nostra selezione sul menu, il public controller
+                    comporrà la vista e la farà stampare
+                    al primo avvio, o ad un eventuale ricaricamento della pagina home
+                    troveremo il contenuto del file index.phtml>
+
+                <?php echo $this->layout()->content; ?> <!inserisce nella pagina il contenuto della variabile content
+                    nella quale viene inserito il file della vista associata al controller/action
+                    così da essere integrato nel layout>
+
+                <div class="clear"> </div>
             </div>
-        </div>    
-    </body>
+            <!-- End Right Column -->
+            <div id="footer"> This is the Footer </div>
+            <!-- End Footer -->
+        </div>
+    </div>    
+</body>
 </html>
