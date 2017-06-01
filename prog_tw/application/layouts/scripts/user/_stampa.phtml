@@ -1,0 +1,37 @@
+<?php echo $this->doctype() ?>
+<html>
+    <head>
+        <?= $this->headMeta(); ?> <!esegue i wiew hepler inizializzati dal bootstrap >
+    <?= $this->headLink(); ?>
+    <?= $this->headTitle(); ?>
+</head>
+<body>
+    <div id="flayer">	
+
+        <div id="titolo">
+            <h2> <?= $promo->titolo ?> </h2>
+        </div>
+        <div id="prezzo">
+
+            <p> <?= $promo->getPrice($promo->sconto) ?> </p>
+            <p>
+                <del>
+                    <?= $promo->prezzo ?>
+                </del>
+                <br><?= $promo->sconto ?>%
+            </p>
+
+        </div>
+
+        <div id="descrizione">
+
+            <?= $promo->descrizione ?>
+            <br>
+            NOME AZIENDA <BR><BR>
+            CODICE COUPON 83 (8 id_promozione 3 id_utente)
+
+
+        </div>
+    </div>    
+</body>
+</html>

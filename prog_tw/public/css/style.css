@@ -272,6 +272,11 @@ select > option{
 ___________________________
 */
 
+#flayer{
+	margin:10px;
+	width: 600px;
+}
+
 #pagination {
     text-align :center;
     background-color: #8B9898;
@@ -281,3 +286,39 @@ ___________________________
 #pagination a {
 	/*border-bottom:none*/
 }
+
+/* ________________________
+        STILE COUPON
+___________________________
+*/
+
+#flayer{
+	margin:10px;
+	min-width: 600px;
+}
+
+    #titolo
+    {
+		text-align:left;
+        padding: 10px;
+        height: 50px;
+    }
+    
+        h2 
+        {
+            color: #313837;
+            font-size: 30px;
+			margin-left:0px;
+        }
+        
+    #prezzo
+    {
+        align-content: center;
+        margin-left: 10px;
+		font-size: 25px;
+    }
+    
+    #descrizione
+    {
+        margin: 20px 0px 0px 10px;
+    }
