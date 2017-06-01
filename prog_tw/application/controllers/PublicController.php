@@ -7,32 +7,36 @@ class PublicController extends Zend_Controller_Action {
     protected $_authService;
     protected $_catalogModel;
     protected $_logged;
-    
+
     //protected $_signform;
 
     public function init() {
         //imposto come layouy il file main.phtml
         $this->_helper->layout->setLayout('main');
-        $this->_logged=$this->_getParam('logged');
-        if($this->_logged){
-            $this->view->assign(array('menu' => $this->_logged."/_menu.phtml"));
-            $this->view->assign(array('topbar' => $this->_logged."/_topbar.phtml"));
-        }
-        else{
+        $this->_logged = $this->_getParam('logged');
+        if ($this->_logged) {
+            $this->view->assign(array('menu' => $this->_logged . "/_menu.phtml"));
+            $this->view->assign(array('topbar' => $this->_logged . "/_topbar.phtml"));
+        } else {
             $this->view->assign(array('menu' => "_menu.phtml"));
             $this->view->loginForm = $this->getLoginForm();
             $this->view->assign(array('topbar' => "_topbar.phtml"));
         }
-        
+
         $this->_catalogModel = new Application_Model_Catalog();
         $this->_authService = new Application_Service_Auth();
-        
+
         $this->view->signinForm = $this->getSigninForm();
     }
 
     public function indexAction() {
 
         $this->_helper->redirector('promo', 'public');
+    }
+
+    public function acquistoAction() {
+
+        $this->view->assign(array('stampa'=> '_stampa.phtml'));
     }
 
     public function promoAction() {
@@ -79,7 +83,7 @@ class PublicController extends Zend_Controller_Action {
     }
 
     public function faqAction() {
-        
+
         $paged = $this->_getParam('page', 1);
         $ordine = $this->_getParam('order', null); //da modificare
 
@@ -92,7 +96,6 @@ class PublicController extends Zend_Controller_Action {
         );
 
         $this->view->assign(array('faq', 'public'));
-        
     }
 
     public function reservedareaAction() {
@@ -130,15 +133,11 @@ class PublicController extends Zend_Controller_Action {
         ));
         return $this->_logform;
     }
-    
+
     //REGISTRAZIONE
     public function signinAction() {
         $this->view->signinForm = $this->getSigninForm();
     }
-    
-    /*public function newuserAction() {
-        
-    }*/
 
     public function adduserAction() {
         if (!$this->getRequest()->isPost()) {
@@ -151,9 +150,16 @@ class PublicController extends Zend_Controller_Action {
         }
         $values = $form->getValues();
         $this->_catalogModel->saveUser($values);
-        $this->_helper->redirector('index');
+        
+        if (false === $this->_authService->authenticate($form->getValues())) {
+            $form->setDescription('Autenticazione fallita. Riprova');
+            return $this->render('login');
+        }
+        return $this->_helper->redirector('index', $this->_authService->getIdentity()->role);
+        
+        //$this->_helper->redirector('index');
     }
-    
+
     private function getSigninForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_signform = new Application_Form_Public_Signin();
@@ -162,6 +168,11 @@ class PublicController extends Zend_Controller_Action {
                     'action' => 'adduser'), 'default'
         ));
         return $this->_signform;
+    }
+
+    //MODIFICA PROFILO UTENTE
+    function modificaprofiloAction() {
+        
     }
 
 }
