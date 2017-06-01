@@ -109,7 +109,7 @@ class PublicController extends Zend_Controller_Action {
     public function faqAction() {
 
         $paged = $this->_getParam('page', 1);
-        $ordine = $this->_getParam('order', null); //da modificare
+        $ordine = $this->_getParam('order', null);
 
         $faqs = $this->_catalogModel->getFaq($paged, $ordine);
 
@@ -227,9 +227,18 @@ class PublicController extends Zend_Controller_Action {
             return $this->render('promo');
         }
         $values = $form->getValues();
-        $trovate=$this->_catalogModel->search($values);
-        //SONO ARRIVATO FIN QUI
-        $this->_helper->redirector('promo');
+        
+        $paged = $this->_getParam('page', 1);
+        $ordine = $this->_getParam('order', null);
+        
+        $trovate=$this->_catalogModel->search($values, $paged, $ordine); 
+        
+        $this->view->assign(array(
+            'trovate' => $trovate
+                )
+        );
+        
+        $this->view->assign(array('search', 'public'));
     }
     
     private function getSearchForm() {
