@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 31, 2017 alle 22:02
+-- Creato il: Giu 01, 2017 alle 09:44
 -- Versione del server: 10.1.21-MariaDB
 -- Versione PHP: 7.1.1
 
@@ -115,6 +115,16 @@ CREATE TABLE `faq` (
   `risposta` text COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dump dei dati per la tabella `faq`
+--
+
+INSERT INTO `faq` (`ID_Faq`, `domanda`, `risposta`) VALUES
+(1, 'Come posso ottenere un nuovo coupon?', 'Cliccando su ottieni in una qualsiasi promozione, verrà poi stampato il volantino che potrai portare direttamente in negozio.'),
+(2, 'Come posso diventare partner?', 'Contattando l\'amministratore il tuo utente potrà essere modificato e potrai inserire anche tu delle nuove promozioni per la tua azienda.'),
+(3, 'Posso modificare le mie credenziali di accesso?', 'Sì, basta fare il login poi apparirà una sezione dove potrai modificare tutto il tuo profilo.'),
+(4, 'Posso acquistare dei prodotti direttamente dal sito?', 'No, questo sito non è un e-commerce, puoi solo stampare un coupon per ottenere lo sconto che ti interessa per poi recarti nel negozio indicato per ritirare il prodotto.');
+
 -- --------------------------------------------------------
 
 --
@@ -176,16 +186,16 @@ CREATE TABLE `utente` (
 --
 
 INSERT INTO `utente` (`ID_Utente`, `Username`, `password`, `nome`, `cognome`, `genere`, `eta`, `telefono`, `email`, `indirizzo`, `role`) VALUES
-(1, 'admin', 'admin', 'ammministratore', 'di prova', 'm', 20, NULL, 'mail', NULL, 'admin'),
-(2, 'staff', 'staff', 'staff', 'di prova', 'f', 20, NULL, 'mailstaff', NULL, 'staff'),
-(3, 'user', 'user', 'mario', 'rossi', 'm', 30, '0349', 'maiil', 'indirizzo', 'role'),
-(4, 'giuseppeb', 'pass', 'Giuseppe', 'Bianchi', 'm', 44, '12345', 'mail1', NULL, 'user'),
-(5, 'mariar', 'pass', 'Maria', 'Russo', 'f', 28, NULL, 'mail2', 'Roma, Via Portuense 39', 'user'),
-(6, 'francescol', 'pass', 'Francesco', 'Ludovico', 'm', 23, '223344', 'mail3', NULL, 'user'),
-(7, 'lauram', 'pass', 'Laura', 'Morelli', 'f', 51, NULL, 'mail4', NULL, 'user'),
-(8, 'claudiab', 'pass', 'Claudia', 'Benedetti', 'f', 46, '12344', 'mail5', 'Napoli, Via Brombeis 12', 'user'),
-(9, 'giuliab', 'pass', 'Giulia', 'Biondini', 'f', 21, '98765', 'mail9', 'Bologna, Via Zamboni 59', 'user'),
-(10, 'federicoa', 'pass', 'Federico', 'Antenucci', 'm', 48, NULL, 'mail10', NULL, 'user');
+(1, 'admin', 'admin', 'amministratore', 'di prova', 'm', 1996, NULL, 'mailadmin@gmail.com', NULL, 'admin'),
+(2, 'staff', 'staff', 'staff', 'di prova', 'f', 1996, NULL, 'mailstaff@gmail.com', NULL, 'staff'),
+(3, 'user', 'user', 'mario', 'rossi', 'm', 1987, '034958964', 'maiil@gmail.com', 'indirizzo', 'role'),
+(4, 'giuseppeb', 'pass', 'Giuseppe', 'Bianchi', 'm', 1980, '12345', 'mail1@gmail.com', NULL, 'user'),
+(5, 'mariar', 'pass', 'Maria', 'Russo', 'f', 1980, NULL, 'mail2@gmail.com', 'Roma, Via Portuense 39', 'user'),
+(6, 'francescol', 'pass', 'Francesco', 'Ludovico', 'm', 1986, '223344', 'mail3@gmail.com', NULL, 'user'),
+(7, 'lauram', 'pass', 'Laura', 'Morelli', 'f', 1968, NULL, 'mail4@gmail.com', NULL, 'user'),
+(8, 'claudiab', 'pass', 'Claudia', 'Benedetti', 'f', 1976, '12344', 'mail5@gmail.com', 'Napoli, Via Brombeis 12', 'user'),
+(9, 'giuliab', 'pass', 'Giulia', 'Biondini', 'f', 1996, '98765', 'mail9@gmail.com', 'Bologna, Via Zamboni 59', 'user'),
+(10, 'federicoa', 'pass', 'Federico', 'Antenucci', 'm', 1975, NULL, 'mail10@gmail.com', NULL, 'user');
 
 --
 -- Indici per le tabelle scaricate
@@ -269,7 +279,7 @@ ALTER TABLE `cupon`
 -- AUTO_INCREMENT per la tabella `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `ID_Faq` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Faq` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT per la tabella `promozione`
 --
@@ -279,7 +289,7 @@ ALTER TABLE `promozione`
 -- AUTO_INCREMENT per la tabella `utente`
 --
 ALTER TABLE `utente`
-  MODIFY `ID_Utente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID_Utente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- Limiti per le tabelle scaricate
 --
