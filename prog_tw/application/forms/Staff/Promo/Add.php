@@ -47,7 +47,7 @@ class Application_Form_Staff_Promo_Add extends App_Form_Abstract
                                     'decorators' => $this->elementDecorators,
 		));
 //INIZIO
-             /*    $this->addElement('date', 'inizio',array(
+             /*   $this->addElement('date', 'inizio',array(
                                     'label' => 'Data Inizio',
                                     'required' => true,
                                     'value' => '2017-06-01'
