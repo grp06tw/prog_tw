@@ -38,7 +38,6 @@ class PublicController extends Zend_Controller_Action {
         $this->view->searchForm = $this->getSearchForm();
         $this->view->reachForm = $this->getReachForm();
         //ho tolto il recupero della form di signin perchè lo fa direttamente nell'action e funziona
-        
     }
 
     public function indexAction() {
@@ -328,6 +327,44 @@ class PublicController extends Zend_Controller_Action {
         return $this->_reachform;
     }
     
+
+    //****************************************
+    //                RICERCA
+    //****************************************    
+    
+    public function searchAction() {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('promo');
+        }
+        $form = $this->_searchform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('promo');
+        }
+        $values = $form->getValues();
+        
+        $paged = $this->_getParam('page', 1);
+        $ordine = $this->_getParam('order', null);
+        
+        $trovate=$this->_catalogModel->search($values, $paged, $ordine); 
+        
+        $this->view->assign(array(
+            'trovate' => $trovate
+                )
+        );
+        
+        $this->view->assign(array('search', 'public'));
+    }
+    
+    private function getSearchForm() {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_searchform = new Application_Form_Public_Search();
+        $this->_searchform->setAction($urlHelper->url(array(
+                    'controller' => 'public',
+                    'action' => 'search'), 'default'
+        ));
+        return $this->_searchform;
+    }
 
     //****************************************
     //       MODIFICA PROFILO UTENTE

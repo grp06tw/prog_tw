@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 01, 2017 alle 10:12
+-- Creato il: Giu 01, 2017 alle 18:51
 -- Versione del server: 10.1.19-MariaDB
 -- Versione PHP: 5.6.28
 
@@ -188,7 +188,7 @@ CREATE TABLE `utente` (
 INSERT INTO `utente` (`ID_Utente`, `Username`, `password`, `nome`, `cognome`, `genere`, `eta`, `telefono`, `email`, `indirizzo`, `role`) VALUES
 (1, 'admin', 'admin', 'amministratore', 'di prova', 'm', 1996, NULL, 'mailadmin@gmail.com', NULL, 'admin'),
 (2, 'staff', 'staff', 'staff', 'di prova', 'f', 1996, NULL, 'mailstaff@gmail.com', NULL, 'staff'),
-(3, 'user', 'user', 'mario', 'rossi', 'm', 1987, '034958964', 'maiil@gmail.com', 'indirizzo', 'role'),
+(3, 'user', 'user', 'mario', 'rossi', 'm', 1987, '034958964', 'maiil@gmail.com', 'indirizzo', 'user'),
 (4, 'giuseppeb', 'pass', 'Giuseppe', 'Bianchi', 'm', 1980, '12345', 'mail1@gmail.com', NULL, 'user'),
 (5, 'mariar', 'pass', 'Maria', 'Russo', 'f', 1980, NULL, 'mail2@gmail.com', 'Roma, Via Portuense 39', 'user'),
 (6, 'francescol', 'pass', 'Francesco', 'Ludovico', 'm', 1986, '223344', 'mail3@gmail.com', NULL, 'user'),
