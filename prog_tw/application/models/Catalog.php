@@ -59,6 +59,11 @@ class Application_Model_Catalog extends App_Model_Abstract {
     public function saveUser($user) {
         return $this->getResource('Utente')->insertUser($user);
     }
+    
+//COUPON
+    public function reach($iduser, $idpromo) {
+        return $this->getResource('Coupon')->insertCoupon($iduser, $idpromo);
+    }
 
     /* GET
       public function getProms()

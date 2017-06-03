@@ -4,10 +4,12 @@
 
         <!-- Link alla prima pagina -->
         <?php if (isset($this->previous)): ?>
-          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'search', 'page' => $this->first)); ?>">Inizio</a> |
+        
+          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'find', 'page' => $this->first)); ?>">Inizio</a> |
         
         <!-- Link alla pagina precedente -->
-          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'search', 'page' => $this->previous)); ?>">&lt; Precedente</a> |
+          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'find', 'page' => $this->previous)); ?>">&lt; Precedente</a> |
+
         
         <?php else: ?>
            Inizio |  &lt; Precedente |
@@ -15,11 +17,13 @@
 
         <!-- Link alla pagina successiva -->
         <?php if (isset($this->next)): ?>
-          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'search', 'page' => $this->next)); ?>">Successivo &gt;</a> |
+        
+          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'find', 'page' => $this->next)); ?>">Successivo &gt;</a> |
 
         <!-- Link all'ultima pagina -->
        
-          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'search', 'page' => $this->last)); ?>">Fine</a>
+          <a href="<?= $this->url(array('controller' => 'public', 'action' => 'find', 'page' => $this->last)); ?>">Fine</a>
+
         <?php else: ?>
           Successivo &gt; | Fine
         <?php endif; ?>
