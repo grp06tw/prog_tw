@@ -11,9 +11,19 @@
     </div>
                       
     <div id="div_src" ><!questo div contiene la form di inserimento e i bottoni di login e registrazione>
-	
-        <?= $this->searchForm ?>
-        
+				
+        <form class="src" id="form_src" name="search" action="" method="post">
+						
+            <select id="cat_src" name="cat"> 
+                <option id="opt_src">Tutte le categorie</option>
+                <option id="opt_src">cat1</option>
+                <option id="opt_src">cat2</option>
+            </select>		
+
+            <input id="desc_src" name="desc" type="text" placeholder="Cerca"> 
+
+            <input id="submit_src" type="submit" value="Cerca">
+									
         </form>
     </div>
 </div>

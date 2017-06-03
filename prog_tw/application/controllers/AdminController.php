@@ -53,6 +53,18 @@ class AdminController extends Zend_Controller_Action {
         $this->_adminModel->saveAzienda($values);
         $this->_helper->redirector('newazienda');
     }
+    
+    // Validazione AJAX
+    /*public function validatenewazAction() {
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $aziendaform = new Application_Form_Admin_Azienda_Add();
+        $response = $aziendaform->processAjax($_POST);
+        if ($response !== null) {
+            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
+        }
+    }*/
 
     //************DELETE*************
     public function deleteaziendaAction() {

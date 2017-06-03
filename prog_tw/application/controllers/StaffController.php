@@ -42,17 +42,16 @@ class StaffController extends Zend_Controller_Action {
         $this->_staffModel->savePromo($values);
         $this->_helper->redirector('index');
     }
-    
+
     // Validazione AJAX
-	public function validateproductAction() 
-    {
+    public function validatepromoAction() {
         $this->_helper->getHelper('layout')->disableLayout();
-    		$this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setNoRender();
 
         $promoform = new Application_Form_Staff_Promo_Add();
-        $response = $promoform->processAjax($_POST); 
+        $response = $promoform->processAjax($_POST);
         if ($response !== null) {
-        	$this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
         }
     }
 
