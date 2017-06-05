@@ -9,13 +9,15 @@ class Application_Form_Public_Reach extends App_Form_Abstract {
         $this->setMethod('post');
         $this->setName('reach');
         $this->setAction('');
-        //$this->addAttribs(array("class" => "src", "id" => "form_src"));
-
-
-        $categories = array();
-        $categories ["null"] = "Tutte le categorie";
         
-        
+        /*
+        $this->addElement('hidden', 'ID_Utente', array(
+            'required' => true,
+            'value' => 'user',
+            'show' => 'none',
+        ));
+         */
+
         $this->addElement('submit', 'cerca', array(
             'label' => 'Ottieni',
             "id"=>"submit_buy",
