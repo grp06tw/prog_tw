@@ -12,7 +12,8 @@ class AdminController extends Zend_Controller_Action {
         $this->view->assign(array('topbar' => "_topbar.phtml"));
         $this->_adminModel = new Application_Model_Admin();
         $this->_authService = new Application_Service_Auth();
-
+        $this->view->assign(array('elimina' => $this->view->baseUrl('css/img/elimina.png')));
+        $this->view->assign(array('modifica' => $this->view->baseUrl('css/img/modifica.png')));
         $this->view->newaziendaform = $this->getAddAziendaForm();
     }
 
@@ -105,13 +106,15 @@ class AdminController extends Zend_Controller_Action {
     //****************************************
 
     public function deleteazAction() {
-       if ($id = $this->_getParam('ID')) {
-        $this->_adminModel->delAzienda($id);     
-        $this->_helper->redirector('modazienda');
-       }
+        if ($id = $this->_getParam('ID')) {
+            $this->_adminModel->delAzienda($id);
+            $this->_helper->redirector('modazienda');
+        }
     }
 
-    //************GET*************
+    //****************************************
+    //             GET FORMS
+    //****************************************  
     private function getAddAziendaForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_newAzform = new Application_Form_Admin_Azienda_Add();
@@ -120,26 +123,6 @@ class AdminController extends Zend_Controller_Action {
                     'action' => 'addazienda'), 'default'
         ));
         return $this->_newAzform;
-    }
-
-    private function getDelAziendaForm() {
-        $urlHelper = $this->_helper->getHelper('url');
-        $this->_delAzform = new Application_Form_Admin_Azienda_Delete();
-        $this->_delAzform->setAction($urlHelper->url(array(
-                    'controller' => 'admin',
-                    'action' => 'delazienda'), 'default'
-        ));
-        return $this->_delAzform;
-    }
-
-    private function getSelAziendaForm() {
-        $urlHelper = $this->_helper->getHelper('url');
-        $this->_selAzform = new Application_Form_Admin_Azienda_Select();
-        $this->_selAzform->setAction($urlHelper->url(array(
-                    'controller' => 'admin',
-                    'action' => 'popolateazienda'), 'default'
-        ));
-        return $this->_selAzform;
     }
 
     private function getUpdateAziendaForm($values) {
@@ -185,6 +168,32 @@ class AdminController extends Zend_Controller_Action {
     //****************************************
 
     public function statsAction() {
+        $coupon = $this->_adminModel->getCoupon();
+        $this->view->assign(array('nCoupon' => count($coupon)));
+        $utenti = $this->_adminModel->getUsers();
+        $promozioni = $this->_adminModel->getProms();
+        $count = 0;
+        foreach ($promozioni as $promo) {
+            for ($i = 0; $i < count($coupon); $i++) {
+                if ($coupon[$i]["ID_Promozione"] == $promo["ID_Promozione"]) {
+                    $count++;
+                }
+            }
+            $stP[$promo["ID_Promozione"]] = array("Promozione" => $promo["titolo"], "couponEmessi" => $count);
+        }
+        $count=0;
+        foreach ($utenti as $utente) {
+            for ($i = 0; $i < count($coupon); $i++) {
+                if ($coupon[$i]["ID_Utente"] == $utente["ID_Utente"]) {
+                    $count++;
+                }
+            }
+            $stU[$utente["ID_Utente"]] = array("Username" => $utente["Username"], "couponAcquistati" => $count);
+        }
+
+
+        $righe = $this->_adminModel->getAziende(null, array('titolo'));
+        $this->view->assign(array('p' => $stP, 'u' => $stU));
         
     }
 

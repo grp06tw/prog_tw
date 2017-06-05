@@ -30,13 +30,13 @@
                                         'action'     => 'popolateaz',
                                         'ID' => $azienda["ID_Azienda"]
                                         ), 
-                                        'default',true);?>" title="Modifica">Modifica</a></td>
+                                        'default',true);?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica?>></a></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'admin',
                                         'action'     => 'deleteaz',
                                         'ID' => $azienda["ID_Azienda"]
                                         ), 
-                                        'default',true);?>" title="Elimina">Elimina</a></td>
+                                        'default',true);?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina?>></a></td>
                 </tr>
                 
             <?php endforeach; ?>

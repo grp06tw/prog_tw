@@ -12,6 +12,8 @@ class StaffController extends Zend_Controller_Action {
         $this->view->newpromoForm = $this->getAddPromoForm();
         $this->view->assign(array('menu' => "staff/_reservedmenu.phtml"));
         $this->view->assign(array('topbar' => "_topbar.phtml"));
+        $this->view->assign(array('elimina' => $this->view->baseUrl('css/img/elimina.png')));
+        $this->view->assign(array('modifica' => $this->view->baseUrl('css/img/modifica.png')));
         $this->_authService = new Application_Service_Auth();
     }
 

@@ -2,6 +2,13 @@
         STILE GENERALE
     ______________________
 */
+#separatorTB{
+    width:50%;
+}
+
+.img_mod{
+    height: 30px;
+}
 #modTable {
     border-collapse: collapse;
     background-color: white;
@@ -15,6 +22,7 @@
 }
 #headmod > tr >  th, #bodymod > tr >td{
     padding: 10px;
+    text-align: center;
 }
 
 ul {
@@ -391,3 +399,18 @@ h2
     margin: 20px 0px 0px 10px;
 }
 
+/* ________________________
+        STATISTICHE
+___________________________
+*/
+#stat{
+    
+}
+
+#statSX{
+    float: left;
+}
+
+#statDX{
+    margin-left: 50%;
+}
