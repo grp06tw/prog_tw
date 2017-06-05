@@ -1,34 +1,35 @@
 <!inizio del div della promozione>
-        
-        <?php foreach ($this->promozioni as $promo) : ?>
-             <div id="promo">  
-                            <div id="tit">
-                                <h2> <?= $promo->titolo ?> </h3>
-                            </div>
-                               
-                            <!-- prende il css dalla classe .img_promo-->
-                            <?= $this->promoImg($promo->immagine) ?>
 
-                            <div id="pricebox">
+<?php foreach ($this->promozioni as $azienda) : ?>
+    <div id="elemento">  
+        <div id="tit">
+            <h2> <?= $azienda->titolo ?> </h2>
+        </div>
 
-                                <?= $this->Price($promo) ?>
+        <!-- prende il css dalla classe .img_promo-->
+        <?= $this->promoImg($azienda->immagine) ?>
 
-                            </div>
+        <div id="pricebox">
 
-                            <div id="desc">
+            <?= $this->Price($azienda) ?>
 
-                                <?= $promo->descrizione ?>
+        </div>
 
-                            </div>
+        <div id="desc" class="promo">
 
-                            <input id="submit_buy" type="submit" value="Ottieni">
+            <?= $azienda->descrizione ?>
 
-                        </div> 
-<!-- fine div della promozione-->
-        <?php endforeach;?>
+        </div>
+
+        <input id="submit_buy" type="submit" value="Ottieni">
+
+    </div> 
+    <!-- fine div della promozione-->
+<?php endforeach; ?>
 
 
-  <?php if($this->promozioni instanceof Zend_Paginator) {
-	  		echo $this->paginationControl($this->promozioni,'Sliding','public/paginator/_paginator.phtml');
-	  } 
+<?php
+if ($this->promozioni instanceof Zend_Paginator) {
+    echo $this->paginationControl($this->promozioni, 'Sliding', 'public/paginator/_paginator.phtml');
+} 
 	  

@@ -8,7 +8,7 @@ class Zend_View_Helper_PromoImg extends Zend_View_Helper_HtmlElement
 			$imgFile = 'default.jpg';
 		}
                 
-		$tag = '<img class="img_promo" src="' . $this->view->baseUrl('img/promo/' . $imgFile) . '">';
+		$tag = '<img class="img_elem" src="' . $this->view->baseUrl('img/promo/' . $imgFile) . '">';
 		return $tag;
 	}
 }

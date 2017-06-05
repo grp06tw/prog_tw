@@ -1,5 +1,34 @@
-<div class="static">
- <h3>login</h3>
- <p>Utilizza questa form per l'autenticazione</p>
- <?=$this->loginForm; ?>
-</div>
+<?php $this->headScript()
+	->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+	->appendFile($this->baseUrl('js/functions.js'))
+	->captureStart() ?>
+
+// codice jQuery inserito da view-script nella sezione head della pagina
+$(function()
+{
+	var actionUrl='<?= $this->url(array('controller' => 'public', 'action' => 'validatelogin',), 'default'); ?>';
+	var formName='<?= $this->loginForm->getName() ?>';
+	$(":input").on('blur', function(event) {
+        var formElementId = $(this).attr('id');
+        doValidation(formElementId, actionUrl, formName);
+    });
+});
+
+<?php $this->headScript()->captureEnd() ?>
+
+<h3>login</h3>
+<p>Utilizza questa form per l'autenticazione</p>
+<br>
+
+<?= $this->loginForm; ?>
+
+<br>
+<p>Se non sei registrato
+
+    <a href="<?=
+    $this->url(array(
+        'controller' => 'public',
+        'action' => 'signin',
+            ), 'default', true);
+    ?>" title="Registrati">REGISTRATI</a>
+</p>

@@ -3,8 +3,8 @@
         <!INDIETRO>
         <li>
             <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'public',
-                                        'action'     => 'reservedarea',
+                                        'controller' => 'admin',
+                                        'action'     => 'index',
                                         ), 
                                         'default',true);?>" title="Torna alla home di area riservata">Indietro	</a></p>
         </li>
@@ -16,20 +16,11 @@
                                         ), 
                                         'default',true);?>" title="Aggiungi una nuova Azienda">Aggiungi Azienda	</a></p>
         </li>
-        <!Elimina Azienda>
-        <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'deleteazienda',
-                                        ), 
-                                        'default',true);?>" title="Elimina una Azienda">Elimina Azienda	</a></p>
-        </li>
-
         <!Modifica Azienda>
         <li>
             <p class="p_menu"><a href="<?= $this->url(array(
                                         'controller' => 'admin',
-                                        'action'     => 'updateazienda',
+                                        'action'     => 'modazienda',
                                         ), 
                                         'default',true);?>" title="Modifica una Azienda">Modifica Azienda	</a></p>
         </li>

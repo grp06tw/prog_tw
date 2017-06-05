@@ -1,6 +1,21 @@
-     visualizza.phtml
-<br><br>
-testo creato dal controller:
-<br><br>
-<?php
-    echo $this->text;
+
+<?php foreach ($this->faq as $faq) : ?>
+    <div id="elemento">  
+        <div id="tit" class="faq">
+            <h2 class="faq"> <?= $faq->domanda ?> </h2>
+        </div>
+
+        <div id="desc">
+
+            <?= $faq->risposta ?>
+
+        </div>
+
+    </div> 
+
+ <?php endforeach;?>
+
+  <?php if($this->faq instanceof Zend_Paginator) {
+	  		echo $this->paginationControl($this->faq,'Sliding','public/paginator/_paginatorFaq.phtml');
+	  } 
+	  ?>
