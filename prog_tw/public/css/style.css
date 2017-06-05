@@ -404,7 +404,7 @@ h2
 ___________________________
 */
 #stat{
-    
+    display: inline;
 }
 
 #statSX{
@@ -412,5 +412,5 @@ ___________________________
 }
 
 #statDX{
-    margin-left: 50%;
+   float:right;
 }

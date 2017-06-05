@@ -54,7 +54,7 @@ class AdminController extends Zend_Controller_Action {
     }
 
     //****************************************
-    //             MODIFICA PROMO
+    //             MODIFICA AZIENDA
     //****************************************
 
     public function modaziendaAction() {
