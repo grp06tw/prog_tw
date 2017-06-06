@@ -9,6 +9,7 @@ class PublicController extends Zend_Controller_Action {
     protected $_signform;
     protected $_searchform;
 
+
     public function init() {
         //creo un istanza del model che userò per la visualizzazione delle promozioni-aziende etc
         //questo model contiene tutte le query dell'area pubblica
@@ -18,11 +19,12 @@ class PublicController extends Zend_Controller_Action {
         
         //imposto come layouy il file main.phtml
         $this->_helper->layout->setLayout('main');
+
         //se la richiesta è fatta da un utente registrato prendo il menu corrispondente, 
         //altrimenti assegno il menù di default
         //e recupero la form di login(che non serve se l'utente è già loggato
         if (isset($this->_authService->getIdentity()->role)) {
-            $prova=$this->_authService->getIdentity()->role;
+
             $this->view->assign(array('menu' => $this->_authService->getIdentity()->role . "/_menu.phtml"));
             $this->view->assign(array('topbar' => $this->_authService->getIdentity()->role . "/_topbar.phtml"));
         } else {
@@ -31,18 +33,16 @@ class PublicController extends Zend_Controller_Action {
             $this->view->assign(array('topbar' => "_topbar.phtml"));
         }
 
+
         
 
         //recupero la form per la registrazione e per la ricerca
         $this->view->signinForm = $this->getSigninForm();
         $this->view->searchForm = $this->getSearchForm();
+        $this->view->reachForm = $this->getReachForm();
     }
 
-    public function indexAction() {
-        //vengo rediretto all'action promo, che si occuperà di visualizzare le promo
-        $this->_helper->redirector('promo', 'public');
-    }
-
+  
     //****************************************
     //             ACQUISTO
     //****************************************
@@ -109,7 +109,10 @@ class PublicController extends Zend_Controller_Action {
     public function faqAction() {
 
         $paged = $this->_getParam('page', 1);
+
         $ordine = $this->_getParam('order', null); //da modificare
+
+
 
         $faqs = $this->_catalogModel->getFaq($paged, $ordine);
 
@@ -127,6 +130,7 @@ class PublicController extends Zend_Controller_Action {
     //****************************************
     public function reservedareaAction() {
         $this->_helper->redirector('index', 'staff');
+
     }
 
     //****************************************
@@ -152,6 +156,7 @@ class PublicController extends Zend_Controller_Action {
         }
         return $this->_helper->redirector('index', $this->_authService->getIdentity()->role);
     }
+  
 
     private function getLoginForm() {
         $urlHelper = $this->_helper->getHelper('url');
@@ -203,6 +208,7 @@ class PublicController extends Zend_Controller_Action {
         //$this->_helper->redirector('index');
     }
 
+
     private function getSigninForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_signform = new Application_Form_Public_Signin();
@@ -212,7 +218,7 @@ class PublicController extends Zend_Controller_Action {
         ));
         return $this->_signform;
     }
-
+  
     //****************************************
     //                RICERCA
     //****************************************    
@@ -226,13 +232,54 @@ class PublicController extends Zend_Controller_Action {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('promo');
         }
+        
         $values = $form->getValues();
-        $trovate=$this->_catalogModel->search($values);
-        //SONO ARRIVATO FIN QUI
-        $this->_helper->redirector('promo');
+        
+        //L'UNICA COSA CHE MANCA QUI è DI RIUSCIRE A PASSARE VALUES ALLA FINDACTION, MI DICE CHE UN'AZIONE NON PUò AVERE PARAMETRI
+        $this->_helper->redirector('find', 'public', $values);
     }
     
-    private function getSearchForm() {
+    public function findAction($values){
+        
+        $paged = $this->_getParam('page', 1);
+        $ordine = $this->_getParam('order', null);
+        
+        $trovate=$this->_catalogModel->search($values, $paged, $ordine); 
+        
+        $this->view->assign(array(
+            'trovate' => $trovate
+                )
+        );
+        
+        //$this->view->assign(array('search', 'public'));
+    }
+    
+    //QUEST'AZIONE FUNZIONAVA MA QUANDO FACCIO SUCCESSIVO NON PRENDE I VALORI E NON LI PASSA ALLA VIEW GIUSTA
+    /*public function searchAction() {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('promo');
+        }
+        $form = $this->_searchform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('promo');
+        }
+        $values = $form->getValues();
+        
+        $paged = $this->_getParam('page', 1);
+        $ordine = $this->_getParam('order', null);
+        
+        $trovate=$this->_catalogModel->search($values, $paged, $ordine); 
+        
+        $this->view->assign(array(
+            'trovate' => $trovate
+                )
+        );
+        
+        $this->view->assign(array('search', 'public'));
+    }*/
+    
+  private function getSearchForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_searchform = new Application_Form_Public_Search();
         $this->_searchform->setAction($urlHelper->url(array(
@@ -241,6 +288,38 @@ class PublicController extends Zend_Controller_Action {
         ));
         return $this->_searchform;
     }
+
+    
+    //****************************************
+    //          OTTIENI COUPON
+    //****************************************
+    
+    public function addcouponAction() {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('index');
+        }
+        $form = $this->_reachform;
+        /*if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('newpromo');
+        }*/
+        //$values = $form->getValues();
+        
+        
+        $this->_catalogModel->reach($iduser, $idpromo);
+        $this->_helper->redirector('index');
+    }
+    
+    private function getReachForm() {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_reachform = new Application_Form_Public_Reach();
+        $this->_reachform->setAction($urlHelper->url(array(
+                    'controller' => 'public',
+                    'action' => 'addcoupon'), 'default'
+        ));
+        return $this->_reachform;
+    }
+    
 
     //****************************************
     //       MODIFICA PROFILO UTENTE

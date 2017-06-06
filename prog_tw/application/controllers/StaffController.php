@@ -4,6 +4,7 @@ class StaffController extends Zend_Controller_Action {
 
     protected $_staffModel;
     protected $_addform;
+
     private $_authService;
 
     public function init() {
@@ -44,7 +45,7 @@ class StaffController extends Zend_Controller_Action {
     }
 
     // Validazione AJAX
-    public function validateproductAction() {
+    public function validatepromoAction() {
         $this->_helper->getHelper('layout')->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
 
@@ -75,6 +76,8 @@ class StaffController extends Zend_Controller_Action {
     //****************************************
     //             UPDATE PROMO
     //****************************************
+
+ 
     public function updpromoAction() {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('index');
@@ -83,13 +86,14 @@ class StaffController extends Zend_Controller_Action {
         if (!$form->isValid($_POST)) {
             $form->setDescription('operazione non riuscita');
             return $this->render('modpromo');
+
         }
         $values = $form->getValues();
         //UPDATE
         $this->_staffModel->updatePromo($values);
         $this->_helper->redirector('modpromo');
     }
-
+  
     public function popolateAction() {
         if ($id = $this->_getParam('ID')) {
             $app = $this->_staffModel->getPromoById($id);
@@ -111,6 +115,7 @@ class StaffController extends Zend_Controller_Action {
     //****************************************
     //             GET FORMS
     //****************************************
+
     private function getAddPromoForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_addform = new Application_Form_Staff_Promo_Add();
@@ -121,6 +126,8 @@ class StaffController extends Zend_Controller_Action {
         return $this->_addform;
     }
 
+
+  
     private function getUpdatePromoForm($values) {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_addform = new Application_Form_Staff_Promo_Add();
@@ -132,9 +139,11 @@ class StaffController extends Zend_Controller_Action {
         return $this->_addform;
     }
 
+
     //****************************************
     //             logout
     //****************************************
+
     public function logoutAction() {
         $this->_authService->clear();
         return $this->_helper->redirector('index', 'public');

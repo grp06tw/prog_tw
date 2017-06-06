@@ -340,7 +340,7 @@ ___________________________
     {
         align-content: center;
         margin-left: 10px;
-		font-size: 25px;
+        font-size: 25px;
     }
     
     #descrizione
@@ -367,13 +367,16 @@ ___________________________
 }
 
 .errors ul {
+
 	line-height: 100%;
 
     margin:10px;
     min-width: 600px;
 }
 
-#titolo
+
+/*
+#titol
 {
     text-align:left;
     padding: 10px;
@@ -387,7 +390,8 @@ h2
     margin-left:0px;
 }
 
-#prezzo
+
+#prezz
 {
     align-content: center;
     margin-left: 10px;
@@ -403,6 +407,7 @@ h2
         STATISTICHE
 ___________________________
 */
+
 #stat{
     display: inline;
 }
@@ -414,3 +419,4 @@ ___________________________
 #statDX{
    float:right;
 }
+

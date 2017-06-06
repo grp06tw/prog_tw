@@ -26,6 +26,7 @@ class Application_Resource_Utente extends Zend_Db_Table_Abstract
     	return $this->find($id)->current();
     }
     
+
     public function getUserLogin($usrName)
     {
         return $this->fetchRow($this->select()->where('Username = ?', $usrName));
