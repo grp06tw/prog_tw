@@ -1,0 +1,46 @@
+<div class="static">
+    <h3>Modifica Aziende</h3>
+    <p>Ecco le Aziende che puoi modificare</p>
+    <br>
+    <table id="modTable">
+        <thead id="headmod">
+            <tr>
+                <th>Nome</th>
+                <th>Ragione Sociale</th>
+                <th>Indirizzo</th>
+                <th>Descrizione</th>
+                <th>Logo</th>
+                <th>Utente</th>
+                <th>Modifica</th>
+                <th>Elimina</th>
+            </tr>
+        </thead>
+        <tbody id="bodymod">
+            <?php foreach ($this->righe as $azienda) : ?>
+
+                <tr>
+                    <td><?= $azienda["nome"] ?></td>
+                    <td><?= $azienda["ragione_sociale"]?></td>
+                    <td><?= $azienda["indirizzo"]?></td>
+                    <td><?= $azienda["descrizione"] ?></td>
+                    <td><?= $azienda["logo"] ?></td>
+                    <td><?= $this->utente[$azienda["ID_Azienda"]] ?></td>
+                    <td><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'popolateaz',
+                                        'ID' => $azienda["ID_Azienda"]
+                                        ), 
+                                        'default',true);?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica?>></a></td>
+                    <td><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'deleteaz',
+                                        'ID' => $azienda["ID_Azienda"]
+                                        ), 
+                                        'default',true);?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina?>></a></td>
+                </tr>
+                
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+</div>

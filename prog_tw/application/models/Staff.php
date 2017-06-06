@@ -13,6 +13,10 @@ class Application_Model_Staff extends App_Model_Abstract
     {
 		return $this->getResource('Categoria')->getCats();
     }
+     public function getCatById($id)
+    {
+		return $this->getResource('Categoria')->getCatById($id);
+    }
     
     
 //PROMOZIONI
@@ -22,9 +26,9 @@ class Application_Model_Staff extends App_Model_Abstract
     	return $this->getResource('Promozione')->insertPromo($promo);
     }
     //GET
-    public function getProms()
+    public function getProms($paged=null, $order=null)
     {
-		return $this->getResource('Promozione')->getProms();
+		return $this->getResource('Promozione')->getProms($paged, $order);
     }
      public function getPromoById($id)
     {
@@ -46,4 +50,9 @@ class Application_Model_Staff extends App_Model_Abstract
     {
 		return $this->getResource('Azienda')->getAziende();
     }
+    public function getAziendaById($id)
+    {
+		return $this->getResource('Azienda')->getAziendaById($id);
+    }
+   
 }

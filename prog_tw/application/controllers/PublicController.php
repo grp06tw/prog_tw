@@ -8,8 +8,7 @@ class PublicController extends Zend_Controller_Action {
     protected $_logged;
     protected $_signform;
     protected $_searchform;
-    protected $_reachform;
-    protected $values;
+
 
     public function init() {
         //creo un istanza del model che userò per la visualizzazione delle promozioni-aziende etc
@@ -20,12 +19,12 @@ class PublicController extends Zend_Controller_Action {
         
         //imposto come layouy il file main.phtml
         $this->_helper->layout->setLayout('main');
-        
+
         //se la richiesta è fatta da un utente registrato prendo il menu corrispondente, 
         //altrimenti assegno il menù di default
         //e recupero la form di login(che non serve se l'utente è già loggato
         if (isset($this->_authService->getIdentity()->role)) {
-            //$prova=$this->_authService->getIdentity()->role;
+
             $this->view->assign(array('menu' => $this->_authService->getIdentity()->role . "/_menu.phtml"));
             $this->view->assign(array('topbar' => $this->_authService->getIdentity()->role . "/_topbar.phtml"));
         } else {
@@ -34,18 +33,16 @@ class PublicController extends Zend_Controller_Action {
             $this->view->assign(array('topbar' => "_topbar.phtml"));
         }
 
-        //recupero la form per la ricerca e per l'acquisizione del cupon
+
+        
+
+        //recupero la form per la registrazione e per la ricerca
+        $this->view->signinForm = $this->getSigninForm();
         $this->view->searchForm = $this->getSearchForm();
         $this->view->reachForm = $this->getReachForm();
-        //ho tolto il recupero della form di signin perchè lo fa direttamente nell'action e funziona
-        
     }
 
-    public function indexAction() {
-        //vengo rediretto all'action promo, che si occuperà di visualizzare le promo
-        $this->_helper->redirector('promo', 'public');
-    }
-
+  
     //****************************************
     //             ACQUISTO
     //****************************************
@@ -112,7 +109,10 @@ class PublicController extends Zend_Controller_Action {
     public function faqAction() {
 
         $paged = $this->_getParam('page', 1);
-        $ordine = $this->_getParam('order', null);
+
+        $ordine = $this->_getParam('order', null); //da modificare
+
+
 
         $faqs = $this->_catalogModel->getFaq($paged, $ordine);
 
@@ -130,6 +130,7 @@ class PublicController extends Zend_Controller_Action {
     //****************************************
     public function reservedareaAction() {
         $this->_helper->redirector('index', 'staff');
+
     }
 
     //****************************************
@@ -155,6 +156,7 @@ class PublicController extends Zend_Controller_Action {
         }
         return $this->_helper->redirector('index', $this->_authService->getIdentity()->role);
     }
+  
 
     private function getLoginForm() {
         $urlHelper = $this->_helper->getHelper('url');
@@ -206,6 +208,7 @@ class PublicController extends Zend_Controller_Action {
         //$this->_helper->redirector('index');
     }
 
+
     private function getSigninForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_signform = new Application_Form_Public_Signin();
@@ -215,19 +218,7 @@ class PublicController extends Zend_Controller_Action {
         ));
         return $this->_signform;
     }
-    
-    // Validazione AJAX
-    public function validatesigninAction() {
-        $this->_helper->getHelper('layout')->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
-
-        $signform = new Application_Form_Public_Signin();
-        $response = $signform->processAjax($_POST);
-        if ($response !== null) {
-            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
-        }
-    }
-    
+  
     //****************************************
     //                RICERCA
     //****************************************    
@@ -288,7 +279,7 @@ class PublicController extends Zend_Controller_Action {
         $this->view->assign(array('search', 'public'));
     }*/
     
-    private function getSearchForm() {
+  private function getSearchForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_searchform = new Application_Form_Public_Search();
         $this->_searchform->setAction($urlHelper->url(array(
@@ -297,6 +288,7 @@ class PublicController extends Zend_Controller_Action {
         ));
         return $this->_searchform;
     }
+
     
     //****************************************
     //          OTTIENI COUPON
@@ -328,6 +320,7 @@ class PublicController extends Zend_Controller_Action {
         return $this->_reachform;
     }
     
+
     //****************************************
     //       MODIFICA PROFILO UTENTE
     //****************************************
