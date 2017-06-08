@@ -1,119 +1,54 @@
 <?php
 
-class Application_Form_Public_Signin extends App_Form_Abstract {
+class Application_Form_Public_Search extends App_Form_Abstract {
+
+    protected $_catalogModel;
 
     public function init() {
+        $this->_catalogModel = new Application_Model_Catalog();
         $this->setMethod('post');
-        $this->setName('signin');
+        $this->setName('search');
         $this->setAction('');
+        $this->addAttribs(array("class" => "src", "id" => "form_src"));
 
-//QUESTO FILE E' DA ELIMINARE!!! L'HO RIMESSO PER VEDERE SE AGGIUSTA I CONFLITTI
 
-        $this->addElement('text', 'Username', array(
+        $categories = array();
+        $categories ["null"] = "Tutte le categorie";
+        
+        $cats = $this->_catalogModel->getCats();
+        foreach ($cats as $cat) {
+            $categories[$cat->ID_Categoria] = $cat->nome;
+        }
+        
+       
+         $this->addElement('select', 'ID_Categoria', array(
+            'required' => true,
+            'multiOptions' => $categories,
+            'decorators' => $this->searchDecorators,
+            'id' => 'cat_src',            
+        ));
+		
+
+        $this->addElement('text', 'words', array(
             'filters' => array('StringTrim', 'StringToLower'),
-            'validators' => array(
-                array('StringLength', true, array(3, 25))
-            ),
-            'required' => true,
-            'label' => 'Username',
-            'decorators' => $this->elementDecorators,
-        ));
-
-        $this->addElement('password', 'password', array(
-            'filters' => array('StringTrim'),
-            'validators' => array(
-                array('StringLength', true, array(3, 25))
-            ),
-            'required' => true,
-            'label' => 'Password',
-            'decorators' => $this->elementDecorators,
-        ));
-
-        $this->addElement('text', 'nome', array(
-            'filters' => array('StringTrim', 'StringToLower'),
-            'validators' => array(
-                array('StringLength', true, array(3, 30))
-            ),
-            'required' => true,
-            'label' => 'Nome',
-            'decorators' => $this->elementDecorators,
-        ));
-
-        $this->addElement('text', 'cognome', array(
-            'filters' => array('StringTrim', 'StringToLower'),
-            'validators' => array(
-                array('StringLength', true, array(3, 30))
-            ),
-            'required' => true,
-            'label' => 'Cognome',
-            'decorators' => $this->elementDecorators,
-        ));
-
-        $this->addElement('radio', 'genere', array(
-            'label' => 'Genere',
-            'multiOptions' => array(
-                'm' => 'M',
-                'f' => 'F',
-                'x' => 'X'
-            ),
-            'decorators' => $this->radioDecorators,
-        ));
-
-        for($i=(int)(date('Y'));$i>=1920;$i--) {
-			$eta[$i] = $i;
-		}
-        $this->addElement('select', 'eta', array(
-            'label' => 'Data di nascita',
-            'required' => true,
-            'multiOptions' => $eta,
-            'decorators' => $this->elementDecorators
+            'id' => 'desc_src',
+            'placeholder' => 'Cerca',
+            'filters'    => array('StringTrim'),
+            'decorators' => $this->searchDecorators
         ));
         
-        $this->addElement('text', 'telefono', array(
-            'label' => 'Telefono',
-            'filters' => array('StringTrim'),
-            'validators' => array(array('StringLength', true, array(9, 12))), 
-            'decorators' => $this->elementDecorators,
-        ));
-        
-        $this->addElement('textarea', 'indirizzo', array(
-            //'filters' => array('StringTrim', 'StringToLower'),
-            'cols' => '30', 'rows' => '3',
-            'validators' => array(
-                array('StringLength', true, array(10, 100))
-            ),
-            'label' => 'Indirizzo',
-            'decorators' => $this->elementDecorators,
-        ));
-        
-        $this->addElement('text', 'email', array(
-            //'filters' => array('StringTrim', 'StringToLower'),
-            'validators' => array(
-                array('StringLength', true, array(10, 30))
-            ),
-            'required' => true,
-            'label' => 'Email',
-            'decorators' => $this->elementDecorators,
-        ));
-        
-        $this->addElement('hidden', 'role', array(
-            'required' => true,
-            'value' => 'user',
-            'show' => 'none',
-            'decorators' => $this->elementDecorators,
-        ));
-
-        $this->addElement('submit', 'signin', array(
-            'label' => 'Registrami',
-            'decorators' => $this->buttonDecorators,
+        $this->addElement('submit', 'cerca', array(
+            'label' => 'Cerca',
+            "id"=>"submit_src",
+            'decorators' => $this->searchDecorators
         ));
 
         $this->setDecorators(array(
             'FormElements',
-            array('HtmlTag', array('tag' => 'table', 'class' => 'zend_form')),
-            array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
             'Form'
         ));
+ 
+ 
     }
 
 }

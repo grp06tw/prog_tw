@@ -14,6 +14,13 @@ class Application_Resource_Coupon extends Zend_Db_Table_Abstract
         $this->insert($coupon);
     }
     
+    public function getCouponById($idUser, $idPromo) {
+        $select = $this->select()
+                ->where("ID_Utente = " . $idUser) and ("ID_Promozione = " . $idPromo);
+
+        return $this->fetchAll($select);
+    }
+    
     /*public function insertPromo($promo) {
         if ($promo['immagine'] == null) {
             $promo['immagine'] = 'default.jpg';

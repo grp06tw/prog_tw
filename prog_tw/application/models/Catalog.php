@@ -62,8 +62,16 @@ class Application_Model_Catalog extends App_Model_Abstract {
     
 //COUPON
     public function reach($iduser, $idpromo) {
-        $coupon[ID_Promozione] = $idpromo;
-        $coupon[ID_Utente] = $iduser;
-        return $this->getResource('Coupon')->insertCoupon($coupon);
+        
+        
+        if($this->getResource('Coupon')->getCouponById($iduser, $idpromo))
+        {
+            return;
+        }
+        else {
+            $coupon[ID_Promozione] = $idpromo;
+            $coupon[ID_Utente] = $iduser;
+            return $this->getResource('Coupon')->insertCoupon($coupon);
+        }
     }
 }
