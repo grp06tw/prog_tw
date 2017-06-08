@@ -5,8 +5,7 @@ class AdminController extends Zend_Controller_Action {
     protected $_adminModel;
     protected $_authService;
     protected $_newAzform;
-    protected $_delAzform;
-    protected $_selAzform;
+
 
     public function init() {
         $this->_helper->layout->setLayout('main');
@@ -15,9 +14,9 @@ class AdminController extends Zend_Controller_Action {
         $this->_adminModel = new Application_Model_Admin();
         $this->_authService = new Application_Service_Auth();
 
+        $this->view->assign(array('elimina' => $this->view->baseUrl('css/img/elimina.png')));
+        $this->view->assign(array('modifica' => $this->view->baseUrl('css/img/modifica.png')));
         $this->view->newaziendaform = $this->getAddAziendaForm();
-        $this->view->delaziendaform = $this->getDelAziendaForm();
-        $this->view->selaziendaform = $this->getSelAziendaForm();
     }
 
     public function indexAction() {
@@ -33,17 +32,22 @@ class AdminController extends Zend_Controller_Action {
         $this->render('index');
     }
 
-    //************NEW*************
+
+    //****************************************
+    //             NEW AZIENDA
+    //****************************************  
     public function newaziendaAction() {
         $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
         $this->view->newaziendaform = $this->getAddAziendaForm();
     }
+
 
     public function addaziendaAction() {
         $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('newazienda');
         }
+
         $form = $this->_newAzform;
         if (!$form->isValid($_POST)) {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
@@ -53,75 +57,70 @@ class AdminController extends Zend_Controller_Action {
         $this->_adminModel->saveAzienda($values);
         $this->_helper->redirector('newazienda');
     }
-    
-    // Validazione AJAX
-    /*public function validatenewazAction() {
-        $this->_helper->getHelper('layout')->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
 
-        $aziendaform = new Application_Form_Admin_Azienda_Add();
-        $response = $aziendaform->processAjax($_POST);
-        if ($response !== null) {
-            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
-        }
-    }*/
+    //****************************************
+    //             MODIFICA AZIENDA
+    //****************************************
 
-    //************DELETE*************
-    public function deleteaziendaAction() {
+    public function modaziendaAction() {
         $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
+
+        $righe = $this->_adminModel->getAziende(null, array('titolo'));
+        $this->view->assign(array('righe' => $righe));
+        foreach ($righe as $riga) {
+            if ($riga["ID_Utente"] != null) {
+                $utenti[$riga["ID_Azienda"]] = $this->_adminModel->getUserById($riga["ID_Utente"])->Username;
+            }
+        }
+        if (isset($utenti)) {
+            $this->view->assign(array('utenti' => $utenti));
+        }
     }
 
-    public function delaziendaAction() {
-        $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
-        if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('deleteazienda');
-        }
-        $form = $this->_delAzform;
-        if (!$form->isValid($_POST)) {
-            $form->setDescription('operazione non riuscita');
-            return $this->render('deleteazienda');
-        }
-        $values = $form->getValues();
-        $this->_adminModel->delAzienda($values);
-        $this->_helper->redirector('deleteazienda');
-    }
-
-    //************UPDATE*************
-    public function updateaziendaAction() {
-        $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
-    }
+    //****************************************
+    //             UPDATE AZIENDA
+    //****************************************
 
     public function updaziendaAction() {
+        $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
+
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('updateazienda');
+            $this->_helper->redirector('modazienda');
         }
         $form = $this->_newAzform;
         if (!$form->isValid($_POST)) {
             $form->setDescription('operazione non riuscita');
-            return $this->render('updateazienda');
+            return $this->render('modazienda');
         }
         $values = $form->getValues();
         //UPDATE
         $this->_adminModel->upAzienda($values);
-        $this->_helper->redirector('updateazienda');
+        $this->_helper->redirector('modazienda');
     }
 
-    public function popolateaziendaAction() {
-        if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('updateazienda');
+    public function popolateazAction() {
+        $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
+        if ($id = $this->_getParam('ID')) {
+            $app = $this->_adminModel->getAziendaById($id);
+            $this->view->updateaziendaform = $this->getUpdateAziendaForm($app->toArray());
         }
-        $form = $this->_selAzform;
-        if (!$form->isValid($_POST)) {
-            $form->setDescription('operazione non riuscita');
-            return $this->render('updateazienda');
-        }
-        $values = $form->getValues();
-        $app = $this->_adminModel->getAziendaById($values);
-        $prova = $app["ID_Azienda"];
-        $this->view->updateaziendaform = $this->getUpdateAziendaForm($app->toArray());
     }
 
-    //************GET*************
+    //****************************************
+    //             DELETE AZIENDA
+    //****************************************
+
+    public function deleteazAction() {
+        if ($id = $this->_getParam('ID')) {
+            $this->_adminModel->delAzienda($id);
+            $this->_helper->redirector('modazienda');
+        }
+    }
+
+    //****************************************
+    //             GET FORMS
+    //****************************************  
+
     private function getAddAziendaForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_newAzform = new Application_Form_Admin_Azienda_Add();
@@ -132,25 +131,6 @@ class AdminController extends Zend_Controller_Action {
         return $this->_newAzform;
     }
 
-    private function getDelAziendaForm() {
-        $urlHelper = $this->_helper->getHelper('url');
-        $this->_delAzform = new Application_Form_Admin_Azienda_Delete();
-        $this->_delAzform->setAction($urlHelper->url(array(
-                    'controller' => 'admin',
-                    'action' => 'delazienda'), 'default'
-        ));
-        return $this->_delAzform;
-    }
-
-    private function getSelAziendaForm() {
-        $urlHelper = $this->_helper->getHelper('url');
-        $this->_selAzform = new Application_Form_Admin_Azienda_Select();
-        $this->_selAzform->setAction($urlHelper->url(array(
-                    'controller' => 'admin',
-                    'action' => 'popolateazienda'), 'default'
-        ));
-        return $this->_selAzform;
-    }
 
     private function getUpdateAziendaForm($values) {
         $urlHelper = $this->_helper->getHelper('url');
@@ -195,7 +175,33 @@ class AdminController extends Zend_Controller_Action {
     //****************************************
 
     public function statsAction() {
-        
+        $coupon = $this->_adminModel->getCoupon();
+        $this->view->assign(array('nCoupon' => count($coupon)));
+        $utenti = $this->_adminModel->getUsers();
+        $promozioni = $this->_adminModel->getProms();
+        $count = 0;
+        foreach ($promozioni as $promo) {
+            for ($i = 0; $i < count($coupon); $i++) {
+                if ($coupon[$i]["ID_Promozione"] == $promo["ID_Promozione"]) {
+                    $count++;
+                }
+            }
+            $stP[$promo["ID_Promozione"]] = array("Promozione" => $promo["titolo"], "couponEmessi" => $count);
+        }
+        $count=0;
+        foreach ($utenti as $utente) {
+            for ($i = 0; $i < count($coupon); $i++) {
+                if ($coupon[$i]["ID_Utente"] == $utente["ID_Utente"]) {
+                    $count++;
+                }
+            }
+            $stU[$utente["ID_Utente"]] = array("Username" => $utente["Username"], "couponAcquistati" => $count);
+        }
+
+
+        $righe = $this->_adminModel->getAziende(null, array('titolo'));
+        $this->view->assign(array('p' => $stP, 'u' => $stU));
+
         
     }
 

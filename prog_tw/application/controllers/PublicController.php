@@ -8,13 +8,10 @@ class PublicController extends Zend_Controller_Action {
     protected $_logged;
     protected $_signform;
     protected $_searchform;
-    //protected $values;
-    //protected $cache;
 
     public function init() {
         //creo un istanza del model che userò per la visualizzazione delle promozioni-aziende etc
         //questo model contiene tutte le query dell'area pubblica
-        $this->cache= new Zend_Cache_Core ();
         $this->_catalogModel = new Application_Model_Catalog();
 
         $this->_authService = new Application_Service_Auth();
@@ -241,9 +238,9 @@ class PublicController extends Zend_Controller_Action {
         }
 
         $this->values = $form->getValues();   
-         $this->cache->load("prova");
-        $this->cache->save($this->values["ID_Categoria"], "ID_Categoria");
-        $this->cache->save($this->values["words"], "words");
+        // $this->cache->load("prova");
+        // $this->cache->save($this->values["ID_Categoria"], "ID_Categoria");
+        // $this->cache->save($this->values["words"], "words");
         
         //L'UNICA COSA CHE MANCA QUI è DI RIUSCIRE A PASSARE VALUES ALLA FINDACTION, MI DICE CHE UN'AZIONE NON PUò AVERE PARAMETRI
         $this->findAction();
