@@ -44,7 +44,7 @@ class AdminController extends Zend_Controller_Action {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('newazienda');
         }
-        $form = $this->_newform;
+        $form = $this->_newAzform;
         if (!$form->isValid($_POST)) {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('newazienda');

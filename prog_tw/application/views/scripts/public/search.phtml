@@ -17,7 +17,9 @@
 
         <div id="desc" class="promo">
 
-            <?= $promo->descrizione ?>
+            <?php $cache= new Zend_Cache_Core ();
+                  echo $cache->load("ID_Categoria").  
+                $promo->descrizione ?>
 
         </div>
 
@@ -30,6 +32,10 @@
 
 <?php
 if ($this->trovate instanceof Zend_Paginator) {
+   
+//$this->trovate
+    //$this->trovate["ID_Categoria"]=$this->ID_Categoria;
+    //$this->trovate["words"]=$this->words;
     echo $this->paginationControl($this->trovate, 'Sliding', 'public/paginator/_pagSearch.phtml');
 } 
 	  
