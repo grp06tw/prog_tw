@@ -10,24 +10,23 @@ class Application_Resource_Coupon extends Zend_Db_Table_Abstract {
         
     }
     
-    public function reach($iduser, $idpromo) {
-        if($iduser == null)
-        {
-            //non puoi acquisire un coupon   
-        }
-        
-        
-        
+    public function insertCoupon($coupon) {
         $this->insert($coupon);
-            
     }
     
-    public function insertPromo($promo) {
+    public function getCouponById($idUser, $idPromo) {
+        $select = $this->select()
+                ->where("ID_Utente = " . $idUser) and ("ID_Promozione = " . $idPromo);
+
+        return $this->fetchAll($select);
+    }
+    
+    /*public function insertPromo($promo) {
         if ($promo['immagine'] == null) {
             $promo['immagine'] = 'default.jpg';
         }
         $this->insert($promo);
-    }
+    }*/
 }
     public function getCoupon() {
         return $this->fetchAll($this->select());

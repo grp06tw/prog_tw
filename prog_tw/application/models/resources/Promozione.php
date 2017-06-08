@@ -45,6 +45,7 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract {
             $paginator = new Zend_Paginator($adapter);
             $paginator->setItemCountPerPage(5)
                     ->setCurrentPageNumber((int) $paged);
+          
             return $paginator;
         }
         return $this->fetchAll($select);
