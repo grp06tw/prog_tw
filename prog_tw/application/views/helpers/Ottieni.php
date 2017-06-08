@@ -1,5 +1,4 @@
 <?php
-
 class Zend_View_Helper_Ottieni extends Zend_View_Helper_Abstract {
 
     public function Ottieni($idPromo) {
@@ -17,5 +16,4 @@ class Zend_View_Helper_Ottieni extends Zend_View_Helper_Abstract {
             return;
         }
     }
-
 }

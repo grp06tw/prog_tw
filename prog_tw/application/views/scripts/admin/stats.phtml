@@ -1,4 +1,49 @@
 <div class="static">
- <h3>Area Admin</h3>
- <p>Seleziona la funzione da attivare</p>
+    <h3>Statistiche</h3>
+    <br>
+    <p>Numero coupon emessi in totale fin ora: <?= $this->nCoupon ?></p>
+    <br>
+    <div id="stat">
+        <div id="statSX">
+            <table id="modTable">
+                <thead id="headmod">
+                    <tr>
+                        <th>Promozione</th>
+                        <th>Coupon Emessi</th>
+                    </tr>
+                </thead>
+
+                <tbody id="bodymod">
+                    <?php foreach ($this->p as $prom) : ?>
+
+                        <tr>
+                            <td><?= $prom["Promozione"] ?></td>
+                            <td><?= $prom["couponEmessi"] ?></td>
+                        </tr>               
+                    <?php endforeach; ?>
+                </tbody>        
+            </table>
+        </div>
+        <div id="statDX">
+            <table id="modTable">
+                <thead id="headmod">
+                    <tr>
+                        <th>Username</th>
+                        <th>Coupon Acquistati</th>
+
+                    </tr>
+                </thead>
+
+                <tbody id="bodymod">
+                    <?php foreach ($this->u as $utente) : ?>
+                        <tr>
+                            <td><?= $utente["Username"] ?></td>
+                            <td><?= $utente["couponAcquistati"] ?></td>
+                        </tr>               
+                    <?php endforeach; ?>
+                </tbody>        
+            </table>
+            <br><br>
+        </div>
+    </div>
 </div>

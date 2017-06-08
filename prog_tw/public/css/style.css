@@ -2,6 +2,29 @@
         STILE GENERALE
     ______________________
 */
+#separatorTB{
+    width:50%;
+}
+
+.img_mod{
+    height: 30px;
+}
+#modTable {
+    border-collapse: collapse;
+    background-color: white;
+}
+#headmod{
+    background-color: #333;
+    color: #0398CA;
+}
+#modTable, #headmod > tr > th, #bodymod > tr >td {
+    border: 1px solid black;
+}
+#headmod > tr >  th, #bodymod > tr >td{
+    padding: 10px;
+    text-align: center;
+}
+
 ul {
     list-style-type: none;
     padding-left: 0;
@@ -344,10 +367,14 @@ ___________________________
 }
 
 .errors ul {
-    line-height: 100%;
+
+	line-height: 100%;
+
     margin:10px;
     min-width: 600px;
 }
+
+
 /*
 #titol
 {
@@ -363,6 +390,7 @@ h2
     margin-left:0px;
 }
 
+
 #prezz
 {
     align-content: center;
@@ -373,4 +401,22 @@ h2
 #descrizione
 {
     margin: 20px 0px 0px 10px;
-}*/
+}
+
+/* ________________________
+        STATISTICHE
+___________________________
+*/
+
+#stat{
+    display: inline;
+}
+
+#statSX{
+    float: left;
+}
+
+#statDX{
+   float:right;
+}
+

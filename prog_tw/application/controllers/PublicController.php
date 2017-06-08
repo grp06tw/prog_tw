@@ -36,11 +36,7 @@ class PublicController extends Zend_Controller_Action {
         $this->view->searchForm = $this->getSearchForm();
     }
 
-    public function indexAction() {
-        //vengo rediretto all'action promo, che si occuperà di visualizzare le promo
-        $this->_helper->redirector('promo', 'public');
-    }
-
+  
     //****************************************
     //             ACQUISTO
     //****************************************
@@ -107,7 +103,10 @@ class PublicController extends Zend_Controller_Action {
     public function faqAction() {
 
         $paged = $this->_getParam('page', 1);
-        $ordine = $this->_getParam('order', null);
+
+        $ordine = $this->_getParam('order', null); //da modificare
+
+
 
         $faqs = $this->_catalogModel->getFaq($paged, $ordine);
 
@@ -125,6 +124,7 @@ class PublicController extends Zend_Controller_Action {
     //****************************************
     public function reservedareaAction() {
         $this->_helper->redirector('index', 'staff');
+
     }
 
     //****************************************
@@ -150,6 +150,7 @@ class PublicController extends Zend_Controller_Action {
         }
         return $this->_helper->redirector('index', $this->_authService->getIdentity()->role);
     }
+  
 
     private function getLoginForm() {
         $urlHelper = $this->_helper->getHelper('url');
@@ -201,6 +202,7 @@ class PublicController extends Zend_Controller_Action {
         //$this->_helper->redirector('index');
     }
 
+
     private function getSigninForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_signform = new Application_Form_Public_Signin();
@@ -210,7 +212,7 @@ class PublicController extends Zend_Controller_Action {
         ));
         return $this->_signform;
     }
-
+  
     // Validazione AJAX
     public function validatesigninAction() {
         $this->_helper->getHelper('layout')->disableLayout();
@@ -222,7 +224,7 @@ class PublicController extends Zend_Controller_Action {
             $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
         }
     }
-
+  
     //****************************************
     //                RICERCA
     //****************************************    
