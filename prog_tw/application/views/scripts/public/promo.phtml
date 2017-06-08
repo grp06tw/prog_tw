@@ -28,6 +28,9 @@
 <?php endforeach; ?>
 
 
+        <input id="submit_buy" type="submit" value="Ottieni">
+
+
 <?php
 if ($this->promozioni instanceof Zend_Paginator) {
     echo $this->paginationControl($this->promozioni, 'Sliding', 'public/paginator/_paginator.phtml');

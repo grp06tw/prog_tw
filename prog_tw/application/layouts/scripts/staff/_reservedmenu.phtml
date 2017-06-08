@@ -19,24 +19,15 @@
                         ), 'default', true);
                 ?>" title="Aggiungi una nuova Promozione">Aggiungi Promozione	</a></p>
         </li>
-        <!Elimina Promozione>
+        <!Modifica Promozione>
         <li>
             <p class="p_menu"><a href="<?=
                 $this->url(array(
                     'controller' => 'staff',
-                    'action' => 'deletepromo',
+                    'action' => 'modpromo',
                         ), 'default', true);
-                ?>" title="Elimina una Promozione">Elimina Promozione	</a></p>
-        </li>
+                ?>" title="Modifica una Promozione">Modifica Promozione	</a></p>
 
-        <!Modifica Promozione>
-        <li>
-            <p class="p_menu"><a href="<?=
-                                 $this->url(array(
-                                     'controller' => 'staff',
-                                     'action' => 'updatepromo',
-                                         ), 'default', true);
-                                 ?>" title="Modifica una Promozione">Modifica Promozione	</a></p>
         </li>
 
         <!PROFILO>
@@ -48,7 +39,6 @@
                                          ), 'default', true);
                                  ?>" title="Modifica il tuo Profilo">Il tuo Profilo		</a></p>
         </li>
-
 
     </ul>
 </div>

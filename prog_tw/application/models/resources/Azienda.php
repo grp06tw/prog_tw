@@ -40,8 +40,9 @@ class Application_Resource_Azienda extends Zend_Db_Table_Abstract {
     }
 
 //DELETE
-    public function deleteAzienda($values) {
-        $this->delete("ID_Azienda = " . $values["ID_Azienda"]);
+    public function deleteAzienda($id) {
+        $this->delete("ID_Azienda = " . $id);
+
     }
 
 //UPDATE

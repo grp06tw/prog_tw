@@ -14,9 +14,10 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract {
 
     //ORDER o PER CATEGORIA o PER AZIENDA
     // Estrae tutte le promozioni
-    public function getProms($paged = null, $order = null) {
-        $select = $this->select();
 
+    public function getProms($paged = null, $order = null) {
+        
+        $select = $this->select();
         if (true === is_array($order)) {
             $select->order($order);
         }
@@ -100,6 +101,7 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract {
     }
 
     //INSERT
+
     public function insertPromo($promo) {
         if ($promo['immagine'] == null) {
             $promo['immagine'] = 'default.jpg';
@@ -108,8 +110,10 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract {
     }
 
     //DELETE
-    public function delPromo($promo) {
-        $this->delete("ID_Promozione = " . $promo["ID_Promozione"]);
+    public function delPromo($promo)
+    {
+        $this->delete("ID_Promozione = ".$promo);
+
     }
 
     //UPDATE
