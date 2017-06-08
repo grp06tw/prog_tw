@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 01, 2017 alle 18:51
+-- Creato il: Giu 08, 2017 alle 09:38
 -- Versione del server: 10.1.19-MariaDB
 -- Versione PHP: 5.6.28
 
@@ -48,7 +48,7 @@ INSERT INTO `azienda` (`ID_Azienda`, `ragione_sociale`, `nome`, `logo`, `indiriz
 (4, 'Ducati Motor Holding SPA', 'Ducati', 'Ducati_logo.jpg', 'Via Cavalieri Ducati 3, 40132, Bologna', NULL, 'La Ducati Motor Holding S.p.A. è una casa motociclistica italiana. Ha la sua sede a Borgo Panigale, un quartiere di Bologna. L''azienda nacque nel 1926 per volontà dell''ingegnere Antonio Cavalieri Ducati.', NULL),
 (5, 'Feltrinelli Editore SRL', 'Feltrinelli', 'Feltrinelli_logo.jpg', 'Via Tucidide 56, 20134, Milano', NULL, 'La Giangiacomo Feltrinelli Editore è una delle principali case editrici italiane.\r\nLa casa editrice nacque alla fine del 1954 a Milano. Ne è fondatore Giangiacomo Feltrinelli, che già nel 1949 aveva dato vita alla "Biblioteca G. Feltrinelli" per lo studio della storia contemporanea e i movimenti sociali, trasformata prima in istituto e successivamente nella Fondazione Giangiacomo Feltrinelli.', NULL),
 (6, 'Coop Italia S.c.a.r.l.', 'Coop', 'Coop_logo.jpg', 'Via del Lavoro 6/8, 40033, Casalecchio di Reno (BO) ', NULL, 'Coop Italia, quale abbreviazione di Cooperativa di Consumatori, è un marchio che contraddistingue un sistema di cooperative italiane che gestisce una rete di superettes, supermercati ed ipermercati.', NULL),
-(7, 'Decathlon Italia SRL', 'Decathlon', 'Decathlon_logo.jpg', 'Sede legale Italia: Via G.Morone 4, 20121, Milano', NULL, 'Decathlon è un''azienda francese che riunisce sotto il suo marchio una catena di negozi di articoli sportivi a livello mondiale, insegna principale del gruppo Oxylane.', NULL),
+(7, 'Decathlon Italia SRL', 'Decathlon', NULL, 'Sede legale Italia: Via G.Morone 4, 20121, Milano', NULL, 'Rivendita di articoli sportivi', NULL),
 (8, 'GameStop Corporation SRL', 'GameStop ', 'GameStop_logo.jpg', 'Via dei Lavoratori 6,\r\n20092, Buccinasco (MI)', NULL, 'GameStop, è un''azienda statunitense con sede nella città di Grapevine (Texas). È il più grande rivenditore di videogiochi nuovi e usati nel mondo, ma si occupa anche della vendita di accessori per videogiochi, console ed altri apparecchi elettronici.', NULL),
 (9, 'Kiko Milano SPA', 'Kiko Milano', 'Kiko_logo.jpg', 'Via Giorgio e Guido Paglia 1/D, 24122, Bergamo', NULL, 'KIKO Milano è una marca di cosmesi italiana che opera nel settore della cosmetica, ideata e fondata nel 1997 a Milano dal Gruppo Percassi, di proprietà di Antonio Percassi.', NULL);
 
@@ -93,11 +93,11 @@ CREATE TABLE `combo` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `cupon`
+-- Struttura della tabella `coupon`
 --
 
-CREATE TABLE `cupon` (
-  `ID_Cupon` int(10) NOT NULL,
+CREATE TABLE `coupon` (
+  `ID_Coupon` int(10) NOT NULL,
   `ID_Utente` int(10) NOT NULL,
   `ID_Promozione` int(10) DEFAULT NULL,
   `ID_Combo` int(10) DEFAULT NULL
@@ -188,7 +188,7 @@ CREATE TABLE `utente` (
 INSERT INTO `utente` (`ID_Utente`, `Username`, `password`, `nome`, `cognome`, `genere`, `eta`, `telefono`, `email`, `indirizzo`, `role`) VALUES
 (1, 'admin', 'admin', 'amministratore', 'di prova', 'm', 1996, NULL, 'mailadmin@gmail.com', NULL, 'admin'),
 (2, 'staff', 'staff', 'staff', 'di prova', 'f', 1996, NULL, 'mailstaff@gmail.com', NULL, 'staff'),
-(3, 'user', 'user', 'mario', 'rossi', 'm', 1987, '034958964', 'maiil@gmail.com', 'indirizzo', 'user'),
+(3, 'user', 'user', 'mario', 'rossi', 'm', 1987, '034958964', 'maiil@gmail.com', 'indirizzo', 'role'),
 (4, 'giuseppeb', 'pass', 'Giuseppe', 'Bianchi', 'm', 1980, '12345', 'mail1@gmail.com', NULL, 'user'),
 (5, 'mariar', 'pass', 'Maria', 'Russo', 'f', 1980, NULL, 'mail2@gmail.com', 'Roma, Via Portuense 39', 'user'),
 (6, 'francescol', 'pass', 'Francesco', 'Ludovico', 'm', 1986, '223344', 'mail3@gmail.com', NULL, 'user'),
@@ -221,10 +221,10 @@ ALTER TABLE `combo`
   ADD PRIMARY KEY (`ID_Combo`);
 
 --
--- Indici per le tabelle `cupon`
+-- Indici per le tabelle `coupon`
 --
-ALTER TABLE `cupon`
-  ADD PRIMARY KEY (`ID_Cupon`),
+ALTER TABLE `coupon`
+  ADD PRIMARY KEY (`ID_Coupon`),
   ADD KEY `ID_Utente` (`ID_Utente`),
   ADD KEY `ID_Promozione` (`ID_Promozione`),
   ADD KEY `ID_Combo` (`ID_Combo`);
@@ -248,8 +248,7 @@ ALTER TABLE `promozione`
 -- Indici per le tabelle `utente`
 --
 ALTER TABLE `utente`
-  ADD PRIMARY KEY (`ID_Utente`),
-  ADD KEY `ID_acl` (`role`);
+  ADD PRIMARY KEY (`ID_Utente`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
@@ -271,10 +270,10 @@ ALTER TABLE `categoria`
 ALTER TABLE `combo`
   MODIFY `ID_Combo` int(10) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT per la tabella `cupon`
+-- AUTO_INCREMENT per la tabella `coupon`
 --
-ALTER TABLE `cupon`
-  MODIFY `ID_Cupon` int(10) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `coupon`
+  MODIFY `ID_Coupon` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT per la tabella `faq`
 --
@@ -289,7 +288,7 @@ ALTER TABLE `promozione`
 -- AUTO_INCREMENT per la tabella `utente`
 --
 ALTER TABLE `utente`
-  MODIFY `ID_Utente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID_Utente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Limiti per le tabelle scaricate
 --
@@ -301,12 +300,12 @@ ALTER TABLE `azienda`
   ADD CONSTRAINT `azienda_ibfk_1` FOREIGN KEY (`ID_Utente`) REFERENCES `utente` (`ID_Utente`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `cupon`
+-- Limiti per la tabella `coupon`
 --
-ALTER TABLE `cupon`
-  ADD CONSTRAINT `cupon_ibfk_1` FOREIGN KEY (`ID_Utente`) REFERENCES `utente` (`ID_Utente`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cupon_ibfk_2` FOREIGN KEY (`ID_Combo`) REFERENCES `combo` (`ID_Combo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cupon_ibfk_3` FOREIGN KEY (`ID_Promozione`) REFERENCES `promozione` (`ID_Promozione`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `coupon`
+  ADD CONSTRAINT `coupon_ibfk_1` FOREIGN KEY (`ID_Utente`) REFERENCES `utente` (`ID_Utente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `coupon_ibfk_2` FOREIGN KEY (`ID_Combo`) REFERENCES `combo` (`ID_Combo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `coupon_ibfk_3` FOREIGN KEY (`ID_Promozione`) REFERENCES `promozione` (`ID_Promozione`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `promozione`
