@@ -20,11 +20,9 @@ class Application_Form_Admin_Faq_Add extends App_Form_Abstract {
 
 
         //-----ID FAQ-----//
-        $this->addElement('text', 'titolo', array(
-            'label' => 'Titolo',
+        $this->addElement('hidden', 'ID_Faq', array(
             'filters' => array('StringTrim'),
-            'required' => true,
-            'validators' => array(array('StringLength', true, array(1, 30))),
+            'show' => 'none',
             'decorators' => $this->elementDecorators,
         ));
 
@@ -33,7 +31,6 @@ class Application_Form_Admin_Faq_Add extends App_Form_Abstract {
             'label' => 'Domanda',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength', true, array(1, 30))),
             'decorators' => $this->elementDecorators,
         ));
 
@@ -42,7 +39,6 @@ class Application_Form_Admin_Faq_Add extends App_Form_Abstract {
             'label' => 'Risposta',
             'filters' => array('StringTrim'),
             'required' => true,
-            'validators' => array(array('StringLength', true, array(1, 30))),
             'decorators' => $this->elementDecorators,
         ));
 

@@ -40,7 +40,30 @@ class Application_Model_Admin extends App_Model_Abstract {
     public function upAzienda($values) {
         return $this->getResource('Azienda')->updateAzienda($values);
     }
+    //CATEGORIA
     
+    public function saveCat($values)
+    {
+    	return $this->getResource('Categoria')->insertCat($values);
+    }
+    
+    public function getCats()
+    {
+	return $this->getResource('Categoria')->getCat();
+    }
+    
+     public function getCatById($id)
+    {
+	return $this->getResource('Categoria')->getCatByID($id);
+    }
+    
+    public function delCat($values) {
+        return $this->getResource('Categoria')->delCat($values);
+    }
+    
+    public function upCat($values) {
+        return $this->getResource('Categoria')->upCat($values);
+    }
     //-----FAQ-----//
     
     public function saveFaq($faq)
@@ -61,6 +84,11 @@ class Application_Model_Admin extends App_Model_Abstract {
     public function delFaq($values) {
         return $this->getResource('Faq')->deleteFaq($values);
     }
+    
+    public function upFaq($values) {
+        return $this->getResource('Faq')->upFaq($values);
+    }
+    
     //COUPON
     public function getCoupon() {
         return $this->getResource('Coupon')->getCoupon();

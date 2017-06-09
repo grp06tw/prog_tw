@@ -1,13 +1,13 @@
 
-<?php foreach ($this->faq as $faq) : ?>
+<?php foreach ($this->faq as $cat) : ?>
     <div id="elemento">  
         <div id="tit" class="faq">
-            <h2 class="faq"> <?= $faq->domanda ?> </h2>
+            <h2 class="faq"> <?= $cat->domanda ?> </h2>
         </div>
 
         <div id="desc">
 
-            <?= $faq->risposta ?>
+            <?= $cat->risposta ?>
 
         </div>
 
