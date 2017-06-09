@@ -36,8 +36,11 @@ class PublicController extends Zend_Controller_Action {
         $this->view->searchForm = $this->getSearchForm();
     }
 
-  
-    //****************************************
+public function indexAction(){
+    $this->_helper->redirector("promo");
+}
+
+        //****************************************
     //             ACQUISTO
     //****************************************
     public function acquistoAction() {
