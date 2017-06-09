@@ -1,32 +1,32 @@
 <?php
 
-class Application_Form_Admin_Azienda_Delete extends App_Form_Abstract {
+class Application_Form_Admin_Faq_Delete extends App_Form_Abstract {
 
     protected $_adminmodel;
 
     public function init() {
         $this->_adminmodel = new Application_Model_Admin();
         $this->setMethod('post');
-        $this->setName('deleteazienda');
+        $this->setName('deletefaq');
         $this->setAction('');
         $this->setAttrib('enctype', 'multipart/form-data');
 
-//AZIENDA                
-        $aziende = array();
-        $az = $this->_adminmodel->getAziende();
-        foreach ($az as $azienda) {
-            $aziende[$azienda->ID_Azienda] = $azienda->nome;
+//-----FAQ-----//              
+        $faq = array();
+        $fa = $this->_adminmodel->getFaq();
+        foreach ($fa as $faq1) {
+            $faq[$faq1->ID_Faq] = $faq1->nome;
         }
-        $this->addElement('select', 'ID_Azienda', array(
-            'label' => 'Azienda',
+        $this->addElement('select', 'ID_Faq', array(
+            'label' => 'Faq',
             'required' => true,
-            'multiOptions' => $aziende,
+            'multiOptions' => $faq,
             'decorators' => $this->elementDecorators,
         ));
 
-//SUBMIT 		
+//-----SUBMIT-----//
         $this->addElement('submit', 'delete', array(
-            'label' => 'Elimina Azienda',
+            'label' => 'Elimina Faq',
             'decorators' => $this->buttonDecorators,
         ));
 

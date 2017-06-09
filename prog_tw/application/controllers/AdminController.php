@@ -185,9 +185,51 @@ class AdminController extends Zend_Controller_Action {
     //                FAQ
     //****************************************
     public function faqAction() {
-        $this->view->assign(array('menu' => "admin/faq/_crudfaq.phtml"));
+        $this->view->assign(array('menu' => "admin/utenti/_crudfaq.phtml"));
         $this->view->assign(array('title' => "Gestisci FAQ"));
         $this->render('index');
+    }
+    
+    public function addfaqAction() {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('newfaq');
+        }
+        $form = $this->_addform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+            return $this->render('newfaq');
+        }
+        $values = $form->getValues();
+        $this->_adminModel->saveFaq($values);
+        $this->_helper->redirector('newfaq');
+    }
+    
+    //-----VALIDAZIONE AJAX-----//
+    public function validatefaqAction() {
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $promoform = new Application_Form_Admin_Faq_Add();
+        $response = $faqform->processAjax($_POST);
+        if ($response !== null) {
+            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
+        }
+    }
+    
+    //-----DELETE FAQ-----//
+    public function delfaqAction() {
+        $this->view->assign(array('menu' => "admin/utenti/_crudfaq.phtml"));
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('deletefaq');
+        }
+        $form = $this->_delfaqform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('operazione non riuscita');
+            return $this->render('deletefaq');
+        }
+        $values = $form->getValues();
+        $this->_adminModel->delFaq($values);
+        $this->_helper->redirector('deletefaq');
     }
 
     //****************************************

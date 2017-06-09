@@ -36,5 +36,26 @@ class Application_Model_Admin extends App_Model_Abstract {
     public function upAzienda($values) {
         return $this->getResource('Azienda')->updateAzienda($values);
     }
+    
 
+    //-----FAQ-----//
+    
+    public function saveFaq($faq)
+    {
+    	return $this->getResource('Faq')->insertFaq($faq);
+    }
+    
+    public function getFaq()
+    {
+	return $this->getResource('Faq')->getFaq();
+    }
+    
+     public function getFaqById($id)
+    {
+	return $this->getResource('Faq')->getFaqByID($id);
+    }
+    
+    public function delFaq($values) {
+        return $this->getResource('Faq')->deleteFaq($values);
+    }
 }
