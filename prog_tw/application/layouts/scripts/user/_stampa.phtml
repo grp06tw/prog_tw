@@ -9,27 +9,25 @@
     <div id="flayer">	
 
         <div id="titol">
-            <h2> <?= $azienda->titolo ?> </h2>
+            <h2> <?= $promo->titolo ?> </h2>
         </div>
         <div id="prezz">
 
-            <p> <?= $azienda->getPrice($azienda->sconto) ?> </p>
+            <p> <?= $promo->getPrice($promo->sconto) ?> </p>
             <p>
                 <del>
-                    <?= $azienda->prezzo ?>
+                    <?= $promo->prezzo ?>
                 </del>
-                <br><?= $azienda->sconto ?>%
-            </p>
+                <br><?= $promo->sconto ?>%            </p>
 
         </div>
 
         <div id="descrizione">
 
-            <?= $azienda->descrizione ?>
+            <?= $promo->descrizione ?>
             <br>
             NOME AZIENDA <BR><BR>
             CODICE COUPON 83 (8 id_promozione 3 id_utente)
-
 
         </div>
     </div>    

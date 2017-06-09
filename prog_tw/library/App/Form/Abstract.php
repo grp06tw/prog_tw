@@ -26,4 +26,15 @@ class App_Form_Abstract extends Zend_Form
                 array('Label', array('tag' => 'td')),
                 array(array('alias4' => 'HtmlTag'), array('tag' => 'tr')),
         );
+        
+        public $radioDecorators = array(
+        'ViewHelper',
+        array(array('alias1' => 'HtmlTag'),array('tag' => 'td', 'class' => 'radio')),
+        array('Label', array('tag' => 'td')),
+        array(array('alias4' => 'HtmlTag'), array('tag' => 'tr')),
+        );
+        
+         public $searchDecorators = array(
+        'ViewHelper',
+        );
 }

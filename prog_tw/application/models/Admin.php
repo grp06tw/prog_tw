@@ -24,7 +24,8 @@ class Application_Model_Admin extends App_Model_Abstract {
         return $this->getResource('Azienda')->getAziende();
     }
 
-    public function getAziendaById($id) {
+    
+     public function getAziendaById($id) {
         return $this->getResource('Azienda')->getAziendaById($id);
     }
 

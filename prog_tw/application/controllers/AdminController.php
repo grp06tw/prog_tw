@@ -6,12 +6,14 @@ class AdminController extends Zend_Controller_Action {
     protected $_authService;
     protected $_newAzform;
 
+
     public function init() {
         $this->_helper->layout->setLayout('main');
         $this->view->assign(array('menu' => "admin/_reservedmenu.phtml"));
         $this->view->assign(array('topbar' => "_topbar.phtml"));
         $this->_adminModel = new Application_Model_Admin();
         $this->_authService = new Application_Service_Auth();
+
         $this->view->assign(array('elimina' => $this->view->baseUrl('css/img/elimina.png')));
         $this->view->assign(array('modifica' => $this->view->baseUrl('css/img/modifica.png')));
         $this->view->newaziendaform = $this->getAddAziendaForm();
@@ -30,6 +32,7 @@ class AdminController extends Zend_Controller_Action {
         $this->render('index');
     }
 
+
     //****************************************
     //             NEW AZIENDA
     //****************************************  
@@ -38,11 +41,13 @@ class AdminController extends Zend_Controller_Action {
         $this->view->newaziendaform = $this->getAddAziendaForm();
     }
 
+
     public function addaziendaAction() {
         $this->view->assign(array('menu' => "admin/aziende/_crudaziende.phtml"));
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('newazienda');
         }
+
         $form = $this->_newAzform;
         if (!$form->isValid($_POST)) {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
@@ -115,6 +120,7 @@ class AdminController extends Zend_Controller_Action {
     //****************************************
     //             GET FORMS
     //****************************************  
+
     private function getAddAziendaForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_newAzform = new Application_Form_Admin_Azienda_Add();
@@ -124,6 +130,7 @@ class AdminController extends Zend_Controller_Action {
         ));
         return $this->_newAzform;
     }
+
 
     private function getUpdateAziendaForm($values) {
         $urlHelper = $this->_helper->getHelper('url');
@@ -194,6 +201,7 @@ class AdminController extends Zend_Controller_Action {
 
         $righe = $this->_adminModel->getAziende(null, array('titolo'));
         $this->view->assign(array('p' => $stP, 'u' => $stU));
+
         
     }
 
