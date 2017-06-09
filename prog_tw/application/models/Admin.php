@@ -49,7 +49,7 @@ class Application_Model_Admin extends App_Model_Abstract {
     
     public function getCats()
     {
-	return $this->getResource('Categoria')->getCat();
+	return $this->getResource('Categoria')->getCats();
     }
     
      public function getCatById($id)

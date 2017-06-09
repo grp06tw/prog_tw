@@ -179,7 +179,7 @@ class AdminController extends Zend_Controller_Action {
         }
         $values = $form->getValues();
         $this->_adminModel->saveCat($values);
-        $this->_helper->redirector('index');
+        $this->_helper->redirector('categorie');
     }
 
     //****************************************
@@ -294,7 +294,7 @@ class AdminController extends Zend_Controller_Action {
         }
         $values = $form->getValues();
         $this->_adminModel->saveFaq($values);
-        $this->_helper->redirector('index');
+        $this->_helper->redirector('faq');
     }
 
 //    //-----VALIDAZIONE AJAX-----//

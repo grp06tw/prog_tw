@@ -18,7 +18,7 @@ class Application_Resource_Categoria extends Zend_Db_Table_Abstract {
     }
 
     // Estrae tutte le categorie
-    public function getCat() {
+    public function getCats() {
         $select = $this->select()
                 ->order('nome');
         return $this->fetchAll($select);
@@ -26,12 +26,13 @@ class Application_Resource_Categoria extends Zend_Db_Table_Abstract {
 
     //qui andremo ad inserire le cìselect che ci serviranno per il crud delle categorie
     public function insertCat($values) {
-        $cats = $this->getCat();
+        $cats = $this->getCats();
         $ok = 1;
         foreach ($cats as $cat) {
-            if ($cat["nome"] == $values["nome"])
-                ;
+            if ($cat["nome"] == $values["nome"]){
+                
             $ok = null;
+            }
         }
         if ($ok) {
             $this->insert($values);
