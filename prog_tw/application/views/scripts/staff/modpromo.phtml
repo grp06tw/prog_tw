@@ -1,0 +1,48 @@
+<div class="static">
+    <h3>Modifica Promozione</h3>
+    <p>Ecco le promozioni che puoi modificare</p>
+    <br>
+    <table id="modTable">
+        <thead id="headmod">
+            <tr>
+                <th>Titolo</th>
+                <th>Prezzo</th>
+                <th>Sconto</th>
+                <th>Descrizione</th>
+                <th>Immagine</th>
+                <th>Categoria</th>
+                <th>Azienda</th>
+                <th>Modifica</th>
+                <th>Elimina</th>
+            </tr>
+        </thead>
+        <tbody id="bodymod">
+            <?php foreach ($this->righe as $azienda) : ?>
+
+                <tr>
+                    <td><?= $azienda["titolo"] ?></td>
+                    <td><?= $azienda["prezzo"].' €' ?></td>
+                    <td><?= $azienda["sconto"].'%' ?></td>
+                    <td><?= $azienda["descrizione"] ?></td>
+                    <td><?= $azienda["immagine"] ?></td>
+                    <td><?= $this->categorie[$azienda["ID_Promozione"]] ?></td>
+                    <td><?= $this->aziende[$azienda["ID_Promozione"]] ?></td>
+                    <td><a href="<?= $this->url(array(
+                                        'controller' => 'staff',
+                                        'action'     => 'popolate',
+                                        'ID' => $azienda["ID_Promozione"]
+                                        ), 
+                                        'default',true);?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica?>></a></td>
+                    <td><a href="<?= $this->url(array(
+                                        'controller' => 'staff',
+                                        'action'     => 'delete',
+                                        'ID' => $azienda["ID_Promozione"]
+                                        ), 
+                                        'default',true);?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina?>></a></td>
+                </tr>
+                
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+</div>

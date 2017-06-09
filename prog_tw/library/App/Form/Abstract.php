@@ -34,7 +34,7 @@ class App_Form_Abstract extends Zend_Form
         array(array('alias4' => 'HtmlTag'), array('tag' => 'tr')),
         );
         
-        public $searchDecorators = array(
-            'ViewHelper'
+         public $searchDecorators = array(
+        'ViewHelper',
         );
 }

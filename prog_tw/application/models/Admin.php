@@ -9,7 +9,10 @@ class Application_Model_Admin extends App_Model_Abstract {
     //USERS
     public function getUsers($where = null) {
         return $this->getResource('Utente')->getUsers($where);
-        
+    }
+
+    public function getUserById($id) {
+        return $this->getResource('Utente')->getUsers($id);
     }
 
     public function getUserByName($info) {
@@ -20,6 +23,7 @@ class Application_Model_Admin extends App_Model_Abstract {
     public function getAziende() {
         return $this->getResource('Azienda')->getAziende();
     }
+
     
      public function getAziendaById($id) {
         return $this->getResource('Azienda')->getAziendaById($id);
@@ -37,7 +41,6 @@ class Application_Model_Admin extends App_Model_Abstract {
         return $this->getResource('Azienda')->updateAzienda($values);
     }
     
-
     //-----FAQ-----//
     
     public function saveFaq($faq)
@@ -57,5 +60,14 @@ class Application_Model_Admin extends App_Model_Abstract {
     
     public function delFaq($values) {
         return $this->getResource('Faq')->deleteFaq($values);
+    }
+    //COUPON
+    public function getCoupon() {
+        return $this->getResource('Coupon')->getCoupon();
+    }
+
+    //PROMOZIONI
+    public function getProms() {
+        return $this->getResource('Promozione')->getProms();
     }
 }

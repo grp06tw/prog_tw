@@ -4,18 +4,17 @@ class StaffController extends Zend_Controller_Action {
 
     protected $_staffModel;
     protected $_addform;
-    protected $_delform;
-    protected $_selform;
+
     private $_authService;
 
     public function init() {
         $this->_helper->layout->setLayout('main');
         $this->_staffModel = new Application_Model_Staff();
         $this->view->newpromoForm = $this->getAddPromoForm();
-        $this->view->deletepromoForm = $this->getDeletePromoForm();
-        $this->view->selectupdateForm = $this->getSelectUpdateForm();
         $this->view->assign(array('menu' => "staff/_reservedmenu.phtml"));
         $this->view->assign(array('topbar' => "_topbar.phtml"));
+        $this->view->assign(array('elimina' => $this->view->baseUrl('css/img/elimina.png')));
+        $this->view->assign(array('modifica' => $this->view->baseUrl('css/img/modifica.png')));
         $this->_authService = new Application_Service_Auth();
     }
 
@@ -23,7 +22,9 @@ class StaffController extends Zend_Controller_Action {
         
     }
 
-    //ADD PROMO       
+    //****************************************
+    //             ADD PROMO
+    //****************************************  
 
     public function newpromoAction() {
         
@@ -55,31 +56,28 @@ class StaffController extends Zend_Controller_Action {
         }
     }
 
-    //DELETE PROMO
+    //****************************************
+    //             MODIFICA PROMO
+    //****************************************
 
-    public function deletepromoAction() {
-        
-    }
+    public function modpromoAction() {
+        $righe = $this->_staffModel->getProms(null, array('titolo'));
 
-    public function delpromoAction() {
-        if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('index');
+        foreach ($righe as $riga) {
+            $categorie[$riga["ID_Promozione"]] = $this->_staffModel->getCatById($riga["ID_Categoria"])->nome;
+            $aziende[$riga["ID_Promozione"]] = $this->_staffModel->getAziendaById($riga["ID_Azienda"])->nome;
         }
-        $form = $this->_delform;
-        if (!$form->isValid($_POST)) {
-            $form->setDescription('operazione non riuscita');
-            return $this->render('deletepromo');
-        }
-        $values = $form->getValues();
-        $this->_staffModel->delPromo($values);
-        $this->_helper->redirector('deletepromo');
+        $this->view->assign(array('righe' => $righe,
+            'categorie' => $categorie,
+            'aziende' => $aziende
+        ));
     }
 
-    //UPDATE PROMO       
-    public function updatepromoAction() {
-        
-    }
+    //****************************************
+    //             UPDATE PROMO
+    //****************************************
 
+ 
     public function updpromoAction() {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('index');
@@ -87,31 +85,37 @@ class StaffController extends Zend_Controller_Action {
         $form = $this->_addform;
         if (!$form->isValid($_POST)) {
             $form->setDescription('operazione non riuscita');
-            return $this->render('updatepromo');
+            return $this->render('modpromo');
+
         }
         $values = $form->getValues();
         //UPDATE
         $this->_staffModel->updatePromo($values);
-        $this->_helper->redirector('updatepromo');
+        $this->_helper->redirector('modpromo');
     }
-
+  
     public function popolateAction() {
-        if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('index');
+        if ($id = $this->_getParam('ID')) {
+            $app = $this->_staffModel->getPromoById($id);
+            $this->view->updatepromoForm = $this->getUpdatePromoForm($app->toArray());
         }
-        $form = $this->_selform;
-        if (!$form->isValid($_POST)) {
-            $form->setDescription('operazione non riuscita');
-            return $this->render('updatepromo');
-        }
-        $values = $form->getValues();
-        $app = $this->_staffModel->getPromoById($values);
-        $prova = $app["ID_Promozione"];
-        $this->view->updatepromoForm = $this->getUpdatePromoForm($app->toArray());
     }
 
-    //RECUPERO LE FORM
-    //ADD
+    //****************************************
+    //             DELETE PROMO
+    //****************************************
+
+    public function deleteAction() {
+        if ($id = $this->_getParam('ID')) {
+            $this->_staffModel->delPromo($id);
+            $this->_helper->redirector('modpromo');
+        }
+    }
+
+    //****************************************
+    //             GET FORMS
+    //****************************************
+
     private function getAddPromoForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_addform = new Application_Form_Staff_Promo_Add();
@@ -122,29 +126,8 @@ class StaffController extends Zend_Controller_Action {
         return $this->_addform;
     }
 
-    //DELETE
-    private function getDeletePromoForm() {
-        $urlHelper = $this->_helper->getHelper('url');
-        $this->_delform = new Application_Form_Staff_Promo_Delete;
-        $this->_delform->setAction($urlHelper->url(array(
-                    'controller' => 'staff',
-                    'action' => 'delpromo'), 'default'
-        ));
-        return $this->_delform;
-    }
 
-    //UPDATE
-    //Seleziona la promo da modificare
-    private function getSelectUpdateForm() {
-        $urlHelper = $this->_helper->getHelper('url');
-        $this->_selform = new Application_Form_Staff_Promo_Select();
-        $this->_selform->setAction($urlHelper->url(array(
-                    'controller' => 'staff',
-                    'action' => 'popolate'), 'default'
-        ));
-        return $this->_selform;
-    }
-
+  
     private function getUpdatePromoForm($values) {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_addform = new Application_Form_Staff_Promo_Add();
@@ -155,6 +138,11 @@ class StaffController extends Zend_Controller_Action {
         ));
         return $this->_addform;
     }
+
+
+    //****************************************
+    //             logout
+    //****************************************
 
     public function logoutAction() {
         $this->_authService->clear();
