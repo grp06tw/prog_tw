@@ -10,6 +10,7 @@
     height: 30px;
 }
 #modTable {
+    width: 100%;
     border-collapse: collapse;
     background-color: white;
 }
@@ -403,20 +404,11 @@ h2
     margin: 20px 0px 0px 10px;
 }
 
-/* ________________________
-        STATISTICHE
-___________________________
+
 */
 
-#stat{
-    display: inline;
-}
 
-#statSX{
-    float: left;
+.statsSelector{
+    margin-bottom: 15px;
+    
 }
-
-#statDX{
-   float:right;
-}
-

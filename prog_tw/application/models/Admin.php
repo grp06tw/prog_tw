@@ -7,16 +7,28 @@ class Application_Model_Admin extends App_Model_Abstract {
     }
 
     //USERS
-    public function getUsers($where = null) {
+    public function getUsers($where = null, $order = null) {
         return $this->getResource('Utente')->getUsers($where);
     }
 
     public function getUserById($id) {
-        return $this->getResource('Utente')->getUsers($id);
+        return $this->getResource('Utente')->getUserById($id);
     }
 
     public function getUserByName($info) {
         return $this->getResource('Utente')->getUserLogin($info);
+    }
+
+    public function saveUser($values) {
+        return $this->getResource('Utente')->insertUser($values);
+    }
+
+    public function upUser($values) {
+        return $this->getResource('Utente')->upUser($values);
+    }
+
+    public function deleteUser($values) {
+        return $this->getResource('Utente')->deleteUser($values);
     }
 
     //AZIENDA
@@ -24,8 +36,7 @@ class Application_Model_Admin extends App_Model_Abstract {
         return $this->getResource('Azienda')->getAziende();
     }
 
-    
-     public function getAziendaById($id) {
+    public function getAziendaById($id) {
         return $this->getResource('Azienda')->getAziendaById($id);
     }
 
@@ -40,55 +51,51 @@ class Application_Model_Admin extends App_Model_Abstract {
     public function upAzienda($values) {
         return $this->getResource('Azienda')->updateAzienda($values);
     }
+
     //CATEGORIA
-    
-    public function saveCat($values)
-    {
-    	return $this->getResource('Categoria')->insertCat($values);
+
+    public function saveCat($values) {
+        return $this->getResource('Categoria')->insertCat($values);
     }
-    
-    public function getCats()
-    {
-	return $this->getResource('Categoria')->getCats();
+
+    public function getCats() {
+        return $this->getResource('Categoria')->getCats();
     }
-    
-     public function getCatById($id)
-    {
-	return $this->getResource('Categoria')->getCatByID($id);
+
+    public function getCatById($id) {
+        return $this->getResource('Categoria')->getCatByID($id);
     }
-    
+
     public function delCat($values) {
         return $this->getResource('Categoria')->delCat($values);
     }
-    
+
     public function upCat($values) {
         return $this->getResource('Categoria')->upCat($values);
     }
+
     //-----FAQ-----//
-    
-    public function saveFaq($faq)
-    {
-    	return $this->getResource('Faq')->insertFaq($faq);
+
+    public function saveFaq($faq) {
+        return $this->getResource('Faq')->insertFaq($faq);
     }
-    
-    public function getFaq()
-    {
-	return $this->getResource('Faq')->getFaq();
+
+    public function getFaq() {
+        return $this->getResource('Faq')->getFaq();
     }
-    
-     public function getFaqById($id)
-    {
-	return $this->getResource('Faq')->getFaqByID($id);
+
+    public function getFaqById($id) {
+        return $this->getResource('Faq')->getFaqByID($id);
     }
-    
+
     public function delFaq($values) {
         return $this->getResource('Faq')->deleteFaq($values);
     }
-    
+
     public function upFaq($values) {
         return $this->getResource('Faq')->upFaq($values);
     }
-    
+
     //COUPON
     public function getCoupon() {
         return $this->getResource('Coupon')->getCoupon();
@@ -98,4 +105,5 @@ class Application_Model_Admin extends App_Model_Abstract {
     public function getProms() {
         return $this->getResource('Promozione')->getProms();
     }
+
 }
