@@ -1,7 +1,9 @@
 <!inizio del div della promozione>
-
+<div id="titlePage">
+    <h3>Risultato Ricerca Promozioni</h3>
+</div>
 <?php foreach ($this->trovate as $promo) : ?>
-<div id="elemento">  PAGINA VISUALIZZAZIONE RISULTATO RICERCA<BR>
+<div id="elemento">
         <div id="tit">
             <h2> <?= $promo->titolo ?> </h2>
         </div>
@@ -17,9 +19,7 @@
 
         <div id="desc" class="promo">
 
-            <?php $cache= new Zend_Cache_Core ();
-                  echo $cache->load("ID_Categoria").  
-                $promo->descrizione ?>
+            <?php $promo->descrizione ?>
 
         </div>
 
@@ -33,9 +33,6 @@
 <?php
 if ($this->trovate instanceof Zend_Paginator) {
    
-//$this->trovate
-    //$this->trovate["ID_Categoria"]=$this->ID_Categoria;
-    //$this->trovate["words"]=$this->words;
-    echo $this->paginationControl($this->trovate, 'Sliding', 'public/paginator/_pagSearch.phtml');
+    
+    echo $this->paginationControl($this->trovate, 'Sliding', 'public/paginator/_pagSearch.phtml',$this->params);
 } 
-	  
