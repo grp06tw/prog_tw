@@ -17,26 +17,26 @@
             </tr>
         </thead>
         <tbody id="bodymod">
-            <?php foreach ($this->righe as $utente) : ?>
+            <?php foreach ($this->righe as $azienda) : ?>
 
                 <tr>
-                    <td><?= $utente["titolo"] ?></td>
-                    <td><?= $utente["prezzo"].' €' ?></td>
-                    <td><?= $utente["sconto"].'%' ?></td>
-                    <td><?= $utente["descrizione"] ?></td>
-                    <td><?= $utente["immagine"] ?></td>
-                    <td><?= $this->categorie[$utente["ID_Promozione"]] ?></td>
-                    <td><?= $this->aziende[$utente["ID_Promozione"]] ?></td>
+                    <td><?= $azienda["titolo"] ?></td>
+                    <td><?= $azienda["prezzo"].' €' ?></td>
+                    <td><?= $azienda["sconto"].'%' ?></td>
+                    <td><?= $azienda["descrizione"] ?></td>
+                    <td><?= $azienda["immagine"] ?></td>
+                    <td><?= $this->categorie[$azienda["ID_Promozione"]] ?></td>
+                    <td><?= $this->aziende[$azienda["ID_Promozione"]] ?></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'staff',
                                         'action'     => 'popolate',
-                                        'ID' => $utente["ID_Promozione"]
+                                        'ID' => $azienda["ID_Promozione"]
                                         ), 
                                         'default',true);?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica?>></a></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'staff',
                                         'action'     => 'delete',
-                                        'ID' => $utente["ID_Promozione"]
+                                        'ID' => $azienda["ID_Promozione"]
                                         ), 
                                         'default',true);?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina?>></a></td>
                 </tr>

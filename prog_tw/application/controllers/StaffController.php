@@ -85,7 +85,7 @@ class StaffController extends Zend_Controller_Action {
         $form = $this->_addform;
         if (!$form->isValid($_POST)) {
             $form->setDescription('operazione non riuscita');
-            return $this->render('popolate');
+            return $this->render('modpromo');
 
         }
         $values = $form->getValues();

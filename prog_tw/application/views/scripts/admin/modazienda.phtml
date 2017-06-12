@@ -16,25 +16,25 @@
             </tr>
         </thead>
         <tbody id="bodymod">
-            <?php foreach ($this->righe as $utente) : ?>
+            <?php foreach ($this->righe as $azienda) : ?>
 
                 <tr>
-                    <td><?= $utente["nome"] ?></td>
-                    <td><?= $utente["ragione_sociale"]?></td>
-                    <td><?= $utente["indirizzo"]?></td>
-                    <td><?= $utente["descrizione"] ?></td>
-                    <td><?= $utente["logo"] ?></td>
-                    <td><?= $this->utente[$utente["ID_Azienda"]] ?></td>
+                    <td><?= $azienda["nome"] ?></td>
+                    <td><?= $azienda["ragione_sociale"]?></td>
+                    <td><?= $azienda["indirizzo"]?></td>
+                    <td><?= $azienda["descrizione"] ?></td>
+                    <td><?= $azienda["logo"] ?></td>
+                    <td><?= $this->utente[$azienda["ID_Azienda"]] ?></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'admin',
                                         'action'     => 'popolateaz',
-                                        'ID' => $utente["ID_Azienda"]
+                                        'ID' => $azienda["ID_Azienda"]
                                         ), 
                                         'default',true);?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica?>></a></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'admin',
                                         'action'     => 'deleteaz',
-                                        'ID' => $utente["ID_Azienda"]
+                                        'ID' => $azienda["ID_Azienda"]
                                         ), 
                                         'default',true);?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina?>></a></td>
                 </tr>

@@ -8,7 +8,7 @@ class Application_Form_Admin_Azienda_Add extends App_Form_Abstract {
 
         $this->_adminModel = new Application_Model_Admin();
         $this->setMethod('post');
-        $this->setName('addazienda');
+        $this->setName('addpromo');
         $this->setAction('');
         $this->setAttrib('enctype', 'multipart/form-data');
 

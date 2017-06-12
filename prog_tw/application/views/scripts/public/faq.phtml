@@ -1,15 +1,13 @@
-<div id="titlePage">
-    <h3>Faq</h3>
-</div>
-<?php foreach ($this->faq as $cat) : ?>
+
+<?php foreach ($this->faq as $faq) : ?>
     <div id="elemento">  
         <div id="tit" class="faq">
-            <h2 class="faq"> <?= $cat->domanda ?> </h2>
+            <h2 class="faq"> <?= $faq->domanda ?> </h2>
         </div>
 
         <div id="desc">
 
-            <?= $cat->risposta ?>
+            <?= $faq->risposta ?>
 
         </div>
 

@@ -11,10 +11,10 @@ class Application_Resource_Utente extends Zend_Db_Table_Abstract
     }
     
     
-    public function getUsers($where = null, $order = null)
+    public function getUsers($where = null)
     {
         if($where){
-    	return $this->fetchAll($this->select()->where('role = "'.$where.'"')->order($order));
+    	return $this->fetchAll($this->select()->where('role = "staff"'));
         }
         else{
             return $this->fetchAll($this->select());
@@ -39,17 +39,16 @@ class Application_Resource_Utente extends Zend_Db_Table_Abstract
     {
     	$this->insert($user);
     }
-      
-    //UPDATE
-    public function upUser($user)
-    {
-	$this->update($user, "ID_Utente = ".$user["ID_Utente"]);
-    }
     
-    //DELETE
-    public function deleteUser($id)
+    /*DELETE
+    public function delPromo($promo)
     {
-        $this->delete("ID_Utente = ".$id);
+        $this->delete("ID_Promozione = ".$promo["ID_Promozione"]);
     }
+    //UPDATE
+    public function updatePromo($promo)
+    {
+	$this->update($promo, "ID_Promozione = ".$promo["ID_Promozione"]);
+    }*/
 }
 

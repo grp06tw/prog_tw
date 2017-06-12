@@ -10,7 +10,7 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
         $this->addElement('text', 'Username', array(
             'filters' => array('StringTrim', 'StringToLower'),
             'validators' => array(
-                array('StringLength', true, array(3, 30))
+                array('StringLength', true, array(3, 25))
             ),
             'required' => true,
             'label' => 'Username',
@@ -20,7 +20,7 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
         $this->addElement('password', 'password', array(
             'filters' => array('StringTrim'),
             'validators' => array(
-                array('StringLength', true, array(3, 30))
+                array('StringLength', true, array(3, 25))
             ),
             'required' => true,
             'label' => 'Password',

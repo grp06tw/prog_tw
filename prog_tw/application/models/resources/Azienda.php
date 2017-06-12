@@ -26,12 +26,12 @@ class Application_Resource_Azienda extends Zend_Db_Table_Abstract {
         }
         return $this->fetchAll($select);
     }
-
-    public function getAziendaById($id) {
+    
+    public function getAziendaById($id){
         return $this->find($id)->current();
     }
 
-//INSERT
+//insert
     public function insertAzienda($values) {
         if ($values['logo'] == null) {
             $values['logo'] = 'default.jpg';

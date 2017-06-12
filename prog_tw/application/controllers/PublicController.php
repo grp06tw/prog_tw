@@ -8,7 +8,6 @@ class PublicController extends Zend_Controller_Action {
     protected $_logged;
     protected $_signform;
     protected $_searchform;
-    protected $values;
 
     public function init() {
         //creo un istanza del model che userò per la visualizzazione delle promozioni-aziende etc
@@ -37,21 +36,18 @@ class PublicController extends Zend_Controller_Action {
         $this->view->searchForm = $this->getSearchForm();
     }
 
-    public function indexAction() {
-        $this->_helper->redirector("promo");
-    }
-
-    //****************************************************************************************************
+  
+    //****************************************
     //             ACQUISTO
-    //****************************************************************************************************
+    //****************************************
     public function acquistoAction() {
 
         $this->view->assign(array('stampa' => '_stampa.phtml'));
     }
 
-    //****************************************************************************************************
+    //****************************************
     //              RPOMOZIONI
-    //****************************************************************************************************
+    //****************************************
     public function promoAction() {
 
         $paged = $this->_getParam('page', 1);
@@ -66,9 +62,9 @@ class PublicController extends Zend_Controller_Action {
         );
     }
 
-    //****************************************************************************************************
+    //****************************************
     //     VISUALIZZATORE PAGINE STATICHE
-    //****************************************************************************************************
+    //****************************************
     public function viewstaticAction() {
         //mi permette di impostare la view da visualizare
         //di default viene visualizzata la vista con il nome dell'action
@@ -79,9 +75,9 @@ class PublicController extends Zend_Controller_Action {
         $this->render($page);
     }
 
-    //****************************************************************************************************
+    //****************************************
     //                AZIENDE
-    //****************************************************************************************************
+    //****************************************
     public function aziendeAction() {
         //$this->view->assign(array('text' => "LOREM IPSUM"));
         // controlla se _catalogModel è già istanziato
@@ -101,9 +97,9 @@ class PublicController extends Zend_Controller_Action {
         $this->view->assign(array('aziende', 'public'));
     }
 
-    //****************************************************************************************************
+    //****************************************
     //                FAQ
-    //****************************************************************************************************
+    //****************************************
     public function faqAction() {
 
         $paged = $this->_getParam('page', 1);
@@ -123,16 +119,17 @@ class PublicController extends Zend_Controller_Action {
         $this->view->assign(array('faq', 'public'));
     }
 
-    //****************************************************************************************************
+    //****************************************
     //           AREA RISERVATA
-    //****************************************************************************************************
+    //****************************************
     public function reservedareaAction() {
         $this->_helper->redirector('index', 'staff');
+
     }
 
-    //****************************************************************************************************
+    //****************************************
     //                LOGIN
-    //****************************************************************************************************
+    //****************************************
     public function loginAction() {
         
     }
@@ -153,6 +150,7 @@ class PublicController extends Zend_Controller_Action {
         }
         return $this->_helper->redirector('index', $this->_authService->getIdentity()->role);
     }
+  
 
     private function getLoginForm() {
         $urlHelper = $this->_helper->getHelper('url');
@@ -176,9 +174,9 @@ class PublicController extends Zend_Controller_Action {
         }
     }
 
-    //****************************************************************************************************
+    //****************************************
     //              REGISTRAZIONE
-    //****************************************************************************************************
+    //****************************************
     public function signinAction() {
         $this->view->signinForm = $this->getSigninForm();
     }
@@ -204,6 +202,7 @@ class PublicController extends Zend_Controller_Action {
         //$this->_helper->redirector('index');
     }
 
+
     private function getSigninForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_signform = new Application_Form_Public_Signin();
@@ -213,7 +212,7 @@ class PublicController extends Zend_Controller_Action {
         ));
         return $this->_signform;
     }
-
+  
     // Validazione AJAX
     public function validatesigninAction() {
         $this->_helper->getHelper('layout')->disableLayout();
@@ -225,10 +224,10 @@ class PublicController extends Zend_Controller_Action {
             $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
         }
     }
-
-    //****************************************************************************************************
+  
+    //****************************************
     //                RICERCA
-    //****************************************************************************************************
+    //****************************************    
 
     public function searchAction() {
         if (!$this->getRequest()->isPost()) {
@@ -240,18 +239,18 @@ class PublicController extends Zend_Controller_Action {
             return $this->render('promo');
         }
 
-        $this->values = $form->getValues();
+        $this->values = $form->getValues();   
+        // $this->cache->load("prova");
+        // $this->cache->save($this->values["ID_Categoria"], "ID_Categoria");
+        // $this->cache->save($this->values["words"], "words");
+        
         //L'UNICA COSA CHE MANCA QUI è DI RIUSCIRE A PASSARE VALUES ALLA FINDACTION, MI DICE CHE UN'AZIONE NON PUò AVERE PARAMETRI
-        $this->findAction(1);
+        $this->findAction();
     }
 
-    public function findAction($first = null) {
-        $paged = 1;
-        $ordine = null;
-        if ($first === null) {
-            $paged = $this->_getParam('page', 1);
-            $ordine = $this->_getParam('order', null);
-        }
+    public function findAction( ) {
+        $paged = $this->_getParam('page', 1);
+        $ordine = $this->_getParam('order', null);
         if ($this->values) {
             $trovate = $this->_catalogModel->search($this->values, $paged, $ordine);
             $this->view->assign(array(
@@ -259,7 +258,7 @@ class PublicController extends Zend_Controller_Action {
                     )
             );
 
-            $this->view->assign(array('params' => array('ID_Categoria' => $this->values["ID_Categoria"], 'words' => $this->values["words"])));
+            $this->view->assign(array('ID_Categoria' => $this->values["ID_Categoria"], 'words' => $this->values["words"]));
         } else {
             $this->values["ID_Categoria"] = $this->_getParam('ID_Categoria', null);
             $this->values["words"] = $this->_getParam('words', null);
@@ -269,10 +268,35 @@ class PublicController extends Zend_Controller_Action {
                     )
             );
 
-            $this->view->assign(array('params' => array('ID_Categoria' => $this->values["ID_Categoria"], 'words' => $this->values["words"])));
-            $this->render('search');
+            $this->view->assign(array('ID_Categoria' => $this->values["ID_Categoria"], 'words' => $this->values["words"]));
+            $this->_helper->redirector('search');
         }
     }
+
+    //QUEST'AZIONE FUNZIONAVA MA QUANDO FACCIO SUCCESSIVO NON PRENDE I VALORI E NON LI PASSA ALLA VIEW GIUSTA
+    /* public function searchAction() {
+      if (!$this->getRequest()->isPost()) {
+      $this->_helper->redirector('promo');
+      }
+      $form = $this->_searchform;
+      if (!$form->isValid($_POST)) {
+      $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+      return $this->render('promo');
+      }
+      $values = $form->getValues();
+
+      $paged = $this->_getParam('page', 1);
+      $ordine = $this->_getParam('order', null);
+
+      $trovate=$this->_catalogModel->search($values, $paged, $ordine);
+
+      $this->view->assign(array(
+      'trovate' => $trovate
+      )
+      );
+
+      $this->view->assign(array('search', 'public'));
+      } */
 
     private function getSearchForm() {
         $urlHelper = $this->_helper->getHelper('url');
@@ -284,9 +308,9 @@ class PublicController extends Zend_Controller_Action {
         return $this->_searchform;
     }
 
-    //****************************************************************************************************
+    //****************************************
     //       MODIFICA PROFILO UTENTE
-    //****************************************************************************************************
+    //****************************************
     function modificaprofiloAction() {
         
     }
