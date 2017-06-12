@@ -58,17 +58,18 @@ class PublicController extends Zend_Controller_Action {
 
         switch ($ordine) {
             case "ID_Categoria":
-                $this->catorderedAction();
+                $this->_helper->redirector('catordered');
+                
                 break;
             case "ID_Azienda":
-                $this->azorderedAction();
+                $this->_helper->redirector('azordered');
                 break;
             default:
                 $promozioni = $this->_catalogModel->getProms($paged, $ordine);
         }
 
 
-        $promozioni = $this->_catalogModel->getProms($paged, $ordine);
+        //$promozioni = $this->_catalogModel->getProms($paged, $ordine);
 
 
         $this->view->assign(array(
@@ -78,11 +79,21 @@ class PublicController extends Zend_Controller_Action {
     }
 
     public function catorderedAction() {
-        
+         $categorie = $this->_catalogModel->getCats();//siccome servono sempre ordinate la query ha di suo l'order by name
+        foreach ($categorie as $cat) {
+            $promo[$cat['nome']]= $this->_catalogModel->getPromsByCat($cat['ID_Categoria']);
+        }
+        $this->view->assign(array('promo'=>$promo,'divisore'=>$categorie));
+        $this->render('ordered');
     }
 
     public function azorderedAction() {
-        
+        $aziende = $this->_catalogModel->getAziende(null,'nome');
+        foreach ($aziende as $az) {
+            $promo[$az['nome']]= $this->_catalogModel->getPromsByAz($az['ID_Azienda']);
+        }
+        $this->view->assign(array('promo'=>$promo,'divisore'=>$aziende));
+        $this->render('ordered');
     }
 
     //****************************************************************************************************

@@ -23,6 +23,7 @@ class Application_Form_Admin_Azienda_Add extends App_Form_Abstract {
 //RAGIONE SOCIALE
         $this->addElement('text', 'ragione_sociale', array(
             'label' => 'Ragione Sociale',
+            'autofocus' => 'autofocus',
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength', true, array(1, 30))),

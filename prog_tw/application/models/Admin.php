@@ -105,5 +105,12 @@ class Application_Model_Admin extends App_Model_Abstract {
     public function getProms() {
         return $this->getResource('Promozione')->getProms();
     }
-
+    //DATI PER MODIFICA PROFILO
+    public function getUserData($rec){
+        return $this->getResource('Utente')->getUserDataByUsername($rec);
+    }
+    //UPDATE DATI PER MODIFICA PROFILO
+    public function updateUserData($campi){
+        return $this->getResource('Utente')->upUser($campi);
+    }
 }

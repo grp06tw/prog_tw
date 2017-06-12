@@ -40,6 +40,10 @@ class Application_Model_Catalog extends App_Model_Abstract {
     public function getPromsByCat($catId, $paged = null, $order = null) {
         return $this->getResource('Promozione')->getPromsByCat($catId, $paged, $order);
     }
+    
+    public function getPromsByAz($azId, $paged = null, $order = null) {
+        return $this->getResource('Promozione')->getPromsByAz($azId, $paged, $order);
+    }
 
     // AZIENDE
 

@@ -1,0 +1,77 @@
+<!inizio del div della promozione>
+<div id="titlePage">
+    <h3>Promozioni</h3>
+</div>
+<div id="visu">
+    <div id="visTit">
+        <h3>Visualizza per:</h3>
+    </div>
+    <div id="visStandard">
+        <a href="<?=
+        $this->url(array(
+            'controller' => 'public',
+            'action' => 'promo',
+                ), 'default', true);
+        ?>"><h3>Standard</h3></a>
+    </div>
+    <div id="visCat">
+        <a href="<?=
+        $this->url(array(
+            'controller' => 'public',
+            'action' => 'promo',
+            'order' => 'ID_Categoria'
+                ), 'default', true);
+        ?>"><h3>Categoria</h3></a>
+    </div>
+    <div id="visAz">
+        <a href="<?=
+        $this->url(array(
+            'controller' => 'public',
+            'action' => 'promo',
+            'order' => 'ID_Azienda'
+                ), 'default', true);
+        ?>"><h3>Azienda</h3></a>
+    </div>
+</div>
+
+<?php foreach ($this->divisore as $div) : ?>
+    <div class="divisoreOrd">
+        <h3><?= $div['nome'] ?></h3>
+    </div>
+    <?php $promozioni = $this->promo[$div['nome']];
+            foreach ($promozioni as $promo):?>
+    <div id="elemento">  
+        <div id="tit">
+            <h2> <?= $promo->titolo ?> </h2>
+        </div>
+
+        <!-- prende il css dalla classe .img_promo-->
+        <?= $this->promoImg($promo->immagine) ?>
+
+        <div id="pricebox">
+
+            <?= $this->Price($promo) ?>
+
+        </div>
+
+        <div id="desc" class="promo">
+
+            <?= $promo->descrizione ?>
+
+        </div>
+
+        <?= $this->Ottieni($promo->ID_Promozione) ?>
+
+    </div> 
+    <!-- fine div della promozione-->
+<?php endforeach; ?>
+<?php endforeach; ?>
+
+
+
+
+<?php
+if ($this->promozioni instanceof Zend_Paginator) {
+    echo $this->paginationControl($this->promozioni, 'Sliding', 'public/paginator/_paginator.phtml');
+} 
+	  

@@ -26,6 +26,7 @@ class Application_Form_Staff_Promo_Add extends App_Form_Abstract {
             'label' => 'Titolo',
             'filters' => array('StringTrim'),
             'required' => true,
+            'autofocus' => 'autofocus',
             'validators' => array(array('StringLength', true, array(1, 30))),
             'decorators' => $this->elementDecorators,
         ));

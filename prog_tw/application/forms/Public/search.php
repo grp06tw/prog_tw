@@ -14,32 +14,33 @@ class Application_Form_Public_Search extends App_Form_Abstract {
 
         $categories = array();
         $categories ["null"] = "Tutte le categorie";
-        
+
         $cats = $this->_catalogModel->getCats();
         foreach ($cats as $cat) {
             $categories[$cat->ID_Categoria] = $cat->nome;
         }
-        
-       
-         $this->addElement('select', 'ID_Categoria', array(
+
+
+        $this->addElement('select', 'ID_Categoria', array(
             'required' => true,
             'multiOptions' => $categories,
             'decorators' => $this->searchDecorators,
-            'id' => 'cat_src',            
+            'id' => 'cat_src',
         ));
-		
+
 
         $this->addElement('text', 'words', array(
             'filters' => array('StringTrim', 'StringToLower'),
             'id' => 'desc_src',
             'placeholder' => 'Cerca',
-            'filters'    => array('StringTrim'),
+            'autofocus' => 'autofocus',
+            'filters' => array('StringTrim'),
             'decorators' => $this->searchDecorators
         ));
-        
+
         $this->addElement('submit', 'cerca', array(
             'label' => 'Cerca',
-            "id"=>"submit_src",
+            "id" => "submit_src",
             'decorators' => $this->searchDecorators
         ));
 
@@ -47,8 +48,6 @@ class Application_Form_Public_Search extends App_Form_Abstract {
             'FormElements',
             'Form'
         ));
- 
- 
     }
 
 }

@@ -29,6 +29,7 @@ class Application_Form_Admin_Faq_Add extends App_Form_Abstract {
         //-----DOMANDA FAQ-----//
         $this->addElement('text', 'domanda', array(
             'label' => 'Domanda',
+            'autofocus' => 'autofocus',
             'filters' => array('StringTrim'),
             'required' => true,
             'decorators' => $this->elementDecorators,
