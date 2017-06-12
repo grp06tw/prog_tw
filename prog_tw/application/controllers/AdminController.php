@@ -8,7 +8,8 @@ class AdminController extends Zend_Controller_Action {
     protected $_newFaqform;
     protected $_newCatForm;
     protected $_newUsrForm;
-
+    protected $_updateform;
+    
     public function init() {
         $this->_helper->layout->setLayout('main');
         $this->view->assign(array('menu' => "admin/_reservedmenu.phtml"));
@@ -22,6 +23,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->newfaqform = $this->getAddFaqForm();
         $this->view->newcatform = $this->getAddCatForm();
         $this->view->newusrform = $this->getAddUsrForm();
+        $this->view->updatedataform = $this->retrieveAction();
     }
 
     public function indexAction() {
@@ -538,5 +540,34 @@ class AdminController extends Zend_Controller_Action {
         $this->_authService->clear();
         return $this->_helper->redirector('index', 'public');
     }
+    //****************************************
+    //          MODIFICA DATI UTENTE
+    //****************************************
+    public function updatedataAction(){
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('index');
+        }
+        $form = $this->_updateform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('operazione non riuscita');
+            return $this->render('updatedata');
+        }
+        $campi = $form->getValues();
+        $this->_adminModel->updateUserData($campi);
+        $this->_helper->redirector('updatedata');
+    }
+    
+    private function populateUpdateDataForm($records){
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_updateform = new Application_Form_User_Update();
+        $this->_updateform->populate($records);
+        $this->_updateform->setAction($urlHelper->url(array('controller'=> 'admin', 'action'=> 'updatedata'),'default'));
+        return $this->_updateform;
+    }
 
+    public function retrieveAction(){
+        $id = $this->_authService->getIdentity();
+            $app = $this->_adminModel->getUserData($id['Username']);
+            $this->view->updatedataform = $this->populateUpdateDataForm($app->toArray());
+    }
 }
