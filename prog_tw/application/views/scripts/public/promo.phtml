@@ -2,6 +2,37 @@
 <div id="titlePage">
     <h3>Promozioni</h3>
 </div>
+<div id="visu">
+    <div id="visTit">
+        <h3>Visualizza per:</h3>
+    </div>
+    <div id="visStandard">
+        <a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'promo',
+                        ), 'default', true);
+                ?>"><h3>Standard</h3></a>
+    </div>
+    <div id="visCat">
+        <a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'promo',
+                    'order' => 'ID_Categoria'
+                        ), 'default', true);
+                ?>"><h3>Categoria</h3></a>
+    </div>
+    <div id="visAz">
+        <a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'promo',
+                    'order' => 'ID_Azienda'
+                        ), 'default', true);
+                ?>"><h3>Azienda</h3></a>
+    </div>
+</div>
 <?php foreach ($this->promozioni as $promo) : ?>
     <div id="elemento">  
         <div id="tit">
@@ -22,7 +53,7 @@
             <?= $promo->descrizione ?>
 
         </div>
-        
+
         <?= $this->Ottieni($promo->ID_Promozione) ?>
 
     </div> 
@@ -30,7 +61,6 @@
 <?php endforeach; ?>
 
 
-        <input id="submit_buy" type="submit" value="Ottieni">
 
 
 <?php
