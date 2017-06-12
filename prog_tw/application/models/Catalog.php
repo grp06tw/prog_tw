@@ -7,20 +7,19 @@ class Application_Model_Catalog extends App_Model_Abstract {
     }
 
     //RICERCA
-    
-    public function search($values, $paged = null, $order = null){
-        if($values['ID_Categoria']=='null' && $values['words']=='' ){
-                return 0; //richiama pagina iniziale oppure nel public controller lo redirigi alla visual per categorie
-        }
-        if($values['words']=='' ){
-                return $this->getResource('Promozione')->getPromsByCat($values['ID_Categoria'], $paged, $order);
-        }
-        if($values['ID_Categoria']=='null'){
-                return $this->getResource('Promozione')->getPromsByWord($values['words'], $paged, $order);
-        }
-        
-        return $this->getResource('Promozione')->fullSearch($values['words'],$values['ID_Categoria'], $paged, $order);
 
+    public function search($values, $paged = null, $order = null) {
+        if ($values['ID_Categoria'] == 'null' && $values['words'] == '') {
+            return 0; //richiama pagina iniziale oppure nel public controller lo redirigi alla visual per categorie
+        }
+        if ($values['words'] == '') {
+            return $this->getResource('Promozione')->getPromsByCat($values['ID_Categoria'], $paged, $order);
+        }
+        if ($values['ID_Categoria'] == 'null') {
+            return $this->getResource('Promozione')->getPromsByWord($values['words'], $paged, $order);
+        }
+
+        return $this->getResource('Promozione')->fullSearch($values['words'], $values['ID_Categoria'], $paged, $order);
     }
 
     // CATEGORIE
@@ -51,8 +50,6 @@ class Application_Model_Catalog extends App_Model_Abstract {
     public function getAziende($paged = null, $order = null) {
         return $this->getResource('Azienda')->getAziende($paged, $order);
     }
-    
-    //FAQ
 
     //FAQ
 
@@ -73,13 +70,15 @@ class Application_Model_Catalog extends App_Model_Abstract {
 //COUPON
     public function reach($iduser, $idpromo) {
         $q = $this->getResource('Coupon')->getCouponById($iduser, $idpromo);
-        if ($q == 0) {
+        if ($q == null) {
             $coupon["ID_Promozione"] = $idpromo;
             $coupon["ID_Utente"] = $iduser;
             $this->getResource('Coupon')->insertCoupon($coupon); //query inserimento nuovo coupon
             $risposta = $this->getResource('Coupon')->getCouponById($iduser, $idpromo); //query per prendere l'idCoupon inserito con l'autoincrement
             return $risposta; //ritorna il record completo del coupon
-        } else {
+        }
+        else
+        {
             return 0;
             //qui dovrei mettere return il coupon che già è stato emesso per visualizzarlo
         }
