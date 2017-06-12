@@ -340,13 +340,31 @@ ___________________________
 #prezz
 {
     align-content: center;
-    margin-left: 10px;
+    margin-left: 100px;
     font-size: 25px;
 }
 
 #descrizione
 {
     margin: 20px 0px 0px 10px;
+}
+
+#btn_flayer
+{
+    width: 500px;
+    height: 30px;
+}
+
+.due
+{
+    margin-top: 10px;
+}
+
+.ottieni{
+    height:30px;
+    width:150px;
+    border:0px;
+    float: right;
 }
 
 /* ________________________
