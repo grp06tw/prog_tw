@@ -59,8 +59,18 @@
             <?= $promo->descrizione ?>
 
         </div>
+        <div id="az" class="promo">
 
-        <?= $this->Ottieni($promo->ID_Promozione) ?>
+            <?= 'Azienda: '.$promo->ID_Azienda ?>
+
+        </div>
+        <div id="cat" class="promo">
+
+            <?= 'Categoria: '.$promo->ID_Categoria ?>
+
+        </div>
+
+        
 
     </div> 
     <!-- fine div della promozione-->
