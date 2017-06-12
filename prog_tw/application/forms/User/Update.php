@@ -13,6 +13,14 @@ class Application_Form_User_Update extends App_Form_Abstract{
                     'decorators' => $this->elementDecorators 
                     )
                 );
+//USERNAME        
+         $this->addElement('text','Username',
+                array(
+                    'label' => 'Username',
+                    'disabled' => 'disabled',
+                    'decorators' => $this->elementDecorators 
+                    )
+                );
 //PASSWORD
         $this->addElement('text','password',
                 array(
