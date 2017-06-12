@@ -32,12 +32,14 @@ class UserController extends Zend_Controller_Action {
         $idPromo = $this->_getParam('idPromo');
         $idUtente = $this->_getParam('idUtente');
         $risposta = $this->_catalogModel->reach($idUtente, $idPromo);
+
         if ($risposta == null) {
             $this->_helper->redirector('promo', 'public');
             //messaggio di errore che quel coupon è già stato acquisito
         } else {
             $utente = $this->_catalogModel->getUserById($idUtente);
             $promozione = $this->_catalogModel->getPromoById($idPromo);
+
             $azienda = $this->_catalogModel->getAziendaById($promozione["ID_Azienda"]);
             $categoria = $this->_catalogModel->getCatById($promozione["ID_Categoria"]);
             
@@ -48,6 +50,7 @@ class UserController extends Zend_Controller_Action {
                 'azienda'=>$azienda,
                 'categoria'=>$categoria));
             $this->render('coupon');
+
         }
     }
     //****************************************

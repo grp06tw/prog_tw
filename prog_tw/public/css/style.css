@@ -275,6 +275,9 @@ h2.faq
     height: 150px;
     margin: 35px 110px 0px 145px;
 }
+#desc.promo, #desc.azienda{
+    margin: 35px 110px 0px 145px;
+}
 
 #desc
 {
@@ -403,7 +406,8 @@ ___________________________
 }
 
 
-#titlePage, #visu{
+#titlePage, #visu, .divisoreOrd{
+
 
     padding-top: 15px;
     text-align: center;
