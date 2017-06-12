@@ -62,16 +62,25 @@ class Application_Model_Catalog extends App_Model_Abstract {
     
 //COUPON
     public function reach($iduser, $idpromo) {
-        
-        
-        if($this->getResource('Coupon')->getCouponById($iduser, $idpromo))
+        $q=$this->getResource('Coupon')->getCouponById($iduser, $idpromo);
+        if($q==0)
         {
-            return;
-        }
-        else {
-            $coupon[ID_Promozione] = $idpromo;
-            $coupon[ID_Utente] = $iduser;
+            $coupon["ID_Promozione"] = $idpromo;
+            $coupon["ID_Utente"] = $iduser;
             return $this->getResource('Coupon')->insertCoupon($coupon);
         }
+        else
+        {
+            return 0;
+        }
+    }
+    
+//PRENDI PROMO BY ID E UTENTE BY ID PER STAMPARE IL FLAYER
+    public function getUserById($id) {
+        return $this->getResource('Utente')->getUserById($id);
+    }
+    
+    public function getPromoById($id) {
+        return $this->getResource('Promozione')->getPromoByID($id);
     }
 }
