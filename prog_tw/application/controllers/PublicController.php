@@ -53,9 +53,20 @@ class PublicController extends Zend_Controller_Action {
     //              RPOMOZIONI
     //****************************************************************************************************
     public function promoAction() {
-
         $paged = $this->_getParam('page', 1);
-        $ordine = $this->_getParam('order', null); //da modificare
+        $ordine = $this->_getParam('order', null);
+
+        switch ($ordine) {
+            case "ID_Categoria":
+                $this->catorderedAction();
+                break;
+            case "ID_Azienda":
+                $this->azorderedAction();
+                break;
+            default:
+                $promozioni = $this->_catalogModel->getProms($paged, $ordine);
+        }
+
 
         $promozioni = $this->_catalogModel->getProms($paged, $ordine);
 
@@ -64,6 +75,14 @@ class PublicController extends Zend_Controller_Action {
             'promozioni' => $promozioni
                 )
         );
+    }
+
+    public function catorderedAction() {
+        
+    }
+
+    public function azorderedAction() {
+        
     }
 
     //****************************************************************************************************
@@ -193,6 +212,10 @@ class PublicController extends Zend_Controller_Action {
             return $this->render('signin');
         }
         $values = $form->getValues();
+        if ($this->_catalogModel->getUserByName($values["Username"])) {
+            $form->setDescription('Attenzione: Username gia in uso');
+            return $this->render('signin');
+        }
         $this->_catalogModel->saveUser($values);
 
         if (false === $this->_authService->authenticate($form->getValues())) {
@@ -254,6 +277,9 @@ class PublicController extends Zend_Controller_Action {
         }
         if ($this->values) {
             $trovate = $this->_catalogModel->search($this->values, $paged, $ordine);
+            if (!$trovate) {
+                $this->_helper->redirector('promo');
+            }
             $this->view->assign(array(
                 'trovate' => $trovate
                     )
