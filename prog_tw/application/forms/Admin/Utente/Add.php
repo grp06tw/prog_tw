@@ -27,10 +27,12 @@ class Application_Form_Admin_Utente_Add extends App_Form_Abstract {
             'required' => true,
             'validators' => array(array('StringLength', true, array(1, 30))),
             'decorators' => $this->elementDecorators,
+            'disabled' => 'disabled'
         ));
 //PASSWORD
         $this->addElement('text', 'password', array(
             'label' => 'Password',
+            'autofocus' => 'autofocus',
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength', true, array(1, 30))),
@@ -54,8 +56,8 @@ class Application_Form_Admin_Utente_Add extends App_Form_Abstract {
             'validators' => array(array('StringLength', true, array(1, 30))),
             'decorators' => $this->elementDecorators,
         ));
- //GENERE
-$this->addElement('radio', 'genere', array(
+        //GENERE
+        $this->addElement('radio', 'genere', array(
             'label' => 'Genere',
             'multiOptions' => array(
                 'm' => 'M',
@@ -65,9 +67,9 @@ $this->addElement('radio', 'genere', array(
             'decorators' => $this->radioDecorators,
         ));
 //ETA
-        for($i=(int)(date('Y'));$i>=1920;$i--) {
-			$eta[$i] = $i;
-		}
+        for ($i = (int) (date('Y')); $i >= 1920; $i--) {
+            $eta[$i] = $i;
+        }
         $this->addElement('select', 'eta', array(
             'label' => 'Data di nascita',
             'required' => true,
@@ -78,7 +80,7 @@ $this->addElement('radio', 'genere', array(
         $this->addElement('text', 'telefono', array(
             'label' => 'Telefono',
             'filters' => array('StringTrim'),
-            'validators' => array(array('StringLength', true, array(9, 12))), 
+            'validators' => array(array('StringLength', true, array(9, 12))),
             'decorators' => $this->elementDecorators,
         ));
 //INDIRIZZO        
@@ -123,7 +125,6 @@ $this->addElement('radio', 'genere', array(
             array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
             'Form'
         ));
-
     }
 
 }

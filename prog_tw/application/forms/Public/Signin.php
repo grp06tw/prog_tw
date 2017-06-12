@@ -14,6 +14,7 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
             ),
             'required' => true,
             'label' => 'Username',
+            'autofocus' => 'autofocus',
             'decorators' => $this->elementDecorators,
         ));
 
@@ -57,23 +58,23 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
             'decorators' => $this->radioDecorators,
         ));
 
-        for($i=(int)(date('Y'));$i>=1920;$i--) {
-			$eta[$i] = $i;
-		}
+        for ($i = (int) (date('Y')); $i >= 1920; $i--) {
+            $eta[$i] = $i;
+        }
         $this->addElement('select', 'eta', array(
             'label' => 'Data di nascita',
             'required' => true,
             'multiOptions' => $eta,
             'decorators' => $this->elementDecorators
         ));
-        
+
         $this->addElement('text', 'telefono', array(
             'label' => 'Telefono',
             'filters' => array('StringTrim'),
-            'validators' => array(array('StringLength', true, array(9, 12))), 
+            'validators' => array(array('StringLength', true, array(9, 12))),
             'decorators' => $this->elementDecorators,
         ));
-        
+
         $this->addElement('textarea', 'indirizzo', array(
             //'filters' => array('StringTrim', 'StringToLower'),
             'cols' => '30', 'rows' => '3',
@@ -83,7 +84,7 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
             'label' => 'Indirizzo',
             'decorators' => $this->elementDecorators,
         ));
-        
+
         $this->addElement('text', 'email', array(
             //'filters' => array('StringTrim', 'StringToLower'),
             'validators' => array(
@@ -93,7 +94,7 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
             'label' => 'Email',
             'decorators' => $this->elementDecorators,
         ));
-        
+
         $this->addElement('hidden', 'role', array(
             'required' => true,
             'value' => 'user',

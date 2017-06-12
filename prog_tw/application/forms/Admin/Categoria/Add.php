@@ -23,12 +23,13 @@ class Application_Form_Admin_Categoria_Add extends App_Form_Abstract {
 //NOME
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
+            'autofocus' => 'autofocus',
             'filters' => array('StringTrim'),
             'required' => true,
             'validators' => array(array('StringLength', true, array(1, 30))),
             'decorators' => $this->elementDecorators,
         ));
-    
+
         $this->addElement('submit', 'add', array(
             'label' => 'Conferma',
             'decorators' => $this->buttonDecorators,

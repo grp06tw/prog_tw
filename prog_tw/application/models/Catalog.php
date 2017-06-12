@@ -7,19 +7,20 @@ class Application_Model_Catalog extends App_Model_Abstract {
     }
 
     //RICERCA
+    
+    public function search($values, $paged = null, $order = null){
+        if($values['ID_Categoria']=='null' && $values['words']=='' ){
+                return 0; //richiama pagina iniziale oppure nel public controller lo redirigi alla visual per categorie
+        }
+        if($values['words']=='' ){
+                return $this->getResource('Promozione')->getPromsByCat($values['ID_Categoria'], $paged, $order);
+        }
+        if($values['ID_Categoria']=='null'){
+                return $this->getResource('Promozione')->getPromsByWord($values['words'], $paged, $order);
+        }
+        
+        return $this->getResource('Promozione')->fullSearch($values['words'],$values['ID_Categoria'], $paged, $order);
 
-    public function search($values, $paged = null, $order = null) {
-        if ($values['ID_Categoria'] == 'null' && $values['words'] == '') {
-            return 0; //richiama pagina iniziale oppure nel public controller lo redirigi alla visual per categorie
-        }
-        if ($values['words'] == '') {
-            return $this->getResource('Promozione')->getPromsByCat($values['ID_Categoria'], $paged, $order);
-        }
-        if ($values['ID_Categoria'] == 'null') {
-            return $this->getResource('Promozione')->getPromsByWord($values['words'], $paged, $order);
-        }
-
-        return $this->getResource('Promozione')->fullSearch($values['words'], $values['ID_Categoria'], $paged, $order);
     }
 
     // CATEGORIE
@@ -40,12 +41,18 @@ class Application_Model_Catalog extends App_Model_Abstract {
     public function getPromsByCat($catId, $paged = null, $order = null) {
         return $this->getResource('Promozione')->getPromsByCat($catId, $paged, $order);
     }
+    
+    public function getPromsByAz($azId, $paged = null, $order = null) {
+        return $this->getResource('Promozione')->getPromsByAz($azId, $paged, $order);
+    }
 
     // AZIENDE
 
     public function getAziende($paged = null, $order = null) {
         return $this->getResource('Azienda')->getAziende($paged, $order);
     }
+    
+    //FAQ
 
     //FAQ
 

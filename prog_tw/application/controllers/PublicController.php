@@ -56,34 +56,79 @@ class PublicController extends Zend_Controller_Action {
         $paged = $this->_getParam('page', 1);
         $ordine = $this->_getParam('order', null);
 
+
         switch ($ordine) {
             case "ID_Categoria":
-                $this->catorderedAction();
+                $this->_helper->redirector('catordered');
                 break;
             case "ID_Azienda":
-                $this->azorderedAction();
+                $this->_helper->redirector('azordered');
                 break;
             default:
                 $promozioni = $this->_catalogModel->getProms($paged, $ordine);
         }
 
-
-        $promozioni = $this->_catalogModel->getProms($paged, $ordine);
-
-
-        $this->view->assign(array(
-            'promozioni' => $promozioni
-                )
-        );
+        $aziende = $this->_catalogModel->getAziende();
+        $categorie = $this->_catalogModel->getCats();
+        foreach ($promozioni as $promo) {
+            foreach ($aziende as $a) {
+                if ($promo["ID_Azienda"] == $a["ID_Azienda"]) {
+                    $promo["ID_Azienda"] = $a["nome"];
+                }
+            }
+            foreach ($categorie as $cat) {
+                if ($promo["ID_Categoria"] == $cat["ID_Categoria"]) {
+                    $promo["ID_Categoria"] = $cat["nome"];
+                }
+            }
+        }
+        $this->view->assign(array('promozioni' => $promozioni));
     }
 
     public function catorderedAction() {
-        
+        $categorie = $this->_catalogModel->getCats(); //siccome servono sempre ordinate la query ha di suo l'order by name
+        $aziende = $this->_catalogModel->getAziende();
+        foreach ($categorie as $cat) {
+            $promo[$cat['nome']] = $this->_catalogModel->getPromsByCat($cat['ID_Categoria']);
+
+            foreach ($promo[$cat['nome']] as $p) {
+                foreach ($aziende as $a) {
+                    if ($p["ID_Azienda"] == $a["ID_Azienda"]) {
+                        $p["ID_Azienda"] = $a["nome"];
+                    }
+                }
+                $p["ID_Categoria"] = $cat['nome'];
+            }
+        }
+
+
+
+
+        $this->view->assign(array('promo' => $promo, 'divisore' => $categorie));
+        $this->render('ordered');
     }
 
     public function azorderedAction() {
-        
+        $categorie = $this->_catalogModel->getCats();
+        $aziende = $this->_catalogModel->getAziende(null, 'nome');
+        foreach ($aziende as $az) {
+            $promo[$az['nome']] = $this->_catalogModel->getPromsByAz($az['ID_Azienda']);
+            foreach ($promo[$az['nome']] as $p) {
+
+                $p["ID_Azienda"] = $az["nome"];
+
+                foreach ($categorie as $cat) {
+                    if ($p["ID_Categoria"] == $cat["ID_Categoria"]) {
+                        $p["ID_Categoria"] = $cat["nome"];
+                    }
+                }
+            }
+        }
+        $this->view->assign(array('promo' => $promo, 'divisore' => $aziende));
+        $this->render('ordered');
     }
+
+
 
     //****************************************************************************************************
     //     VISUALIZZATORE PAGINE STATICHE
@@ -266,6 +311,7 @@ class PublicController extends Zend_Controller_Action {
         $this->values = $form->getValues();
         //L'UNICA COSA CHE MANCA QUI è DI RIUSCIRE A PASSARE VALUES ALLA FINDACTION, MI DICE CHE UN'AZIONE NON PUò AVERE PARAMETRI
         $this->findAction(1);
+
     }
 
     public function findAction($first = null) {
@@ -299,6 +345,7 @@ class PublicController extends Zend_Controller_Action {
             $this->render('search');
         }
     }
+
 
     private function getSearchForm() {
         $urlHelper = $this->_helper->getHelper('url');
