@@ -10,7 +10,7 @@ class Application_Model_Catalog extends App_Model_Abstract {
     
     public function search($values, $paged = null, $order = null){
         if($values['ID_Categoria']=='null' && $values['words']=='' ){
-                return; //richiama pagina iniziale oppure nel public controller lo redirigi alla visual per categorie
+                return 0; //richiama pagina iniziale oppure nel public controller lo redirigi alla visual per categorie
         }
         if($values['words']=='' ){
                 return $this->getResource('Promozione')->getPromsByCat($values['ID_Categoria'], $paged, $order);
@@ -58,6 +58,9 @@ class Application_Model_Catalog extends App_Model_Abstract {
     //SALVA
     public function saveUser($user) {
         return $this->getResource('Utente')->insertUser($user);
+    }
+    public function getUserByName($info) {
+        return $this->getResource('Utente')->getUserLogin($info);
     }
     
 //COUPON

@@ -12,13 +12,13 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract {
         
     }
 
-    //ORDER o PER CATEGORIA o PER AZIENDA
-    // Estrae tutte le promozioni
+//ORDER o PER CATEGORIA o PER AZIENDA
+// Estrae tutte le promozioni
 
     public function getProms($paged = null, $order = null) {
-        
+
         $select = $this->select();
-        if (true === is_array($order)) {
+        if ($order) {
             $select->order($order);
         }
 
@@ -45,7 +45,7 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract {
             $paginator = new Zend_Paginator($adapter);
             $paginator->setItemCountPerPage(5)
                     ->setCurrentPageNumber((int) $paged);
-          
+
             return $paginator;
         }
         return $this->fetchAll($select);
@@ -110,10 +110,8 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract {
     }
 
     //DELETE
-    public function delPromo($promo)
-    {
-        $this->delete("ID_Promozione = ".$promo);
-
+    public function delPromo($promo) {
+        $this->delete("ID_Promozione = " . $promo);
     }
 
     //UPDATE
