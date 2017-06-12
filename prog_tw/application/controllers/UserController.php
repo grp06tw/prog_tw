@@ -29,22 +29,22 @@ class UserController extends Zend_Controller_Action {
         $idPromo = $this->_getParam('idPromo');
         $idUtente = $this->_getParam('idUtente');
         $risposta = $this->_catalogModel->reach($idUtente, $idPromo);
-        if ($risposta == 0) {
+        if ($risposta == null) {
             $this->_helper->redirector('promo', 'public');
             //messaggio di errore che quel coupon è già stato acquisito
         } else {
             $utente = $this->_catalogModel->getUserById($idUtente);
             $promozione = $this->_catalogModel->getPromoById($idPromo);
+            $azienda = $this->_catalogModel->getAziendaById($promozione["ID_Azienda"]);
+            $categoria = $this->_catalogModel->getCatById($promozione["ID_Categoria"]);
             
-            $this->_helper->layout->setLayout('user/_stampa');
-            
-            //$this->view->assign(array('coupon' => "user/_stampa.phtml", 'promo'=>$promozione, 'utente'=>$utente, 'coupon'=>$coupon ));
-            $this->view->assign(array('coupon', 'promo'=>$promozione, 'utente'=>$utente, 'coupon'=>$risposta ));
-            
+            $this->_helper->layout->setLayout('user/_stampa');$this->view->assign(array('coupon',
+                'promo'=>$promozione,
+                'utente'=>$utente,
+                'coupon'=>$risposta,
+                'azienda'=>$azienda,
+                'categoria'=>$categoria));
             $this->render('coupon');
-            //$this->_helper->redirector('promo', 'public');
-            //bisogna redirezionarlo sul file _stampa che è un nuovo layout
-            //$this->_helper->layout->setLayout('main');
         }
     }
 
