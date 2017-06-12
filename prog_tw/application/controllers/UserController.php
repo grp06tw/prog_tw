@@ -31,14 +31,23 @@ class UserController extends Zend_Controller_Action {
     public function addcouponAction() {
         $idPromo = $this->_getParam('idPromo');
         $idUtente = $this->_getParam('idUtente');
-        if ($this->_catalogModel->reach($idUtente, $idPromo)) {
-            $this->_helper->redirector('promo');
+        $risposta = $this->_catalogModel->reach($idUtente, $idPromo);
+        if ($risposta == 0) {
+            $this->_helper->redirector('promo', 'public');
+            //messaggio di errore che quel coupon è già stato acquisito
+        } else {
+            $utente = $this->_catalogModel->getUserById($idUtente);
+            $promozione = $this->_catalogModel->getPromoById($idPromo);
+            
+            $this->_helper->layout->setLayout('user/_stampa');
+            
+            //$this->view->assign(array('coupon' => "user/_stampa.phtml", 'promo'=>$promozione, 'utente'=>$utente, 'coupon'=>$coupon ));
+            $this->view->assign(array('coupon', 'promo'=>$promozione, 'utente'=>$utente, 'coupon'=>$risposta ));
+            
+            $this->render('coupon');
+            //$this->_helper->redirector('promo', 'public');
             //bisogna redirezionarlo sul file _stampa che è un nuovo layout
             //$this->_helper->layout->setLayout('main');
-        } else {
-
-            $this->_helper->redirector('index');
-            //messaggio di errore che quel coupon è già stato acquisito
         }
     }
     //****************************************

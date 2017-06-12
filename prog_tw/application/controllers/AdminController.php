@@ -294,8 +294,13 @@ class AdminController extends Zend_Controller_Action {
         if (!$form->isValid($_POST)) {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('newutente');
-        }
+        }       
         $values = $form->getValues();
+        if($this->_adminModel->getUserByName($values["Username"])){
+            $form->setDescription('Attenzione: Username gia in uso');
+            return $this->render('newutente');
+        }
+         
         $this->_adminModel->saveUser($values);
         $this->_helper->redirector('utenti');
     }
