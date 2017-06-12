@@ -55,6 +55,8 @@ class PublicController extends Zend_Controller_Action {
     public function promoAction() {
         $paged = $this->_getParam('page', 1);
         $ordine = $this->_getParam('order', null);
+
+
         switch ($ordine) {
             case "ID_Categoria":
                 $this->_helper->redirector('catordered');
@@ -65,6 +67,7 @@ class PublicController extends Zend_Controller_Action {
             default:
                 $promozioni = $this->_catalogModel->getProms($paged, $ordine);
         }
+
         $aziende = $this->_catalogModel->getAziende();
         $categorie = $this->_catalogModel->getCats();
         foreach ($promozioni as $promo) {
@@ -100,6 +103,7 @@ class PublicController extends Zend_Controller_Action {
 
 
 
+
         $this->view->assign(array('promo' => $promo, 'divisore' => $categorie));
         $this->render('ordered');
     }
@@ -123,6 +127,8 @@ class PublicController extends Zend_Controller_Action {
         $this->view->assign(array('promo' => $promo, 'divisore' => $aziende));
         $this->render('ordered');
     }
+
+
 
     //****************************************************************************************************
     //     VISUALIZZATORE PAGINE STATICHE
@@ -305,6 +311,7 @@ class PublicController extends Zend_Controller_Action {
         $this->values = $form->getValues();
         //L'UNICA COSA CHE MANCA QUI è DI RIUSCIRE A PASSARE VALUES ALLA FINDACTION, MI DICE CHE UN'AZIONE NON PUò AVERE PARAMETRI
         $this->findAction(1);
+
     }
 
     public function findAction($first = null) {
@@ -338,6 +345,7 @@ class PublicController extends Zend_Controller_Action {
             $this->render('search');
         }
     }
+
 
     private function getSearchForm() {
         $urlHelper = $this->_helper->getHelper('url');

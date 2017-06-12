@@ -20,9 +20,9 @@ class Application_Model_Catalog extends App_Model_Abstract {
         }
         
         return $this->getResource('Promozione')->fullSearch($values['words'],$values['ID_Categoria'], $paged, $order);
+
     }
-    
-    
+
     // CATEGORIE
     public function getCats() {
         return $this->getResource('Categoria')->getCats();
@@ -54,6 +54,8 @@ class Application_Model_Catalog extends App_Model_Abstract {
     
     //FAQ
 
+    //FAQ
+
     public function getFaq($paged = null, $order = null) {
         return $this->getResource('Faq')->getFaq($paged, $order);
     }
@@ -63,31 +65,37 @@ class Application_Model_Catalog extends App_Model_Abstract {
     public function saveUser($user) {
         return $this->getResource('Utente')->insertUser($user);
     }
+
     public function getUserByName($info) {
         return $this->getResource('Utente')->getUserLogin($info);
     }
-    
+
 //COUPON
     public function reach($iduser, $idpromo) {
-        $q=$this->getResource('Coupon')->getCouponById($iduser, $idpromo);
-        if($q==0)
-        {
+        $q = $this->getResource('Coupon')->getCouponById($iduser, $idpromo);
+        if ($q == 0) {
             $coupon["ID_Promozione"] = $idpromo;
             $coupon["ID_Utente"] = $iduser;
-            return $this->getResource('Coupon')->insertCoupon($coupon);
-        }
-        else
-        {
+            $this->getResource('Coupon')->insertCoupon($coupon); //query inserimento nuovo coupon
+            $risposta = $this->getResource('Coupon')->getCouponById($iduser, $idpromo); //query per prendere l'idCoupon inserito con l'autoincrement
+            return $risposta; //ritorna il record completo del coupon
+        } else {
             return 0;
+            //qui dovrei mettere return il coupon che già è stato emesso per visualizzarlo
         }
     }
-    
-//PRENDI PROMO BY ID E UTENTE BY ID PER STAMPARE IL FLAYER
+
+//PRENDI PROMO BY ID, UTENTE BY ID, AZIENDA PER ID PER STAMPARE IL FLAYER
     public function getUserById($id) {
         return $this->getResource('Utente')->getUserById($id);
     }
-    
+
     public function getPromoById($id) {
         return $this->getResource('Promozione')->getPromoByID($id);
     }
+
+    public function getAziendaById($id) {
+        return $this->getResource('Azienda')->getAziendaByID($id);
+    }
+
 }
