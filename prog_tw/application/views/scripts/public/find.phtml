@@ -1,9 +1,7 @@
 <!inizio del div della promozione>
-<div id="titlePage">
-    <h3>Promozioni</h3>
-</div>
-<?php foreach ($this->promozioni as $promo) : ?>
-    <div id="elemento">  
+
+<?php foreach ($this->trovate as $promo) : ?>
+<div id="elemento">  PAGINA VISUALIZZAZIONE RISULTATO RICERCA<BR>
         <div id="tit">
             <h2> <?= $promo->titolo ?> </h2>
         </div>
@@ -22,19 +20,16 @@
             <?= $promo->descrizione ?>
 
         </div>
-        
-        <?= $this->Ottieni($promo->ID_Promozione) ?>
+
+        <input id="submit_buy" type="submit" value="Ottieni">
 
     </div> 
     <!-- fine div della promozione-->
 <?php endforeach; ?>
 
 
-        <input id="submit_buy" type="submit" value="Ottieni">
-
-
 <?php
-if ($this->promozioni instanceof Zend_Paginator) {
-    echo $this->paginationControl($this->promozioni, 'Sliding', 'public/paginator/_paginator.phtml');
+if ($this->trovate instanceof Zend_Paginator) {
+    echo $this->paginationControl($this->trovate, 'Sliding', 'public/paginator/_pagSearch.phtml');
 } 
 	  

@@ -27,7 +27,6 @@ class Application_Resource_Coupon extends Zend_Db_Table_Abstract {
         }
         $this->insert($promo);
     }*/
-}
     public function getCoupon() {
         return $this->fetchAll($this->select());
     }

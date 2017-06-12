@@ -1,40 +1,30 @@
 <div class="static">
-    <h3>Modifica Aziende</h3>
-    <p>Ecco le Aziende che puoi modificare</p>
+    <h3>Modifica Faq</h3>
+    <p>Ecco le Faq che puoi modificare</p>
     <br>
     <table id="modTable">
         <thead id="headmod">
             <tr>
                 <th>Nome</th>
-                <th>Ragione Sociale</th>
-                <th>Indirizzo</th>
-                <th>Descrizione</th>
-                <th>Logo</th>
-                <th>Utente</th>
                 <th>Modifica</th>
                 <th>Elimina</th>
             </tr>
         </thead>
         <tbody id="bodymod">
-            <?php foreach ($this->righe as $utente) : ?>
+            <?php foreach ($this->righe as $cat) : ?>
 
                 <tr>
-                    <td><?= $utente["nome"] ?></td>
-                    <td><?= $utente["ragione_sociale"]?></td>
-                    <td><?= $utente["indirizzo"]?></td>
-                    <td><?= $utente["descrizione"] ?></td>
-                    <td><?= $utente["logo"] ?></td>
-                    <td><?= $this->utente[$utente["ID_Azienda"]] ?></td>
+                    <td><?= $cat["nome"] ?></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'admin',
-                                        'action'     => 'popolateaz',
-                                        'ID' => $utente["ID_Azienda"]
+                                        'action'     => 'popolatecat',
+                                        'ID' => $cat["ID_Categoria"]
                                         ), 
                                         'default',true);?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica?>></a></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'admin',
-                                        'action'     => 'deleteaz',
-                                        'ID' => $utente["ID_Azienda"]
+                                        'action'     => 'deletecat',
+                                        'ID' => $cat["ID_Categoria"]
                                         ), 
                                         'default',true);?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina?>></a></td>
                 </tr>

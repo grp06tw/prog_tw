@@ -1,4 +1,6 @@
-
+<div id="titlePage">
+    <h3>Aziende</h3>
+</div>
 <?php foreach ($this->aziende as $az) : ?>
     <div id="elemento">  
         <div id="tit">
@@ -16,9 +18,10 @@
 
     </div> 
 
- <?php endforeach;?>
+<?php endforeach; ?>
 
-  <?php if($this->aziende instanceof Zend_Paginator) {
-	  		echo $this->paginationControl($this->aziende,'Sliding','public/paginator/_paginatorAz.phtml');
-	  } 
-	  ?>
+<?php
+if ($this->aziende instanceof Zend_Paginator) {
+    echo $this->paginationControl($this->aziende, 'Sliding', 'public/paginator/_paginatorAz.phtml');
+}
+?>
