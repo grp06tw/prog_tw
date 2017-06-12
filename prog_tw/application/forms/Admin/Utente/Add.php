@@ -1,53 +1,62 @@
 <?php
 
-class Application_Form_Public_Signin extends App_Form_Abstract {
+class Application_Form_Admin_Utente_Add extends App_Form_Abstract {
+
+    protected $_adminModel;
 
     public function init() {
+
+        $this->_adminModel = new Application_Model_Admin();
         $this->setMethod('post');
-        $this->setName('signin');
+        $this->setName('addutente');
         $this->setAction('');
+        $this->setAttrib('enctype', 'multipart/form-data');
 
-        $this->addElement('text', 'Username', array(
-            'filters' => array('StringTrim', 'StringToLower'),
-            'validators' => array(
-                array('StringLength', true, array(3, 30))
-            ),
-            'required' => true,
-            'label' => 'Username',
-            'autofocus' => 'autofocus',
-            'decorators' => $this->elementDecorators,
-        ));
 
-        $this->addElement('password', 'password', array(
+        //ID  -> Serve per la update
+        $this->addElement('hidden', 'ID_Utente', array(
             'filters' => array('StringTrim'),
-            'validators' => array(
-                array('StringLength', true, array(3, 30))
-            ),
+            'show' => 'none',
+            'decorators' => $this->elementDecorators,
+        ));
+
+//USERNAME
+        $this->addElement('text', 'Username', array(
+            'label' => 'Username',
+            'filters' => array('StringTrim'),
             'required' => true,
+            'validators' => array(array('StringLength', true, array(1, 30))),
+            'decorators' => $this->elementDecorators,
+            'disabled' => 'disabled'
+        ));
+//PASSWORD
+        $this->addElement('text', 'password', array(
             'label' => 'Password',
+            'autofocus' => 'autofocus',
+            'filters' => array('StringTrim'),
+            'required' => true,
+            'validators' => array(array('StringLength', true, array(1, 30))),
             'decorators' => $this->elementDecorators,
         ));
 
+//NOME
         $this->addElement('text', 'nome', array(
-            'filters' => array('StringTrim', 'StringToLower'),
-            'validators' => array(
-                array('StringLength', true, array(3, 30))
-            ),
-            'required' => true,
             'label' => 'Nome',
-            'decorators' => $this->elementDecorators,
-        ));
-
-        $this->addElement('text', 'cognome', array(
-            'filters' => array('StringTrim', 'StringToLower'),
-            'validators' => array(
-                array('StringLength', true, array(3, 30))
-            ),
+            'filters' => array('StringTrim'),
             'required' => true,
-            'label' => 'Cognome',
+            'validators' => array(array('StringLength', true, array(1, 30))),
             'decorators' => $this->elementDecorators,
         ));
 
+//COGNOME
+        $this->addElement('text', 'cognome', array(
+            'label' => 'Cognome',
+            'filters' => array('StringTrim'),
+            'required' => true,
+            'validators' => array(array('StringLength', true, array(1, 30))),
+            'decorators' => $this->elementDecorators,
+        ));
+        //GENERE
         $this->addElement('radio', 'genere', array(
             'label' => 'Genere',
             'multiOptions' => array(
@@ -57,7 +66,7 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
             ),
             'decorators' => $this->radioDecorators,
         ));
-
+//ETA
         for ($i = (int) (date('Y')); $i >= 1920; $i--) {
             $eta[$i] = $i;
         }
@@ -67,14 +76,14 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
             'multiOptions' => $eta,
             'decorators' => $this->elementDecorators
         ));
-
+//TELEFONO
         $this->addElement('text', 'telefono', array(
             'label' => 'Telefono',
             'filters' => array('StringTrim'),
             'validators' => array(array('StringLength', true, array(9, 12))),
             'decorators' => $this->elementDecorators,
         ));
-
+//INDIRIZZO        
         $this->addElement('textarea', 'indirizzo', array(
             //'filters' => array('StringTrim', 'StringToLower'),
             'cols' => '30', 'rows' => '3',
@@ -84,7 +93,7 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
             'label' => 'Indirizzo',
             'decorators' => $this->elementDecorators,
         ));
-
+//EMAIL
         $this->addElement('text', 'email', array(
             //'filters' => array('StringTrim', 'StringToLower'),
             'validators' => array(
@@ -94,16 +103,19 @@ class Application_Form_Public_Signin extends App_Form_Abstract {
             'label' => 'Email',
             'decorators' => $this->elementDecorators,
         ));
-
-        $this->addElement('hidden', 'role', array(
+//RUOLO        
+        $role["user"] = "user";
+        $role["staff"] = "staff";
+        $role["admin"] = "admin";
+        $this->addElement('select', 'role', array(
             'required' => true,
-            'value' => 'user',
+            'multiOptions' => $role,
             'show' => 'none',
             'decorators' => $this->elementDecorators,
         ));
-
-        $this->addElement('submit', 'signin', array(
-            'label' => 'Registrami',
+//SUBMIT
+        $this->addElement('submit', 'add', array(
+            'label' => 'Conferma',
             'decorators' => $this->buttonDecorators,
         ));
 

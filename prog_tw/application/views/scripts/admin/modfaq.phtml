@@ -1,0 +1,38 @@
+<div class="static">
+    <h3>Modifica Faq</h3>
+    <p>Ecco le Faq che puoi modificare</p>
+    <br>
+    <table id="modTable">
+        <thead id="headmod">
+            <tr>
+                <th>Domanda</th>
+                <th>Risposta</th>
+                <th>Modifica</th>
+                <th>Elimina</th>
+            </tr>
+        </thead>
+        <tbody id="bodymod">
+            <?php foreach ($this->righe as $cat) : ?>
+
+                <tr>
+                    <td><?= $cat["domanda"] ?></td>
+                    <td><?= $cat["risposta"]?></td>
+                    <td><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'popolatefaq',
+                                        'ID' => $cat["ID_Faq"]
+                                        ), 
+                                        'default',true);?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica?>></a></td>
+                    <td><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'deletefaq',
+                                        'ID' => $cat["ID_Faq"]
+                                        ), 
+                                        'default',true);?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina?>></a></td>
+                </tr>
+                
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+</div>

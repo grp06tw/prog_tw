@@ -5,12 +5,15 @@
     <table id="modTable">
         <thead id="headmod">
             <tr>
+                <th>Username</th>
                 <th>Nome</th>
-                <th>Ragione Sociale</th>
+                <th>Cognome</th>
+                <th>Genere</th>
+                <th>Data Di Nascita</th>
+                <th>Telefono</th>
                 <th>Indirizzo</th>
-                <th>Descrizione</th>
-                <th>Logo</th>
-                <th>Utente</th>
+                <th>Email</th>
+                <th>Ruolo</th>
                 <th>Modifica</th>
                 <th>Elimina</th>
             </tr>
@@ -19,22 +22,25 @@
             <?php foreach ($this->righe as $utente) : ?>
 
                 <tr>
-                    <td><?= $utente["nome"] ?></td>
-                    <td><?= $utente["ragione_sociale"]?></td>
-                    <td><?= $utente["indirizzo"]?></td>
-                    <td><?= $utente["descrizione"] ?></td>
-                    <td><?= $utente["logo"] ?></td>
-                    <td><?= $this->utente[$utente["ID_Azienda"]] ?></td>
+                    <td><?= $utente["Username"] ?></td>
+                    <td><?= $utente["nome"]?></td>
+                    <td><?= $utente["cognome"]?></td>
+                    <td><?= $utente["genere"] ?></td>
+                    <td><?= $utente["eta"] ?></td>
+                    <td><?= $utente["telefono"] ?></td>
+                    <td><?= $utente["indirizzo"] ?></td>
+                    <td><?= $utente["email"] ?></td>
+                    <td><?= $utente["role"] ?></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'admin',
-                                        'action'     => 'popolateaz',
-                                        'ID' => $utente["ID_Azienda"]
+                                        'action'     => 'popolateusr',
+                                        'ID' => $utente["ID_Utente"]
                                         ), 
                                         'default',true);?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica?>></a></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'admin',
-                                        'action'     => 'deleteaz',
-                                        'ID' => $utente["ID_Azienda"]
+                                        'action'     => 'deleteusr',
+                                        'ID' => $utente["ID_Utente"]
                                         ), 
                                         'default',true);?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina?>></a></td>
                 </tr>

@@ -8,7 +8,7 @@ class PublicController extends Zend_Controller_Action {
     protected $_logged;
     protected $_signform;
     protected $_searchform;
-
+    protected $values;
 
     public function init() {
         //creo un istanza del model che userò per la visualizzazione delle promozioni-aziende etc
@@ -16,7 +16,7 @@ class PublicController extends Zend_Controller_Action {
         $this->_catalogModel = new Application_Model_Catalog();
 
         $this->_authService = new Application_Service_Auth();
-        
+
         //imposto come layouy il file main.phtml
         $this->_helper->layout->setLayout('main');
 
@@ -24,7 +24,6 @@ class PublicController extends Zend_Controller_Action {
         //altrimenti assegno il menù di default
         //e recupero la form di login(che non serve se l'utente è già loggato
         if (isset($this->_authService->getIdentity()->role)) {
-
             $this->view->assign(array('menu' => $this->_authService->getIdentity()->role . "/_menu.phtml"));
             $this->view->assign(array('topbar' => $this->_authService->getIdentity()->role . "/_topbar.phtml"));
         } else {
@@ -33,48 +32,101 @@ class PublicController extends Zend_Controller_Action {
             $this->view->assign(array('topbar' => "_topbar.phtml"));
         }
 
-
-        
-
-        //recupero la form per la registrazione e per la ricerca
+        //recupero la form per la ricerca delle promozioni e per la registrazione
         $this->view->signinForm = $this->getSigninForm();
         $this->view->searchForm = $this->getSearchForm();
-        $this->view->reachForm = $this->getReachForm();
     }
 
-public function indexAction(){
-    $this->_helper->redirector('promo','public');
-}
+    public function indexAction() {
+        $this->_helper->redirector("promo");
+    }
 
-
-    //****************************************
+    //****************************************************************************************************
     //             ACQUISTO
-    //****************************************
+    //****************************************************************************************************
     public function acquistoAction() {
 
         $this->view->assign(array('stampa' => '_stampa.phtml'));
     }
 
-    //****************************************
+    //****************************************************************************************************
     //              RPOMOZIONI
-    //****************************************
+    //****************************************************************************************************
     public function promoAction() {
-
         $paged = $this->_getParam('page', 1);
-        $ordine = $this->_getParam('order', null); //da modificare
-
-        $promozioni = $this->_catalogModel->getProms($paged, $ordine);
-
-
-        $this->view->assign(array(
-            'promozioni' => $promozioni
-                )
-        );
+        $ordine = $this->_getParam('order', null);
+        switch ($ordine) {
+            case "ID_Categoria":
+                $this->_helper->redirector('catordered');
+                break;
+            case "ID_Azienda":
+                $this->_helper->redirector('azordered');
+                break;
+            default:
+                $promozioni = $this->_catalogModel->getProms($paged, $ordine);
+        }
+        $aziende = $this->_catalogModel->getAziende();
+        $categorie = $this->_catalogModel->getCats();
+        foreach ($promozioni as $promo) {
+            foreach ($aziende as $a) {
+                if ($promo["ID_Azienda"] == $a["ID_Azienda"]) {
+                    $promo["ID_Azienda"] = $a["nome"];
+                }
+            }
+            foreach ($categorie as $cat) {
+                if ($promo["ID_Categoria"] == $cat["ID_Categoria"]) {
+                    $promo["ID_Categoria"] = $cat["nome"];
+                }
+            }
+        }
+        $this->view->assign(array('promozioni' => $promozioni));
     }
 
-    //****************************************
+    public function catorderedAction() {
+        $categorie = $this->_catalogModel->getCats(); //siccome servono sempre ordinate la query ha di suo l'order by name
+        $aziende = $this->_catalogModel->getAziende();
+        foreach ($categorie as $cat) {
+            $promo[$cat['nome']] = $this->_catalogModel->getPromsByCat($cat['ID_Categoria']);
+
+            foreach ($promo[$cat['nome']] as $p) {
+                foreach ($aziende as $a) {
+                    if ($p["ID_Azienda"] == $a["ID_Azienda"]) {
+                        $p["ID_Azienda"] = $a["nome"];
+                    }
+                }
+                $p["ID_Categoria"] = $cat['nome'];
+            }
+        }
+
+
+
+        $this->view->assign(array('promo' => $promo, 'divisore' => $categorie));
+        $this->render('ordered');
+    }
+
+    public function azorderedAction() {
+        $categorie = $this->_catalogModel->getCats();
+        $aziende = $this->_catalogModel->getAziende(null, 'nome');
+        foreach ($aziende as $az) {
+            $promo[$az['nome']] = $this->_catalogModel->getPromsByAz($az['ID_Azienda']);
+            foreach ($promo[$az['nome']] as $p) {
+
+                $p["ID_Azienda"] = $az["nome"];
+
+                foreach ($categorie as $cat) {
+                    if ($p["ID_Categoria"] == $cat["ID_Categoria"]) {
+                        $p["ID_Categoria"] = $cat["nome"];
+                    }
+                }
+            }
+        }
+        $this->view->assign(array('promo' => $promo, 'divisore' => $aziende));
+        $this->render('ordered');
+    }
+
+    //****************************************************************************************************
     //     VISUALIZZATORE PAGINE STATICHE
-    //****************************************
+    //****************************************************************************************************
     public function viewstaticAction() {
         //mi permette di impostare la view da visualizare
         //di default viene visualizzata la vista con il nome dell'action
@@ -85,9 +137,9 @@ public function indexAction(){
         $this->render($page);
     }
 
-    //****************************************
+    //****************************************************************************************************
     //                AZIENDE
-    //****************************************
+    //****************************************************************************************************
     public function aziendeAction() {
         //$this->view->assign(array('text' => "LOREM IPSUM"));
         // controlla se _catalogModel è già istanziato
@@ -107,9 +159,9 @@ public function indexAction(){
         $this->view->assign(array('aziende', 'public'));
     }
 
-    //****************************************
+    //****************************************************************************************************
     //                FAQ
-    //****************************************
+    //****************************************************************************************************
     public function faqAction() {
 
         $paged = $this->_getParam('page', 1);
@@ -129,17 +181,16 @@ public function indexAction(){
         $this->view->assign(array('faq', 'public'));
     }
 
-    //****************************************
+    //****************************************************************************************************
     //           AREA RISERVATA
-    //****************************************
+    //****************************************************************************************************
     public function reservedareaAction() {
         $this->_helper->redirector('index', 'staff');
-
     }
 
-    //****************************************
+    //****************************************************************************************************
     //                LOGIN
-    //****************************************
+    //****************************************************************************************************
     public function loginAction() {
         
     }
@@ -160,7 +211,6 @@ public function indexAction(){
         }
         return $this->_helper->redirector('index', $this->_authService->getIdentity()->role);
     }
-  
 
     private function getLoginForm() {
         $urlHelper = $this->_helper->getHelper('url');
@@ -171,7 +221,7 @@ public function indexAction(){
         ));
         return $this->_logform;
     }
-    
+
     // Validazione AJAX
     public function validateloginAction() {
         $this->_helper->getHelper('layout')->disableLayout();
@@ -184,9 +234,9 @@ public function indexAction(){
         }
     }
 
-    //****************************************
+    //****************************************************************************************************
     //              REGISTRAZIONE
-    //****************************************
+    //****************************************************************************************************
     public function signinAction() {
         $this->view->signinForm = $this->getSigninForm();
     }
@@ -201,6 +251,10 @@ public function indexAction(){
             return $this->render('signin');
         }
         $values = $form->getValues();
+        if ($this->_catalogModel->getUserByName($values["Username"])) {
+            $form->setDescription('Attenzione: Username gia in uso');
+            return $this->render('signin');
+        }
         $this->_catalogModel->saveUser($values);
 
         if (false === $this->_authService->authenticate($form->getValues())) {
@@ -212,7 +266,6 @@ public function indexAction(){
         //$this->_helper->redirector('index');
     }
 
-
     private function getSigninForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_signform = new Application_Form_Public_Signin();
@@ -222,11 +275,23 @@ public function indexAction(){
         ));
         return $this->_signform;
     }
-  
-    //****************************************
+
+    // Validazione AJAX
+    public function validatesigninAction() {
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $signform = new Application_Form_Public_Signin();
+        $response = $signform->processAjax($_POST);
+        if ($response !== null) {
+            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
+        }
+    }
+
+    //****************************************************************************************************
     //                RICERCA
-    //****************************************    
-    
+    //****************************************************************************************************
+
     public function searchAction() {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('promo');
@@ -236,54 +301,45 @@ public function indexAction(){
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('promo');
         }
-        
-        $values = $form->getValues();
-        
+
+        $this->values = $form->getValues();
         //L'UNICA COSA CHE MANCA QUI è DI RIUSCIRE A PASSARE VALUES ALLA FINDACTION, MI DICE CHE UN'AZIONE NON PUò AVERE PARAMETRI
-        $this->_helper->redirector('find', 'public', $values);
+        $this->findAction(1);
     }
-    
-    public function findAction($values){
-        
-        $paged = $this->_getParam('page', 1);
-        $ordine = $this->_getParam('order', null);
-        
-        $trovate=$this->_catalogModel->search($values, $paged, $ordine); 
-        
-        $this->view->assign(array(
-            'trovate' => $trovate
-                )
-        );
-        
-        //$this->view->assign(array('search', 'public'));
+
+    public function findAction($first = null) {
+        $paged = 1;
+        $ordine = null;
+        if ($first === null) {
+            $paged = $this->_getParam('page', 1);
+            $ordine = $this->_getParam('order', null);
+        }
+        if ($this->values) {
+            $trovate = $this->_catalogModel->search($this->values, $paged, $ordine);
+            if (!$trovate) {
+                $this->_helper->redirector('promo');
+            }
+            $this->view->assign(array(
+                'trovate' => $trovate
+                    )
+            );
+
+            $this->view->assign(array('params' => array('ID_Categoria' => $this->values["ID_Categoria"], 'words' => $this->values["words"])));
+        } else {
+            $this->values["ID_Categoria"] = $this->_getParam('ID_Categoria', null);
+            $this->values["words"] = $this->_getParam('words', null);
+            $trovate = $this->_catalogModel->search($this->values, $paged, $ordine);
+            $this->view->assign(array(
+                'trovate' => $trovate
+                    )
+            );
+
+            $this->view->assign(array('params' => array('ID_Categoria' => $this->values["ID_Categoria"], 'words' => $this->values["words"])));
+            $this->render('search');
+        }
     }
-    
-    //QUEST'AZIONE FUNZIONAVA MA QUANDO FACCIO SUCCESSIVO NON PRENDE I VALORI E NON LI PASSA ALLA VIEW GIUSTA
-    /*public function searchAction() {
-        if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('promo');
-        }
-        $form = $this->_searchform;
-        if (!$form->isValid($_POST)) {
-            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->render('promo');
-        }
-        $values = $form->getValues();
-        
-        $paged = $this->_getParam('page', 1);
-        $ordine = $this->_getParam('order', null);
-        
-        $trovate=$this->_catalogModel->search($values, $paged, $ordine); 
-        
-        $this->view->assign(array(
-            'trovate' => $trovate
-                )
-        );
-        
-        $this->view->assign(array('search', 'public'));
-    }*/
-    
-  private function getSearchForm() {
+
+    private function getSearchForm() {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_searchform = new Application_Form_Public_Search();
         $this->_searchform->setAction($urlHelper->url(array(
@@ -293,41 +349,9 @@ public function indexAction(){
         return $this->_searchform;
     }
 
-    
-    //****************************************
-    //          OTTIENI COUPON
-    //****************************************
-    
-    public function addcouponAction() {
-        if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('index');
-        }
-        $form = $this->_reachform;
-        /*if (!$form->isValid($_POST)) {
-            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
-            return $this->render('newpromo');
-        }*/
-        //$values = $form->getValues();
-        
-        
-        $this->_catalogModel->reach($iduser, $idpromo);
-        $this->_helper->redirector('index');
-    }
-    
-    private function getReachForm() {
-        $urlHelper = $this->_helper->getHelper('url');
-        $this->_reachform = new Application_Form_Public_Reach();
-        $this->_reachform->setAction($urlHelper->url(array(
-                    'controller' => 'public',
-                    'action' => 'addcoupon'), 'default'
-        ));
-        return $this->_reachform;
-    }
-    
-
-    //****************************************
+    //****************************************************************************************************
     //       MODIFICA PROFILO UTENTE
-    //****************************************
+    //****************************************************************************************************
     function modificaprofiloAction() {
         
     }

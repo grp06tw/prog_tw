@@ -4,7 +4,7 @@ class StaffController extends Zend_Controller_Action {
 
     protected $_staffModel;
     protected $_addform;
-
+    protected $_updateform;
     private $_authService;
 
     public function init() {
@@ -16,6 +16,7 @@ class StaffController extends Zend_Controller_Action {
         $this->view->assign(array('elimina' => $this->view->baseUrl('css/img/elimina.png')));
         $this->view->assign(array('modifica' => $this->view->baseUrl('css/img/modifica.png')));
         $this->_authService = new Application_Service_Auth();
+        $this->view->updatedataform = $this->retrieveAction();
     }
 
     public function indexAction() {
@@ -85,7 +86,7 @@ class StaffController extends Zend_Controller_Action {
         $form = $this->_addform;
         if (!$form->isValid($_POST)) {
             $form->setDescription('operazione non riuscita');
-            return $this->render('modpromo');
+            return $this->render('popolate');
 
         }
         $values = $form->getValues();
@@ -148,5 +149,35 @@ class StaffController extends Zend_Controller_Action {
         $this->_authService->clear();
         return $this->_helper->redirector('index', 'public');
     }
+    //****************************************
+    //          MODIFICA DATI UTENTE
+    //****************************************
+    public function updatedataAction(){
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('index');
+        }
+        $form = $this->_updateform;
+        if (!$form->isValid($_POST)) {
+            $form->setDescription('operazione non riuscita');
+            return $this->render('updatedata');
+        }
+        $campi = $form->getValues();
+        $this->_staffModel->updateUserData($campi);
+        $this->_helper->redirector('updatedata');
+    }
+    
+    private function populateUpdateDataForm($records){
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_updateform = new Application_Form_User_Update();
+        $this->_updateform->populate($records);
+        $this->_updateform->setAction($urlHelper->url(array('controller'=> 'staff', 'action'=> 'updatedata'),'default'));
+        return $this->_updateform;
+    }
 
+    public function retrieveAction(){
+        $id = $this->_authService->getIdentity();
+        $app = $this->_staffModel->getUserData($id['Username']);
+        $this->view->updatedataform = $this->populateUpdateDataForm($app->toArray());
+        
+    }
 }

@@ -10,25 +10,24 @@ class Application_Resource_Coupon extends Zend_Db_Table_Abstract {
         
     }
     
-    public function reach($iduser, $idpromo) {
-        if($iduser == null)
-        {
-            //non puoi acquisire un coupon   
-        }
-        
-        
-        
+    public function insertCoupon($coupon) {
         $this->insert($coupon);
-            
+        return $coupon;
     }
     
-    public function insertPromo($promo) {
-        if ($promo['immagine'] == null) {
-            $promo['immagine'] = 'default.jpg';
+    public function getCouponById($idUser, $idPromo) {
+        $select = $this->select()
+                ->where("ID_Utente = " . $idUser." and ID_Promozione = " . $idPromo);
+        $q = $this->fetchAll($select);
+        //qui abbiamo dovuto usare il foreach perchè non riuscivamo a trovare un modo per vedere se la query
+        //dava come risultato dei dati o no, le variabili nella risposta sono private
+        foreach ($q as $r)
+        {
+            return $r;
         }
-        $this->insert($promo);
+        return 0;
     }
-
+    
     public function getCoupon() {
         return $this->fetchAll($this->select());
     }

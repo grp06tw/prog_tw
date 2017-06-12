@@ -10,6 +10,7 @@
     height: 30px;
 }
 #modTable {
+    width: 100%;
     border-collapse: collapse;
     background-color: white;
 }
@@ -274,6 +275,9 @@ h2.faq
     height: 150px;
     margin: 35px 110px 0px 145px;
 }
+#desc.promo, #desc.azienda{
+    margin: 35px 110px 0px 145px;
+}
 
 #desc
 {
@@ -304,7 +308,7 @@ ___________________________
 
 #pagination {
     text-align :center;
-    background-color: #8B9898;
+    background-color: #555;
     border-radius: 5px;
 }
 
@@ -318,64 +322,10 @@ ___________________________
 */
 
 #flayer{
-	margin:10px;
-	min-width: 600px;
-}
-
-    #titol
-    {
-		text-align:left;
-        padding: 10px;
-        height: 50px;
-    }
-    
-        #titol>h2 
-        {
-            color: #313837;
-            font-size: 30px;
-			margin-left:0px;
-        }
-        
-    #prezz
-    {
-        align-content: center;
-        margin-left: 10px;
-        font-size: 25px;
-    }
-    
-    #descrizione
-    {
-        margin: 20px 0px 0px 10px;
-    }
-    
-/* ________________________
-        STILE ERRORI
-___________________________
-*/
-    
-.formerror {
-    background: none repeat scroll 0 0 #FFECEC;
-    border: 3px solid #f93d00;
-    height: 21px;
-    width:278px;
-    margin: 0 0 1px;
-    padding-left:7px;
-}
-
-.errors {
-	color: #f93d00;
-}
-
-.errors ul {
-
-	line-height: 100%;
-
     margin:10px;
     min-width: 600px;
 }
 
-
-/*
 #titol
 {
     text-align:left;
@@ -383,13 +333,12 @@ ___________________________
     height: 50px;
 }
 
-h2 
+#titol>h2 
 {
     color: #313837;
     font-size: 30px;
     margin-left:0px;
 }
-
 
 #prezz
 {
@@ -404,19 +353,67 @@ h2
 }
 
 /* ________________________
-        STATISTICHE
+        STILE ERRORI
 ___________________________
 */
 
-#stat{
-    display: inline;
+.formerror {
+    background: none repeat scroll 0 0 #FFECEC;
+    border: 3px solid #f93d00;
+    height: 21px;
+    width:278px;
+    margin: 0 0 1px;
+    padding-left:7px;
 }
 
-#statSX{
-    float: left;
+.errors {
+    color: #f93d00;
 }
 
-#statDX{
-   float:right;
+.errors ul {
+
+    line-height: 100%;
+
+    margin:10px;
+    min-width: 600px;
 }
 
+
+
+
+
+.statsSelector{
+    margin-bottom: 15px;
+
+}
+
+
+#titlePage, #visu, .divisoreOrd{
+
+    padding-top: 15px;
+    text-align: center;
+    border-radius: 10px;
+    width:100%;
+    height: 40px;
+    color: #0398CA;
+    background-color:#555;
+    margin-bottom: 15px;
+}
+#visu{
+    display: inline-flex;
+}
+#visTit{
+    margin-left: 30px;
+}
+#visAz{
+    height: 100%;
+    margin-left:  15%;
+}
+#visCat{
+    height: 100%;
+    margin-left: 15%;
+}
+#visStandard{
+    height: 100%;
+    margin-left:  15%;
+}

@@ -10,7 +10,7 @@ class Application_Model_Catalog extends App_Model_Abstract {
     
     public function search($values, $paged = null, $order = null){
         if($values['ID_Categoria']=='null' && $values['words']=='' ){
-                return; //richiama pagina iniziale oppure nel public controller lo redirigi alla visual per categorie
+                return 0; //richiama pagina iniziale oppure nel public controller lo redirigi alla visual per categorie
         }
         if($values['words']=='' ){
                 return $this->getResource('Promozione')->getPromsByCat($values['ID_Categoria'], $paged, $order);
@@ -41,6 +41,10 @@ class Application_Model_Catalog extends App_Model_Abstract {
     public function getPromsByCat($catId, $paged = null, $order = null) {
         return $this->getResource('Promozione')->getPromsByCat($catId, $paged, $order);
     }
+    
+    public function getPromsByAz($azId, $paged = null, $order = null) {
+        return $this->getResource('Promozione')->getPromsByAz($azId, $paged, $order);
+    }
 
     // AZIENDE
 
@@ -59,29 +63,31 @@ class Application_Model_Catalog extends App_Model_Abstract {
     public function saveUser($user) {
         return $this->getResource('Utente')->insertUser($user);
     }
+    public function getUserByName($info) {
+        return $this->getResource('Utente')->getUserLogin($info);
+    }
     
 //COUPON
     public function reach($iduser, $idpromo) {
-        return $this->getResource('Coupon')->insertCoupon($iduser, $idpromo);
+        $q=$this->getResource('Coupon')->getCouponById($iduser, $idpromo);
+        if($q==0)
+        {
+            $coupon["ID_Promozione"] = $idpromo;
+            $coupon["ID_Utente"] = $iduser;
+            return $this->getResource('Coupon')->insertCoupon($coupon);
+        }
+        else
+        {
+            return 0;
+        }
     }
-
-    /* GET
-      public function getProms()
-      {
-      return $this->getResource('Promozione')->getProms();
-      }
-      public function getPromoById($id)
-      {
-      return $this->getResource('Promozione')->getPromoByID($id);
-      }
-      //DELETE
-      public function delPromo($promo)
-      {
-      return $this->getResource('Promozione')->delPromo($promo);
-      }
-      //UPDATE
-      public function updatePromo($promo)
-      {
-      return $this->getResource('Promozione')->updatePromo($promo);
-      } */
+    
+//PRENDI PROMO BY ID E UTENTE BY ID PER STAMPARE IL FLAYER
+    public function getUserById($id) {
+        return $this->getResource('Utente')->getUserById($id);
+    }
+    
+    public function getPromoById($id) {
+        return $this->getResource('Promozione')->getPromoByID($id);
+    }
 }
