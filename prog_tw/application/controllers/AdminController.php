@@ -512,6 +512,8 @@ class AdminController extends Zend_Controller_Action {
         $utenti = $this->_adminModel->getUsers("user",null);
         $promozioni = $this->_adminModel->getProms();
         $count = 0;
+        $stP=array();
+        $stU=array();
         foreach ($promozioni as $promo) {
             for ($i = 0; $i < count($coupon); $i++) {
                 if ($coupon[$i]["ID_Promozione"] == $promo["ID_Promozione"]) {
