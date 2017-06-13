@@ -5,6 +5,7 @@ class UserController extends Zend_Controller_Action {
     private $_authService;
     protected $_userModel;
     protected $_updateform;
+
     public function init() {
         $this->_helper->layout->setLayout('main');
         $this->view->assign(array('menu' => "user/_menu.phtml"));
@@ -32,28 +33,32 @@ class UserController extends Zend_Controller_Action {
         $idPromo = $this->_getParam('idPromo');
         $idUtente = $this->_getParam('idUtente');
         $risposta = $this->_catalogModel->reach($idUtente, $idPromo);
-        if ($risposta == 0) {
-            $this->_helper->redirector('promo', 'public');
+        if ($risposta == null) {
+            $doppio = "si";
             //messaggio di errore che quel coupon è già stato acquisito
         } else {
-            $utente = $this->_catalogModel->getUserById($idUtente);
-            $promozione = $this->_catalogModel->getPromoById($idPromo);
-            
-            $this->_helper->layout->setLayout('user/_stampa');
-            
-            //$this->view->assign(array('coupon' => "user/_stampa.phtml", 'promo'=>$promozione, 'utente'=>$utente, 'coupon'=>$coupon ));
-            $this->view->assign(array('coupon', 'promo'=>$promozione, 'utente'=>$utente, 'coupon'=>$risposta ));
-            
-            $this->render('coupon');
-            //$this->_helper->redirector('promo', 'public');
-            //bisogna redirezionarlo sul file _stampa che è un nuovo layout
-            //$this->_helper->layout->setLayout('main');
+            $doppio = "no";
         }
+        $utente = $this->_catalogModel->getUserById($idUtente);
+        $promozione = $this->_catalogModel->getPromoById($idPromo);
+        $azienda = $this->_catalogModel->getAziendaById($promozione["ID_Azienda"]);
+        $categoria = $this->_catalogModel->getCatById($promozione["ID_Categoria"]);
+
+        $this->_helper->layout->setLayout('user/_stampa');
+        $this->view->assign(array('coupon',
+            'promo' => $promozione,
+            'utente' => $utente,
+            'coupon' => $risposta,
+            'azienda' => $azienda,
+            'categoria' => $categoria,
+            'doppio' => $doppio));
+        $this->render('coupon');
     }
+
     //****************************************
     //          MODIFICA DATI UTENTE
     //****************************************
-    public function updatedataAction(){
+    public function updatedataAction() {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('index');
         }
@@ -66,19 +71,20 @@ class UserController extends Zend_Controller_Action {
         $this->_userModel->updateUserData($campi);
         $this->_helper->redirector('updatedata');
     }
-    
-    private function populateUpdateDataForm($records){
+
+    private function populateUpdateDataForm($records) {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_updateform = new Application_Form_User_Update();
         $this->_updateform->populate($records);
-        $this->_updateform->setAction($urlHelper->url(array('controller'=> 'user', 'action'=> 'updatedata'),'default'));
+        $this->_updateform->setAction($urlHelper->url(array('controller' => 'user', 'action' => 'updatedata'), 'default'));
         return $this->_updateform;
     }
 
-    public function retrieveAction(){
+    public function retrieveAction() {
         $id = $this->_authService->getIdentity();
-        
+
         $app = $this->_userModel->getUserData($id['Username']);
         $this->view->updatedataform = $this->populateUpdateDataForm($app->toArray());
     }
+
 }

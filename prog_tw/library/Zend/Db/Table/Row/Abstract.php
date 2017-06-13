@@ -166,7 +166,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess, IteratorAggreg
 
     /**
      * Retrieve row field value
-     *
+     * 
      * @param  string $columnName The user-specified column name.
      * @return string             The corresponding column value.
      * @throws Zend_Db_Table_Row_Exception if the $columnName is not a column in the row.

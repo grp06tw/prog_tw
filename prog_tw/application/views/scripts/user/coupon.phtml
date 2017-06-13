@@ -1,26 +1,53 @@
 <div id="flayer">	
 
-        <div id="titol">
-            <h2> <?= $this->promo["titolo"] ?> </h2>
-        </div>
-        <div id="prezz">
+    <div id="titol">
+        <h2> Sconto per: <?= $this->promo["titolo"] ?> </h2>
+    </div>
+    <p>
+        <?= $this->utente["nome"] . "<br>" . $this->utente["cognome"] ?> hai ottenuto il seguente sconto:
+    </p>
+    <div id="prezz">
 
-            <p> <?= $this->promo->getPrice($this->promo["sconto"]) ?> </p>
-            <p>
-                <del>
-                    <?= $this->promo["prezzo"] ?>
-                </del>
-                <br><?= $this->promo["sconto"] ?>%            </p>
+        <p> <?= $this->promo->getPrice($this->promo["sconto"]) ?> </p>
+        <p>
+            <del>
+                <?= $this->promo["prezzo"] ?>
+            </del>
+            <br><?= $this->promo["sconto"] ?>%            </p>
 
-        </div>
+    </div>
 
-        <div id="descrizione">
+    <div id="descrizione">
+        <p>
+            <?= $this->promo["descrizione"] ?><br>
+            <?= $this->categoria["nome"] ?>
+        </p>
+    </div>
+    <p>
+        Potrai ritirare il prodotto al seguente indirizzo:<br>
+        <?= $this->azienda["ragione_sociale"] ?><br>
+        <?= $this->azienda["indirizzo"] ?><br>
+    </p>
+    <br>
+    <p>
+        CODICE COUPON: <?= $this->coupon["ID_Coupon"] ?>
+    </p>
+    <p>
+        Il seguente coupon è stato emesso da:<br>
+        <img src=<?= $this->logo ?>>
+    </p>
 
-            <?= $this->promo["descrizione"] ?>
-            <br>
-            NOME AZIENDA <BR><BR>
-            
-            CODICE COUPON <?= $this->coupon["ID_Promozione"].$this->coupon["ID_Utente"] ?> (8 id_promozione 3 id_utente)
-
-        </div>
-    </div>    
+    <div id="btn_flayer">
+        <?= $this->SalvaCoupon() ?>
+    </div>
+    <div id="btn_flayer" class="due">
+        <?= $this->Continua() ?>
+    </div>
+    
+    <?php
+    if($this->doppio=="si"):?>
+    <p>
+        <br>Attenzione! Hai già acquisito questo coupon, potrai usufruirne una sola volta!
+    </p>
+    <?php endif; ?>
+</div>    
