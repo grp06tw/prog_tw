@@ -49,8 +49,15 @@ class Application_Form_Admin_Azienda_Add extends App_Form_Abstract {
                 array('Extension', false, array('jpg', 'gif'))),
             'decorators' => $this->fileDecorators,
         ));
-
-        //INDIRIZZO
+//CITTA        
+        $this->addElement('text', 'citta', array(
+            'label' => 'Citta',
+            'filters' => array('StringTrim'),
+            'required' => true,
+            'validators' => array(array('StringLength', true, array(1, 30))),
+            'decorators' => $this->elementDecorators,
+        ));
+//INDIRIZZO
         $this->addElement('text', 'indirizzo', array(
             'label' => 'Indirizzo',
             'filters' => array('StringTrim'),

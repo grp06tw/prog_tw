@@ -55,9 +55,11 @@ class PublicController extends Zend_Controller_Action {
     public function promoAction() {
         $paged = $this->_getParam('page', 1);
         $ordine = $this->_getParam('order', null);
+
         switch ($ordine) {
             case "ID_Categoria":
                 $this->_helper->redirector('catordered');
+
                 break;
             case "ID_Azienda":
                 $this->_helper->redirector('azordered');
@@ -65,6 +67,7 @@ class PublicController extends Zend_Controller_Action {
             default:
                 $promozioni = $this->_catalogModel->getProms($paged, $ordine);
         }
+
         $aziende = $this->_catalogModel->getAziende();
         $categorie = $this->_catalogModel->getCats();
         foreach ($promozioni as $promo) {
@@ -85,6 +88,7 @@ class PublicController extends Zend_Controller_Action {
     public function catorderedAction() {
         $categorie = $this->_catalogModel->getCats(); //siccome servono sempre ordinate la query ha di suo l'order by name
         $aziende = $this->_catalogModel->getAziende();
+
         foreach ($categorie as $cat) {
             $promo[$cat['nome']] = $this->_catalogModel->getPromsByCat($cat['ID_Categoria']);
 
@@ -97,9 +101,6 @@ class PublicController extends Zend_Controller_Action {
                 $p["ID_Categoria"] = $cat['nome'];
             }
         }
-
-
-
         $this->view->assign(array('promo' => $promo, 'divisore' => $categorie));
         $this->render('ordered');
     }

@@ -1,3 +1,24 @@
+<?php
+$this->headScript()
+        ->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+        ->appendFile($this->baseUrl('js/functions.js'))
+        ->captureStart()
+?>
+
+$(function()
+{
+    $('div#elemento').slideToggle();
+
+        $('div.divisoreOrd').on('click', function(){
+            $('div#elemento').hide('slow');
+            $(this).parent().find('div#elemento').slideToggle();
+            
+    });
+
+});
+
+<?php $this->headScript()->captureEnd() ?>
+
 <!inizio del div della promozione>
 <div id="titlePage">
     <h3>Promozioni</h3>
@@ -35,46 +56,50 @@
 </div>
 
 <?php foreach ($this->divisore as $div) : ?>
-    <div class="divisoreOrd">
-        <h3><?= $div['nome'] ?></h3>
+    <div class="<?= 'bundle' . $div['nome'] ?>">
+        <div class="divisoreOrd">
+            <h3><?= $div['nome'] ?></h3>
+        </div>
+        <?php
+        $promozioni = $this->promo[$div['nome']];
+        foreach ($promozioni as $promo):
+            ?>
+            <div id="elemento">  
+                <div id="tit">
+                    <h2> <?= $promo->titolo ?> </h2>
+                </div>
+
+                <!-- prende il css dalla classe .img_promo-->
+                <?= $this->promoImg($promo->immagine) ?>
+
+                <div id="pricebox">
+
+                    <?= $this->Price($promo) ?>
+
+                </div>
+
+                <div id="desc" class="promo">
+
+                    <p><?= $promo->descrizione ?></p>                 
+                    <div id="az" class="promo">
+
+                        <p><?= 'Azienda: ' . $promo->ID_Azienda ?></p>
+
+                    </div>
+
+                    <div id="cat" class="promo">
+
+                        <p><?= 'Categoria: ' . $promo->ID_Categoria ?></p>
+
+                    </div>
+
+                </div>
+
+
+            </div> 
+            <!-- fine div della promozione-->
+        <?php endforeach; ?>
     </div>
-    <?php $promozioni = $this->promo[$div['nome']];
-            foreach ($promozioni as $promo):?>
-    <div id="elemento">  
-        <div id="tit">
-            <h2> <?= $promo->titolo ?> </h2>
-        </div>
-
-        <!-- prende il css dalla classe .img_promo-->
-        <?= $this->promoImg($promo->immagine) ?>
-
-        <div id="pricebox">
-
-            <?= $this->Price($promo) ?>
-
-        </div>
-
-        <div id="desc" class="promo">
-
-            <?= $promo->descrizione ?>
-
-        </div>
-        <div id="az" class="promo">
-
-            <?= 'Azienda: '.$promo->ID_Azienda ?>
-
-        </div>
-        <div id="cat" class="promo">
-
-            <?= 'Categoria: '.$promo->ID_Categoria ?>
-
-        </div>
-
-        
-
-    </div> 
-    <!-- fine div della promozione-->
-<?php endforeach; ?>
 <?php endforeach; ?>
 
 

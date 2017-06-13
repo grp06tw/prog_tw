@@ -17,7 +17,7 @@ class Application_Form_User_Update extends App_Form_Abstract{
          $this->addElement('text','Username',
                 array(
                     'label' => 'Username',
-                    'disabled' => 'disabled',
+                    'readonly' => 'readonly',
                     'decorators' => $this->elementDecorators 
                     )
                 );
@@ -52,7 +52,7 @@ class Application_Form_User_Update extends App_Form_Abstract{
         $this->addElement('radio', 'genere', 
             array(
                 'label' => 'Genere',
-                'multiOptions' => array('m' => 'M','f' => 'F'),
+                'multiOptions' => array('m' => 'M','f' => 'F','x' => 'X'),
                 'decorators' => $this->radioDecorators
                 )
             );

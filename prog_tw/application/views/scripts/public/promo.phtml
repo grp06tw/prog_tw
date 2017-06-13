@@ -8,29 +8,29 @@
     </div>
     <div id="visStandard">
         <a href="<?=
-                $this->url(array(
-                    'controller' => 'public',
-                    'action' => 'promo',
-                        ), 'default', true);
-                ?>"><h3>Standard</h3></a>
+        $this->url(array(
+            'controller' => 'public',
+            'action' => 'promo',
+                ), 'default', true);
+        ?>"><h3>Standard</h3></a>
     </div>
     <div id="visCat">
         <a href="<?=
-                $this->url(array(
-                    'controller' => 'public',
-                    'action' => 'promo',
-                    'order' => 'ID_Categoria'
-                        ), 'default', true);
-                ?>"><h3>Categoria</h3></a>
+        $this->url(array(
+            'controller' => 'public',
+            'action' => 'promo',
+            'order' => 'ID_Categoria'
+                ), 'default', true);
+        ?>"><h3>Categoria</h3></a>
     </div>
     <div id="visAz">
         <a href="<?=
-                $this->url(array(
-                    'controller' => 'public',
-                    'action' => 'promo',
-                    'order' => 'ID_Azienda'
-                        ), 'default', true);
-                ?>"><h3>Azienda</h3></a>
+        $this->url(array(
+            'controller' => 'public',
+            'action' => 'promo',
+            'order' => 'ID_Azienda'
+                ), 'default', true);
+        ?>"><h3>Azienda</h3></a>
     </div>
 </div>
 <?php foreach ($this->promozioni as $promo) : ?>
@@ -50,18 +50,9 @@
 
         <div id="desc" class="promo">
 
-            <?= $promo->descrizione ?>
-
-        </div>
-        <div id="az" class="promo">
-
-            <?= 'Azienda: '.$promo->ID_Azienda ?>
-
-        </div>
-        <div id="cat" class="promo">
-
-            <?= 'Categoria: '.$promo->ID_Categoria ?>
-
+            <p><?= $promo->descrizione ?></p>
+            <p><?= '<b>Azienda: </b> &nbsp;' . $promo->ID_Azienda ?></p>
+            <p><?= '<b>Categoria: </b> &nbsp;' . $promo->ID_Categoria ?></p>
         </div>
 
         <?= $this->Ottieni($promo->ID_Promozione) ?>

@@ -372,7 +372,7 @@ class AdminController extends Zend_Controller_Action {
 
     private function getUpdateUsrForm($values) {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_newUsrForm = new Application_Form_Admin_Utente_Add();
+        $this->_newUsrForm = new Application_Form_User_Update();
         $this->_newUsrForm->populate($values);
         $this->_newUsrForm->setAction($urlHelper->url(array(
                     'controller' => 'admin',
@@ -512,6 +512,8 @@ class AdminController extends Zend_Controller_Action {
         $utenti = $this->_adminModel->getUsers("user",null);
         $promozioni = $this->_adminModel->getProms();
         $count = 0;
+        $stP=array();
+        $stU=array();
         foreach ($promozioni as $promo) {
             for ($i = 0; $i < count($coupon); $i++) {
                 if ($coupon[$i]["ID_Promozione"] == $promo["ID_Promozione"]) {
@@ -574,5 +576,41 @@ class AdminController extends Zend_Controller_Action {
         $id = $this->_authService->getIdentity();
             $app = $this->_adminModel->getUserData($id['Username']);
             $this->view->updatedataform = $this->populateUpdateDataForm($app->toArray());
+    }
+    
+    //****************************************
+    //          VALIDAZIONI AJAX
+    //****************************************
+    public function validateazAction() {
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $form = new Application_Form_Admin_Azienda_Add();
+        $response = $form->processAjax($_POST);
+        if ($response !== null) {
+            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
+        }
+    }
+    
+    public function validatecatAction() {
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $form = new Application_Form_Admin_Categoria_Add();
+        $response = $form->processAjax($_POST);
+        if ($response !== null) {
+            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
+        }
+    }
+    
+    public function validatefaqAction() {
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $form = new Application_Form_Admin_Faq_Add();
+        $response = $form->processAjax($_POST);
+        if ($response !== null) {
+            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
+        }
     }
 }
