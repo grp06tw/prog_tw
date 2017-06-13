@@ -21,12 +21,15 @@ $(function()
 $(function()
  {
         $("#inizio").datepicker({ dateFormat: 'yy-mm-dd' });
+        
         $("#fine").datepicker({ dateFormat: 'yy-mm-dd' });
+        
+       
 });
 <?php $this->headScript()->captureEnd() ?>
 
 <div class="static">
- <h3>Aggiungi Prodotti</h3>
+ <h3>Aggiungi Promozione</h3>
  <p>Utilizza questa form per inserire una nuova promozione</p>
   <?php echo $this->newpromoForm ?>
 </div>
