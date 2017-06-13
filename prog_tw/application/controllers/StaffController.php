@@ -45,18 +45,6 @@ class StaffController extends Zend_Controller_Action {
         $this->_helper->redirector('index');
     }
 
-    // Validazione AJAX
-    public function validatepromoAction() {
-        $this->_helper->getHelper('layout')->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
-
-        $promoform = new Application_Form_Staff_Promo_Add();
-        $response = $promoform->processAjax($_POST);
-        if ($response !== null) {
-            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
-        }
-    }
-
     //****************************************
     //             MODIFICA PROMO
     //****************************************
@@ -78,7 +66,6 @@ class StaffController extends Zend_Controller_Action {
     //             UPDATE PROMO
     //****************************************
 
- 
     public function updpromoAction() {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('index');
@@ -127,8 +114,6 @@ class StaffController extends Zend_Controller_Action {
         return $this->_addform;
     }
 
-
-  
     private function getUpdatePromoForm($values) {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_addform = new Application_Form_Staff_Promo_Add();
@@ -179,5 +164,20 @@ class StaffController extends Zend_Controller_Action {
         $app = $this->_staffModel->getUserData($id['Username']);
         $this->view->updatedataform = $this->populateUpdateDataForm($app->toArray());
         
+    }
+    
+    //****************************************
+    //          VALIDAZIONI AJAX
+    //****************************************
+   
+    public function validatepromoAction() {
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $promoform = new Application_Form_Staff_Promo_Add();
+        $response = $promoform->processAjax($_POST);
+        if ($response !== null) {
+            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
+        }
     }
 }

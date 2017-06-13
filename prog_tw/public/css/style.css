@@ -9,59 +9,46 @@ html
 #separatorTB{
     width:50%;
 }
-
 .img_mod{
     height: 30px;
 }
 #modTable {
     width: 100%;
     border-collapse: collapse;
-    /*background-color: white;*/
-    background-color: green;
+    background-color: #D3DBD9;
 }
 #headmod{
-    /*background-color: #333;
-    color: #0398CA;*/
-    background-color: red;
-    color:green;
+    background-color: #A7C4BD;
+    color: black;
 }
 #modTable, #headmod > tr > th, #bodymod > tr >td {
-    border: 1px solid black;
+    border: 3px solid #5C6362;
 }
 #headmod > tr >  th, #bodymod > tr >td{
     padding: 10px;
     text-align: center;
 }
-
 ul {
     list-style-type: none;
     padding-left: 0;
     margin-left: 0;
 }
-
 a:link, a:visited {
     text-decoration: none;
-    /*color: #0398CA;*/
     color: black;
     background-color: transparent;
 }
 a:hover, a:active {
     text-decoration: underline overline;
-    color: #0398CA;
+    color: white;
 }
-
-
-
 input,select{	
-    /*color: #0398CA;*/
     color: black;
     font-weight:bold;
 }
-
 input#login{
     padding:2px 5px;
 }
-
 select > option{
     font-weight:normal;
 }
@@ -70,24 +57,18 @@ select > option{
         STILE LAYOUT
     ______________________
 */
-
 #wrapper{
     margin:10px;
     min-width: 1020px;
 }
 
 /*HEADER*/
-
-
 #header {
-
-    /*background-color:#555;*/
     background-color: #D3DBD9;
     padding: 10px;
     height: 150px;
     margin: 10px 0px 0px 0px;
 }
-
 #logo{
     padding:25px;
     height: 100px;
@@ -99,19 +80,12 @@ select > option{
 
     height: 100px;	
 }
-
 .src{
     height:100%;
     float:left;
 }
 
 /* SEARCH */
-/*
-#form_src > #cat_src ,#submit_src , #login > .submit{
-       background-color: #75B60C;
-       color: black;
-}
-*/
 #div_src {
     position: relative;
     margin-top: 55px;
@@ -128,7 +102,6 @@ select > option{
 }
 #cat_src{
     height:100%;
-    width:150px;
     background-color:#A7C4BD;
     border:0px;
     margin-right:-5px;
@@ -147,42 +120,33 @@ select > option{
     border:0px;
     width:100px;
     background-color: #A7C4BD;
+    cursor: pointer;
 }
 
 * { padding: 0; margin: 0; }
-
 /*END HEADER*/
 
 /*MAIN PAGE*/
 #main_page{
-
 }
 #menu {
-/*background-color:#DDD;*/
     background-color:white;
     width:220px;
     float: left;
 }
-
 #menu > ul >li{
-
     text-align:center;
     padding:8% 0%;
     height:20px;
     margin:5px;
-    /*background-color:#555;*/
     background-color:#A7C4BD;
+    border-radius: 5px;
 }
-
 .p_menu{
     font-weight:bold;
     font-size:14pt;
 }
-
-
-
 #page { 
-    /*background-color:#DDD;*/
     background-color:white;
     margin:10px 0px 0px 230px;
     padding:20px;
@@ -190,7 +154,6 @@ select > option{
 #footer { 
     margin-top:10px;
     clear: both;
-    /*background-color:#555;*/
     background-color:#D3DBD9;
     padding: 10px;
 }
@@ -198,18 +161,13 @@ select > option{
 /*END MAIN PAGE*/
 .clear { clear: both; background: none; }
 
-
-
 /*  ______________________
         STILE DOVE SIAMO
     ______________________
 */
-
 .static h1{
     color: black;
-    /*color:#0398CA;*/
 }
-
 #iframe{
     width:80%;
     height:600px;
@@ -220,16 +178,16 @@ select > option{
         STILE OFFERTA / AZIENDA / FAQ
     _______________________________________________
 */
-
 #elemento
 {
-    /*background-color: #8B9898;*/
     background-color: #A7C4BD;
     padding:20px;
     border-radius: 10px;
     margin-bottom: 15px;
 }
-
+#elemento.azienda{
+    height:270px;
+}
 .img_elem
 {
     height: 120px;
@@ -237,97 +195,85 @@ select > option{
     margin-top: 40px;
     float:left;
 }
-
 #tit
 {
     padding: 10px;
     height: 20px;
     width: 60%;
 }
-
 #tit.faq
 {
     padding: 2px;
     height: 20px;
     width: 100%;
 }
-
 h2 
 {
     color: #313837;
     font-size: 30px;
     margin-left: 130px;
 }
-
 h2.faq
 {
     color: #313837;
     font-size: 25px;
     margin-left: 0px;
 }
-
 #pricebox
 {
     text-align: right;
     float: right;
     margin: -30px 0px 0px 10px;
 }
-
 .price
 {
     font-size: 25px;
 }
-
 .discount
 {
     font-size: 20px;
 }
-
 #desc.promo, #desc.azienda
 {
     height: 150px;
-    margin: 35px 110px 0px 145px;
+    margin: 50px 110px 0px 145px;
 }
-#desc.promo, #desc.azienda{
-    margin: 35px 110px 0px 145px;
-}
-
 #desc
 {
     margin: 35px 0px 0px 10px;
 }
-
+#desc>p{
+    margin-top:10px;
+}
 #submit_buy
 {
     height:30px;
     width:100px;
     border:0px;
     margin-top: -30px;
-    /*
-    position: absolute;
-    */
     float: right;
+    cursor: pointer;
 }
 
 /* ________________________
         STILE PAGINATOR
 ___________________________
 */
-
 #flayer{
     margin:10px;
     width: 600px;
 }
-/***********************************qui********************************/
 #pagination {
     text-align :center;
-    /*background-color: #555;*/
     background-color: #829B95;
     border-radius: 5px;
+    padding:5px;
+}
+#pagination>a:link{
+    color: #D3DBD9;
 }
 
 #pagination a {
-    /*border-bottom:none*/
 }
 
 /* ________________________
@@ -339,44 +285,37 @@ ___________________________
     margin:10px;
     min-width: 600px;
 }
-
 #titol
 {
     text-align:left;
     padding: 10px;
     height: 50px;
 }
-
 #titol>h2 
 {
     color: #313837;
     font-size: 30px;
     margin-left:0px;
 }
-
 #prezz
 {
     align-content: center;
     margin-left: 100px;
     font-size: 25px;
 }
-
 #descrizione
 {
     margin: 20px 0px 0px 10px;
 }
-
 #btn_flayer
 {
     width: 500px;
     height: 30px;
 }
-
 .due
 {
     margin-top: 10px;
 }
-
 .ottieni{
     height:30px;
     width:150px;
@@ -388,7 +327,6 @@ ___________________________
         STILE ERRORI
 ___________________________
 */
-
 .formerror {
     background: none repeat scroll 0 0 #FFECEC;
     border: 3px solid #f93d00;
@@ -397,35 +335,24 @@ ___________________________
     margin: 0 0 1px;
     padding-left:7px;
 }
-
 .errors {
     color: #f93d00;
 }
-
 .errors ul {
-
     line-height: 100%;
-
     margin:10px;
     min-width: 600px;
 }
-
 .statsSelector{
     margin-bottom: 15px;
-
 }
-
-
 #titlePage, #visu, .divisoreOrd{
-
-
     padding-top: 15px;
     text-align: center;
     border-radius: 10px;
     width:100%;
     height: 40px;
     color: black;
-    /*background-color:#555;*/
     background-color:#829B95;
     margin-bottom: 15px;
 }
@@ -447,4 +374,3 @@ ___________________________
     height: 100%;
     margin-left:  15%;
 }
-
