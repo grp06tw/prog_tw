@@ -19,28 +19,28 @@
             </tr>
         </thead>
         <tbody id="bodymod">
-            <?php foreach ($this->righe as $utente) : ?>
+            <?php foreach ($this->righe as $promozione) : ?>
 
                 <tr>
-                    <td><?= $utente["Username"] ?></td>
-                    <td><?= $utente["nome"]?></td>
-                    <td><?= $utente["cognome"]?></td>
-                    <td><?= $utente["genere"] ?></td>
-                    <td><?= $utente["eta"] ?></td>
-                    <td><?= $utente["telefono"] ?></td>
-                    <td><?= $utente["indirizzo"] ?></td>
-                    <td><?= $utente["email"] ?></td>
-                    <td><?= $utente["role"] ?></td>
+                    <td><?= $promozione["Username"] ?></td>
+                    <td><?= $promozione["nome"]?></td>
+                    <td><?= $promozione["cognome"]?></td>
+                    <td><?= $promozione["genere"] ?></td>
+                    <td><?= $promozione["eta"] ?></td>
+                    <td><?= $promozione["telefono"] ?></td>
+                    <td><?= $promozione["indirizzo"] ?></td>
+                    <td><?= $promozione["email"] ?></td>
+                    <td><?= $promozione["role"] ?></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'admin',
                                         'action'     => 'popolateusr',
-                                        'ID' => $utente["ID_Utente"]
+                                        'ID' => $promozione["ID_Utente"]
                                         ), 
                                         'default',true);?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica?>></a></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'admin',
                                         'action'     => 'deleteusr',
-                                        'ID' => $utente["ID_Utente"]
+                                        'ID' => $promozione["ID_Utente"]
                                         ), 
                                         'default',true);?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina?>></a></td>
                 </tr>

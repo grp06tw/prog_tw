@@ -311,6 +311,8 @@ class PublicController extends Zend_Controller_Action {
     public function findAction($first = null) {
         $paged = 1;
         $ordine = null;
+        $aziende = $this->_catalogModel->getAziende();
+        $categorie = $this->_catalogModel->getCats();
         if ($first === null) {
             $paged = $this->_getParam('page', 1);
             $ordine = $this->_getParam('order', null);
@@ -320,6 +322,21 @@ class PublicController extends Zend_Controller_Action {
             if (!$trovate) {
                 $this->_helper->redirector('promo');
             }
+            
+            foreach ($trovate as $promo) {
+                foreach ($aziende as $a) {
+                    if ($promo["ID_Azienda"] == $a["ID_Azienda"]) {
+                        $promo["ID_Azienda"] = $a["nome"];
+                    }
+                }
+                foreach ($categorie as $cat) {
+                    if ($promo["ID_Categoria"] == $cat["ID_Categoria"]) {
+                        $promo["ID_Categoria"] = $cat["nome"];
+                    }
+                }
+            }
+            
+            
             $this->view->assign(array(
                 'trovate' => $trovate
                     )
@@ -330,11 +347,25 @@ class PublicController extends Zend_Controller_Action {
             $this->values["ID_Categoria"] = $this->_getParam('ID_Categoria', null);
             $this->values["words"] = $this->_getParam('words', null);
             $trovate = $this->_catalogModel->search($this->values, $paged, $ordine);
+            
+            foreach ($trovate as $promo) {
+                foreach ($aziende as $a) {
+                    if ($promo["ID_Azienda"] == $a["ID_Azienda"]) {
+                        $promo["ID_Azienda"] = $a["nome"];
+                    }
+                }
+                foreach ($categorie as $cat) {
+                    if ($promo["ID_Categoria"] == $cat["ID_Categoria"]) {
+                        $promo["ID_Categoria"] = $cat["nome"];
+                    }
+                }
+            }
+            
             $this->view->assign(array(
                 'trovate' => $trovate
                     )
             );
-
+            
             $this->view->assign(array('params' => array('ID_Categoria' => $this->values["ID_Categoria"], 'words' => $this->values["words"])));
             $this->render('search');
         }

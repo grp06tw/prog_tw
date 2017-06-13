@@ -9,6 +9,8 @@
                 <th>Prezzo</th>
                 <th>Sconto</th>
                 <th>Descrizione</th>
+                <th>Data Inizio</th>
+                <th>Data Fine</th>
                 <th>Immagine</th>
                 <th>Categoria</th>
                 <th>Azienda</th>
@@ -17,26 +19,28 @@
             </tr>
         </thead>
         <tbody id="bodymod">
-            <?php foreach ($this->righe as $utente) : ?>
+            <?php foreach ($this->righe as $promozione) : ?>
 
                 <tr>
-                    <td><?= $utente["titolo"] ?></td>
-                    <td><?= $utente["prezzo"].' €' ?></td>
-                    <td><?= $utente["sconto"].'%' ?></td>
-                    <td><?= $utente["descrizione"] ?></td>
-                    <td><?= $utente["immagine"] ?></td>
-                    <td><?= $this->categorie[$utente["ID_Promozione"]] ?></td>
-                    <td><?= $this->aziende[$utente["ID_Promozione"]] ?></td>
+                    <td><?= $promozione["titolo"] ?></td>
+                    <td><?= $promozione["prezzo"].' €' ?></td>
+                    <td><?= $promozione["sconto"].'%' ?></td>
+                    <td><?= $promozione["descrizione"] ?></td>
+                    <td><?= $promozione["inizio"] ?></td>
+                    <td><?= $promozione["fine"] ?></td>
+                    <td><?= $promozione["immagine"] ?></td>
+                    <td><?= $this->categorie[$promozione["ID_Promozione"]] ?></td>
+                    <td><?= $this->aziende[$promozione["ID_Promozione"]] ?></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'staff',
                                         'action'     => 'popolate',
-                                        'ID' => $utente["ID_Promozione"]
+                                        'ID' => $promozione["ID_Promozione"]
                                         ), 
                                         'default',true);?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica?>></a></td>
                     <td><a href="<?= $this->url(array(
                                         'controller' => 'staff',
                                         'action'     => 'delete',
-                                        'ID' => $utente["ID_Promozione"]
+                                        'ID' => $promozione["ID_Promozione"]
                                         ), 
                                         'default',true);?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina?>></a></td>
                 </tr>

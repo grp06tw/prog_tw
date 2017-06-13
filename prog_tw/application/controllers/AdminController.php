@@ -577,40 +577,4 @@ class AdminController extends Zend_Controller_Action {
             $app = $this->_adminModel->getUserData($id['Username']);
             $this->view->updatedataform = $this->populateUpdateDataForm($app->toArray());
     }
-    
-    //****************************************
-    //          VALIDAZIONI AJAX
-    //****************************************
-    public function validateazAction() {
-        $this->_helper->getHelper('layout')->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
-
-        $form = new Application_Form_Admin_Azienda_Add();
-        $response = $form->processAjax($_POST);
-        if ($response !== null) {
-            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
-        }
-    }
-    
-    public function validatecatAction() {
-        $this->_helper->getHelper('layout')->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
-
-        $form = new Application_Form_Admin_Categoria_Add();
-        $response = $form->processAjax($_POST);
-        if ($response !== null) {
-            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
-        }
-    }
-    
-    public function validatefaqAction() {
-        $this->_helper->getHelper('layout')->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
-
-        $form = new Application_Form_Admin_Faq_Add();
-        $response = $form->processAjax($_POST);
-        if ($response !== null) {
-            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
-        }
-    }
 }

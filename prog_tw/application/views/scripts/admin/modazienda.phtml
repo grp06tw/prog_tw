@@ -17,28 +17,28 @@
             </tr>
         </thead>
         <tbody id="bodymod">
-            <?php foreach ($this->righe as $utente) : ?>
+            <?php foreach ($this->righe as $promozione) : ?>
 
                 <tr>
-                    <td><?= $utente["nome"] ?></td>
-                    <td><?= $utente["ragione_sociale"] ?></td>
-                    <td><?= $utente["citta"] ?></td>
-                    <td><?= $utente["indirizzo"] ?></td>
-                    <td><?= $utente["descrizione"] ?></td>
-                    <td><?= $utente["logo"] ?></td>
-                    <td><?= $this->utente[$utente["ID_Azienda"]] ?></td>
+                    <td><?= $promozione["nome"] ?></td>
+                    <td><?= $promozione["ragione_sociale"] ?></td>
+                    <td><?= $promozione["citta"] ?></td>
+                    <td><?= $promozione["indirizzo"] ?></td>
+                    <td><?= $promozione["descrizione"] ?></td>
+                    <td><?= $promozione["logo"] ?></td>
+                    <td><?= $this->utente[$promozione["ID_Azienda"]] ?></td>
                     <td><a href="<?=
                         $this->url(array(
                             'controller' => 'admin',
                             'action' => 'popolateaz',
-                            'ID' => $utente["ID_Azienda"]
+                            'ID' => $promozione["ID_Azienda"]
                                 ), 'default', true);
                         ?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica ?>></a></td>
                     <td><a href="<?=
                         $this->url(array(
                             'controller' => 'admin',
                             'action' => 'deleteaz',
-                            'ID' => $utente["ID_Azienda"]
+                            'ID' => $promozione["ID_Azienda"]
                                 ), 'default', true);
                         ?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina ?>></a></td>
                 </tr>
