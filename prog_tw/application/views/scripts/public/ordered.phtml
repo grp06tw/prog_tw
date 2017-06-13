@@ -38,33 +38,45 @@
     <div class="divisoreOrd">
         <h3><?= $div['nome'] ?></h3>
     </div>
-    <?php $promozioni = $this->promo[$div['nome']];
-            foreach ($promozioni as $promo):?>
-    <div id="elemento">  
-        <div id="tit">
-            <h2> <?= $promo->titolo ?> </h2>
-        </div>
+    <?php
+    $promozioni = $this->promo[$div['nome']];
+    foreach ($promozioni as $promo):
+        ?>
+        <div id="elemento">  
+            <div id="tit">
+                <h2> <?= $promo->titolo ?> </h2>
+            </div>
 
-        <!-- prende il css dalla classe .img_promo-->
-        <?= $this->promoImg($promo->immagine) ?>
+            <!-- prende il css dalla classe .img_promo-->
+            <?= $this->promoImg($promo->immagine) ?>
 
-        <div id="pricebox">
+            <div id="pricebox">
 
-            <?= $this->Price($promo) ?>
+                <?= $this->Price($promo) ?>
 
-        </div>
+            </div>
 
-        <div id="desc" class="promo">
+            <div id="desc" class="promo">
 
-            <?= $promo->descrizione ?>
+                <p><?= $promo->descrizione ?></p>                 
+                <div id="az" class="promo">
 
-        </div>
+                    <p><?= 'Azienda: ' . $promo->ID_Azienda ?></p>
 
-        <?= $this->Ottieni($promo->ID_Promozione) ?>
+                </div>
 
-    </div> 
-    <!-- fine div della promozione-->
-<?php endforeach; ?>
+                <div id="cat" class="promo">
+
+                    <p><?= 'Categoria: ' . $promo->ID_Categoria ?></p>
+
+                </div>
+
+            </div>
+
+
+        </div> 
+        <!-- fine div della promozione-->
+    <?php endforeach; ?>
 <?php endforeach; ?>
 
 
