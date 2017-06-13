@@ -2,7 +2,7 @@
     <h3>Aziende</h3>
 </div>
 <?php foreach ($this->aziende as $az) : ?>
-    <div id="elemento">  
+    <div id="elemento" class="azienda">  
         <div id="tit">
             <h2> <?= $az->nome ?> </h2>
         </div>
@@ -13,8 +13,8 @@
         <div id="desc" class="azienda">
 
             <p><?= $az->descrizione ?></p>
-            <p><h4>Indirizzo:</h4> <?= $az->indirizzo ?></p>
-            <p><h4>Città: </h4><?= $az->citta ?></p>
+            <p><b>Indirizzo:</b> <?= $az->indirizzo ?></p>
+            <p><b>Città: </b><?= $az->citta ?></p>
 
         </div>
 
