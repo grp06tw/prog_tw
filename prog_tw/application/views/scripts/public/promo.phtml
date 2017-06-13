@@ -51,8 +51,16 @@
         <div id="desc" class="promo">
 
             <p><?= $promo->descrizione ?></p>
-            <p><?= '<b>Azienda: </b> &nbsp;' . $promo->ID_Azienda ?></p>
-            <p><?= '<b>Categoria: </b> &nbsp;' . $promo->ID_Categoria ?></p>
+            <div id="az" class="promo">
+
+                <p><?= '<h4>Azienda: </h4>' . $promo->ID_Azienda ?></p>
+
+            </div>
+            <div id="cat" class="promo">
+
+                <p><?= '<h4>Categoria: </h4>' . $promo->ID_Categoria ?></p>
+
+            </div>
         </div>
 
         <?= $this->Ottieni($promo->ID_Promozione) ?>

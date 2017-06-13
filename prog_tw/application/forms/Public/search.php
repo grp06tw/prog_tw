@@ -33,7 +33,6 @@ class Application_Form_Public_Search extends App_Form_Abstract {
             'filters' => array('StringTrim', 'StringToLower'),
             'id' => 'desc_src',
             'placeholder' => 'Cerca',
-            'autofocus' => 'autofocus',
             'filters' => array('StringTrim'),
             'decorators' => $this->searchDecorators
         ));

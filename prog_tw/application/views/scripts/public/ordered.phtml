@@ -10,8 +10,13 @@ $(function()
     $('div#elemento').slideToggle();
 
         $('div.divisoreOrd').on('click', function(){
-            $('div#elemento').hide('slow');
-            $(this).parent().find('div#elemento').slideToggle();
+            if($(this).parent().find('div#elemento').is(':hidden')){
+                $('div#elemento').hide('slow');
+                $(this).parent().find('div#elemento').slideToggle();
+            }
+            else{
+                $(this).parent().find('div#elemento').hide('slow');
+            }
             
     });
 

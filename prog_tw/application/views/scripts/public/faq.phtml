@@ -1,3 +1,31 @@
+<?php
+$this->headScript()
+        ->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+        ->appendFile($this->baseUrl('js/functions.js'))
+        ->captureStart()
+?>
+
+$(function()
+{
+    $('div#desc').slideToggle();
+    
+    
+        $('div#elemento').on('click', function(){
+        
+        if($(this).find('div#desc').is(':hidden')){
+                $('div#desc').hide('slow');
+                $(this).find('div#desc').slideToggle();
+            }
+            else{
+                $(this).parent().find('div#desc').hide('slow');
+            }           
+    });
+
+});
+
+<?php $this->headScript()->captureEnd() ?>
+
+
 <div id="titlePage">
     <h3>Faq</h3>
 </div>
@@ -6,7 +34,6 @@
         <div id="tit" class="faq">
             <h2 class="faq"> <?= $cat->domanda ?> </h2>
         </div>
-
         <div id="desc">
 
             <?= $cat->risposta ?>

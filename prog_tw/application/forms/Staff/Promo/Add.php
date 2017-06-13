@@ -47,19 +47,18 @@ class Application_Form_Staff_Promo_Add extends App_Form_Abstract {
             'decorators' => $this->elementDecorators,
         ));
 //INIZIO
-        /*   $this->addElement('date', 'inizio',array(
-          'label' => 'Data Inizio',
-          'required' => true,
-          'value' => '2017-06-01'
-
-
-          ));
-          //FINE
-          $this->addElement('date', 'inizio',array(
-          'label' => 'Data Inizio',
-          'required' => true,
-          'min' => $this->inizio->value
-          )); */
+        $this->addElement('text', 'inizio', array(
+            'label' => 'Data Inizio',
+            'required' => true,
+            'decorators' => $this->elementDecorators,
+        ));
+        //FINE
+        $this->addElement('text', 'fine', array(
+        'label' => 'Data Fine',
+        'required' => true,
+        'min' => $this->inizio->value,
+        'decorators' => $this->elementDecorators,
+        ));
 //DESCRIZIONE
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
