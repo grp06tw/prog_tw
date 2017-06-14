@@ -75,7 +75,7 @@ class Application_Model_Catalog extends App_Model_Abstract {
             $coupon["ID_Utente"] = $iduser;
             $this->getResource('Coupon')->insertCoupon($coupon); //query inserimento nuovo coupon
             $risposta = $this->getResource('Coupon')->getCouponById($iduser, $idpromo); //query per prendere l'idCoupon inserito con l'autoincrement
-            return array('coupon'=>$risposta); //ritorna il record completo del coupon
+            return array('coupon'=>$risposta,'doppio'=>0); //ritorna il record completo del coupon
         } else {
             return array('coupon'=>$q,'doppio'=>1);
             //qui dovrei mettere return il coupon che già è stato emesso per visualizzarlo

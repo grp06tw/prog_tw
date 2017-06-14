@@ -32,17 +32,12 @@ $(function()
         <h2> Sconto per: <?= $this->promo["titolo"] ?> </h2>
     </div>
     <p>
-        <?= $this->utente["nome"] . "<br>" . $this->utente["cognome"] ?> hai ottenuto il seguente sconto:
+        <?= $this->utente["nome"] . "<br>" . $this->utente["cognome"]. "<br>" ?> hai ottenuto il seguente sconto:
     </p>
     <div id="prezz">
 
-        <p> <?= $this->promo->getPrice($this->promo["sconto"]) ?> </p>
-        <p>
-            <del>
-                <?= $this->promo["prezzo"] ?>
-            </del>
-            <br><?= $this->promo["sconto"] ?>%            </p>
-
+        <p> <?= $this->Price($this->promo) ?> </p>
+        
     </div>
 
     <div id="descrizione">

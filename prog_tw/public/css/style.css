@@ -292,6 +292,9 @@ ___________________________
         STILE COUPON
 ___________________________
 */
+#wrapperFlyer{
+    background-color: white;
+}
 
 #flayer{
     margin:10px;
@@ -319,8 +322,9 @@ ___________________________
 {
     margin: 20px 0px 0px 10px;
 }
-#btn_flayer
+.btn_flayer
 {
+    margin-bottom: 5px;
     width: 500px;
     height: 30px;
 }
