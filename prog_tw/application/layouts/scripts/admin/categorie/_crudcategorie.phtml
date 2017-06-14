@@ -2,27 +2,30 @@
     <ul>
         <!INDIETRO>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'index',
-                                        ), 
-                                        'default',true);?>" title="Torna alla home di area riservata">Indietro	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'index',
+                    ), 'default', true);
+            ?>" title="Torna alla home di area riservata"><p class="p_menu">Indietro	</p></a>
         </li>
         <!Aggiungi Categoria>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'newcategoria',
-                                        ), 
-                                        'default',true);?>" title="Aggiungi una nuova Categoria">Aggiungi Categoria	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'newcategoria',
+                    ), 'default', true);
+            ?>" title="Aggiungi una nuova Categoria"><p class="p_menu">Aggiungi Categoria	</p></a>
         </li>
         <!Modifica Categoria>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'modcategoria',
-                                        ), 
-                                        'default',true);?>" title="Modifica una Categoria">Modifica Categoria	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'modcategoria',
+                    ), 'default', true);
+            ?>" title="Modifica una Categoria"><p class="p_menu">Modifica Categoria	</p></a>
         </li>
 
 

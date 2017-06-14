@@ -2,81 +2,80 @@
     <ul>
         <!HOME>
         <li>
-            <p class="p_menu"><a href="<?=
-                $this->url(array(
-                    'controller' => 'public',
-                    'action' => 'promo',
-                    'logged' => 'admin'
-                        ), 'default', true);
-                ?>" title="Home">Home	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'public',
+                'action' => 'promo',
+                'logged' => 'admin'
+                    ), 'default', true);
+            ?>" title="Home"><p class="p_menu">Home	</p></a>
         </li>
         <!CRUD AZIENDE>
         <li>
-            <p class="p_menu"><a href="<?=
-                $this->url(array(
-                    'controller' => 'admin',
-                    'action' => 'aziende',
-                        ), 'default', true);
-                ?>" title="Gestisci Aziende">Gestisci Aziende	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'aziende',
+                    ), 'default', true);
+            ?>" title="Gestisci Aziende"><p class="p_menu">Gestisci Aziende</p></a>
         </li>
         <!CRUD CATEGORIE>
         <li>
-            <p class="p_menu"><a href="<?=
-                $this->url(array(
-                    'controller' => 'admin',
-                    'action' => 'categorie',
-                        ), 'default', true);
-                ?>" title="Gestisci Categorie">Gestisci Categorie	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'categorie',
+                    ), 'default', true);
+            ?>" title="Gestisci Categorie"><p class="p_menu">Gestisci Categorie	</p></a>
         </li>
 
         <!CRUD UTENTI>
         <li>
-            <p class="p_menu"><a href="<?=
-                $this->url(array(
-                    'controller' => 'admin',
-                    'action' => 'utenti',
-                        ), 'default', true);
-                ?>" title="Gestisci Utenti">Gestisci Utenti	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'utenti',
+                    ), 'default', true);
+            ?>" title="Gestisci Utenti"><p class="p_menu">Gestisci Utenti	</p></a>
         </li>
 
         <!CRUD FAQ>
         <li>
-            <p class="p_menu"><a href="<?=
-                $this->url(array(
-                    'controller' => 'admin',
-                    'action' => 'faq',
-                        ), 'default', true);
-                ?>" title="Gestisci Faq">Gestisci FAQ	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'faq',
+                    ), 'default', true);
+            ?>" title="Gestisci Faq"><p class="p_menu">Gestisci FAQ	</p></a>
         </li>
 
         <!STATISTICHE>
         <li>
-            <p class="p_menu"><a href="<?=
-                $this->url(array(
-                    'controller' => 'admin',
-                    'action' => 'stats',
-                        ), 'default', true);
-                ?>" title="Accedi alle Statistiche">Statistiche	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'stats',
+                    ), 'default', true);
+            ?>" title="Accedi alle Statistiche"><p class="p_menu">Statistiche	</p></a>
         </li>
         <!PROFILO>
         <li>
-            <p class="p_menu"><a href="<?=
-                $this->url(array(
-                    'controller' => 'admin',
-                    'action' => 'retrieve',
-                        ), 'default', true);
-                ?>" title="Modifica il tuo Profilo">Il tuo Profilo		</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'retrieve',
+                    ), 'default', true);
+            ?>" title="Modifica il tuo Profilo"><p class="p_menu">Il tuo Profilo		</p></a>
         </li>
         <!LOGOUT>
         <li>
-            <p class="p_menu"><a href="<?=
-                                 $this->url(array(
-                                     'controller' => 'admin',
-                                     'action' => 'logout',
-                                         ), 'default', true);
-                                 ?>" title="Fai il logout">Logout		</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'logout',
+                    ), 'default', true);
+            ?>" title="Fai il logout"><p class="p_menu">Logout		</p></a>
         </li>
-
 
     </ul>
 </div>
