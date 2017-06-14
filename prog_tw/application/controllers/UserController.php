@@ -1,7 +1,5 @@
 <?php
 
-require_once APPLICATION_PATH . '/services/Webthumbnail.php';
-
 class UserController extends Zend_Controller_Action {
 
     private $_authService;
@@ -35,7 +33,7 @@ class UserController extends Zend_Controller_Action {
         $idPromo = $this->_getParam('idPromo');
         $idUtente = $this->_getParam('idUtente');
         $risposta = $this->_catalogModel->reach($idUtente, $idPromo);
-        if ($risposta == null) {
+        if ($risposta['doppio'] == 1) {
             $doppio = "si";
             //messaggio di errore che quel coupon è già stato acquisito
         } else {
@@ -50,29 +48,11 @@ class UserController extends Zend_Controller_Action {
         $this->view->assign(array('coupon',
             'promo' => $promozione,
             'utente' => $utente,
-            'coupon' => $risposta,
+            'coupon' => $risposta['coupon'],
             'azienda' => $azienda,
             'categoria' => $categoria,
             'doppio' => $doppio));
         $this->render('coupon');
-
-//       if ($this->getParam('stampa')) {
-//            $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-//            $path = tempnam('', 'webthumbnail-');
-//            $thumb = new Webthumbnail('www.google.it');
-//            $thumb
-//                    ->setWidth(320)
-//                    ->setHeight(240)
-//                    ->setScreen(1280)
-//                    ->captureToOutput();
-//            ->captureToFile($path);
-//            @chmod($path, 0644);
-//            echo "Your thumbnail has been saved to " . $path;
-//        }
-    }
-
-    public function salvacouponAction() {
-        
     }
 
     //****************************************

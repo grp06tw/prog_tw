@@ -40,7 +40,7 @@ class Application_Model_Catalog extends App_Model_Abstract {
     public function getPromsByCat($catId, $paged = null, $order = null) {
         return $this->getResource('Promozione')->getPromsByCat($catId, $paged, $order);
     }
-    
+
     public function getPromsByAz($azId, $paged = null, $order = null) {
         return $this->getResource('Promozione')->getPromsByAz($azId, $paged, $order);
     }
@@ -75,13 +75,15 @@ class Application_Model_Catalog extends App_Model_Abstract {
             $coupon["ID_Utente"] = $iduser;
             $this->getResource('Coupon')->insertCoupon($coupon); //query inserimento nuovo coupon
             $risposta = $this->getResource('Coupon')->getCouponById($iduser, $idpromo); //query per prendere l'idCoupon inserito con l'autoincrement
-            return $risposta; //ritorna il record completo del coupon
-        }
-        else
-        {
-            return 0;
+            return array('coupon'=>$risposta); //ritorna il record completo del coupon
+        } else {
+            return array('coupon'=>$q,'doppio'=>1);
             //qui dovrei mettere return il coupon che già è stato emesso per visualizzarlo
         }
+    }
+
+    public function getCouponById($iduser, $idpromo) {
+        return$this->getResource('Coupon')->getCouponById($iduser, $idpromo);
     }
 
 //PRENDI PROMO BY ID, UTENTE BY ID, AZIENDA PER ID PER STAMPARE IL FLAYER

@@ -1,3 +1,31 @@
+<?php
+$this->headScript()
+        ->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+        ->appendFile($this->baseUrl('js/functions.js'))
+        ->captureStart()
+?>
+
+$(function()
+{
+    $('div#stampa').on('click', function(event){
+
+        $('div#doppio').hide();
+        $('div.btn_flayer').hide();
+        
+        window.print();    
+        
+        $('div.btn_flayer').show();
+        $('div#doppio').show();
+    });
+
+   
+
+
+});
+
+<?php $this->headScript()->captureEnd() ?>
+
+
 <div id="flayer">	
 
     <div id="titol">
@@ -37,17 +65,18 @@
         <img src=<?= $this->logo ?>>
     </p>
 
-    <div id="btn_flayer">
-        <?= $this->SalvaCoupon() ?>
+    <div class="btn_flayer" id="stampa">
+        <input type="submit" value="Stampa" class="ottieni">
     </div>
-    <div id="btn_flayer" class="due">
+
+  
+    <div class="btn_flayer" class="due">
         <?= $this->Continua() ?>
     </div>
-    
-    <?php
-    if($this->doppio=="si"):?>
-    <p>
-        <br>Attenzione! Hai già acquisito questo coupon, potrai usufruirne una sola volta!
+
+    <?php if ($this->doppio == "si"): ?>
+        <p>
+        <br><div id="doppio">Attenzione! Hai già acquisito questo coupon, potrai usufruirne una sola volta!</div>
     </p>
-    <?php endif; ?>
+<?php endif; ?>
 </div>    
