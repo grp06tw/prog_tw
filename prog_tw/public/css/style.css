@@ -42,6 +42,15 @@ a:hover, a:active {
     text-decoration: underline overline;
     color: white;
 }
+#titlog{
+    margin-left:40px;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.login>a:hover, .login>a:active,
+.statsSelector a:hover, .statsSelector a:active{
+    color: #7d8e8a;
+}
 input,select{	
     color: black;
     font-weight:bold;
@@ -152,10 +161,13 @@ select > option{
     padding:20px;
 }
 #footer { 
-    margin-top:10px;
+    margin: 10px 0px 5px -2px;
     clear: both;
     background-color:#D3DBD9;
     padding: 10px;
+    position: absolute;
+    width: 97%;
+    text-align: center;
 }
 
 /*END MAIN PAGE*/
@@ -373,4 +385,9 @@ ___________________________
 #visStandard{
     height: 100%;
     margin-left:  15%;
+}
+
+/*** STYLE SUBMIT FORM ****/
+form .button>input{
+    padding:5px;
 }
