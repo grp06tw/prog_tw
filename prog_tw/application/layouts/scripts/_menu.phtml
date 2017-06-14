@@ -2,65 +2,59 @@
     <ul>
         <!HOME>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'public',
-                'action' => 'index',
-                    ), 'default', true);
-            ?>" title="Promozioni"><p class="p_menu">Promozioni	</p></a>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'index',
+                                        ), 
+                                        'default',true);?>" title="Promozioni">Promozioni	</a></p>
         </li>
         <!AZIENDE>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'public',
-                'action' => 'aziende',
-                    ), 'default', true);
-            ?>" title="Aziende"><p class="p_menu">Aziende	</p></a>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'aziende',                                    
+                                        ), 
+                                        'default',true);?>" title="Aziende">Aziende	</a></p>
         </li>
         <!CHI SIAMO>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'public',
-                'action' => 'viewstatic',
-                'staticPage' => 'who'), 'default', true
-            );
-            ?>" title="Chi Siamo"><p class="p_menu">Chi Siamo	</p></a>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                            'controller' => 'public',
+                            'action'     => 'viewstatic',
+                            'staticPage' => 'who'), 
+                            'default',true
+                            ); ?>" title="Chi Siamo">Chi Siamo	</a></p>
         </li>
         <!DOVE SIAMO>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'public',
-                'action' => 'viewstatic',
-                'staticPage' => 'where'), 'default', true
-            );
-            ?>" title="Dove Siamo"><p class="p_menu">Dove Trovarci	</p></a>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                            'controller' => 'public',
+                            'action'     => 'viewstatic',
+                            'staticPage' => 'where'), 
+                            'default',true
+                            ); ?>" title="Dove Siamo">Dove Trovarci	</a></p>
         </li>
         <!CONTATTACI>
         <li>
-            <a href="mailto:s1071182@studenti.univpm.it" title="Contatti"><p class="p_menu">Contattaci</p></a>
+            <p class="p_menu"><a href="mailto:s1071182@studenti.univpm.it" title="Contatti">Contattaci</a></p>
         </li>
-        <!FAQ>
+         <!FAQ>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'public',
-                'action' => 'faq',
-                    ), 'default', true);
-            ?>" title="FAQ"><p class="p_menu">FAQ		</p></a>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'faq',                                    
+                                        ), 
+                                        'default',true);?>" title="FAQ">FAQ		</a></p>
         </li>
-
-
+        
+       
         <!LOGIN>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'public',
-                'action' => 'login',
-                    ), 'default', true);
-            ?>" title="Accedi al sito"><p class="p_menu">Login		</p>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'login',                                    
+                                        ), 
+                                        'default',true);?>" title="Accedi al sito">Login		</a></p>
         </li>
     </ul>
 </div>

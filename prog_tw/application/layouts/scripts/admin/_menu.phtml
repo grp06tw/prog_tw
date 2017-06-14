@@ -2,83 +2,83 @@
     <ul>
         <!HOME>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'public',
-                'action' => 'promo',
-                    ), 'default', true);
-            ?>" title="Promozioni"><p class="p_menu">Promozioni	</p></a>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'promo',
+                         ), 'default', true);
+                ?>" title="Promozioni">Promozioni	</a></p>
         </li>
-
+        
         <!AZIENDE>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'public',
-                'action' => 'aziende',
-                    ), 'default', true);
-            ?>" title="Aziende"><p class="p_menu">Aziende	</p></a>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'aziende',
+                        ), 'default', true);
+                ?>" title="Aziende">Aziende	</a></p>
         </li>
-
+        
         <!CHI SIAMO>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'public',
-                'action' => 'viewstatic',
-                'staticPage' => 'who',
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'viewstatic',
+                    'staticPage' => 'who',
                     ), 'default', true
-            );
-            ?>" title="Chi Siamo"><p class="p_menu">Chi Siamo	</p></a>
+                );
+                ?>" title="Chi Siamo">Chi Siamo	</a></p>
         </li>
-
+        
         <!DOVE SIAMO>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'public',
-                'action' => 'viewstatic',
-                'staticPage' => 'where',
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'viewstatic',
+                    'staticPage' => 'where',
                     ), 'default', true
-            );
-            ?>" title="Dove Siamo"><p class="p_menu">Dove Trovarci	</p></a>
+                );
+                ?>" title="Dove Siamo">Dove Trovarci	</a></p>
         </li>
-
+        
         <!CONTATTACI>
         <li>
-            <a href="mailto:s1071182@studenti.univpm.it" title="Contatti"><p class="p_menu">Contattaci</p></a>
+            <p class="p_menu"><a href="mailto:s1071182@studenti.univpm.it" title="Contatti">Contattaci</a></p>
         </li>
-
+        
         <!FAQ>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'public',
-                'action' => 'faq',
-                    ), 'default', true);
-            ?>" title="FAQ"><p class="p_menu">FAQ		</p></a>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'public',
+                    'action' => 'faq',
+                        ), 'default', true);
+                ?>" title="FAQ">FAQ		</a></p>
         </li>   
 
-
-
+        
+        
         <!AREA RISERVATA>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'admin',
-                'action' => 'index',
-                    ), 'default', true);
-            ?>" title="Accedi all'area riservata"><p class="p_menu">Area Riservata		</p></a>
+            <p class="p_menu"><a href="<?=
+                $this->url(array(
+                    'controller' => 'admin',
+                    'action' => 'index',
+                        ), 'default', true);
+                ?>" title="Accedi all'area riservata">Area Riservata		</a></p>
         </li>
-
+        
         <!LOGOUT>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'admin',
-                'action' => 'logout',
-                    ), 'default', true);
-            ?>" title="Fai il logout"><p class="p_menu">Logout		</p></a>
+            <p class="p_menu"><a href="<?=
+                                 $this->url(array(
+                                     'controller' => 'admin',
+                                     'action' => 'logout',
+                                         ), 'default', true);
+                                 ?>" title="Fai il logout">Logout		</a></p>
         </li>
     </ul>
 </div>

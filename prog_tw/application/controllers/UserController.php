@@ -1,7 +1,5 @@
 <?php
 
-require_once APPLICATION_PATH . '/services/Webthumbnail.php';
-
 class UserController extends Zend_Controller_Action {
 
     private $_authService;
@@ -55,24 +53,6 @@ class UserController extends Zend_Controller_Action {
             'categoria' => $categoria,
             'doppio' => $doppio));
         $this->render('coupon');
-
-//       if ($this->getParam('stampa')) {
-//            $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-//            $path = tempnam('', 'webthumbnail-');
-//            $thumb = new Webthumbnail('www.google.it');
-//            $thumb
-//                    ->setWidth(320)
-//                    ->setHeight(240)
-//                    ->setScreen(1280)
-//                    ->captureToOutput();
-//            ->captureToFile($path);
-//            @chmod($path, 0644);
-//            echo "Your thumbnail has been saved to " . $path;
-//        }
-    }
-
-    public function salvacouponAction() {
-        
     }
 
     //****************************************
@@ -106,9 +86,9 @@ class UserController extends Zend_Controller_Action {
         $app = $this->_userModel->getUserData($id['Username']);
         $this->view->updatedataform = $this->populateUpdateDataForm($app->toArray());
     }
-
+    
     //VALIDAZIONE AJAX
-
+    
     public function validateuserAction() {
         $this->_helper->getHelper('layout')->disableLayout();
         $this->_helper->viewRenderer->setNoRender();

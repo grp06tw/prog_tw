@@ -2,30 +2,27 @@
     <ul>
         <!INDIETRO>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'admin',
-                'action' => 'index',
-                    ), 'default', true);
-            ?>" title="Torna alla home di area riservata"><p class="p_menu">Indietro	</p></a>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'index',
+                                        ), 
+                                        'default',true);?>" title="Torna alla home di area riservata">Indietro	</a></p>
         </li>
         <!Aggiungi Utente>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'admin',
-                'action' => 'newutente',
-                    ), 'default', true);
-            ?>" title="Aggiungi una nuova Utente"><p class="p_menu">Aggiungi Utente	</p></a>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'newutente',
+                                        ), 
+                                        'default',true);?>" title="Aggiungi una nuova Utente">Aggiungi Utente	</a></p>
         </li>
         <!Modifica Utente>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'admin',
-                'action' => 'modutente',
-                    ), 'default', true);
-            ?>" title="Modifica una Utente"><p class="p_menu">Modifica Utente	</p></a>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'modutente',
+                                        ), 
+                                        'default',true);?>" title="Modifica una Utente">Modifica Utente	</a></p>
         </li>
 
 

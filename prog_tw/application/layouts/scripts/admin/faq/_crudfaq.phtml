@@ -2,30 +2,27 @@
     <ul>
         <!INDIETRO>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'admin',
-                'action' => 'index',
-                    ), 'default', true);
-            ?>" title="Torna alla home di area riservata"><p class="p_menu">Indietro	</p></a>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'index',
+                                        ), 
+                                        'default',true);?>" title="Torna alla home di area riservata">Indietro	</a></p>
         </li>
         <!Aggiungi FAQ>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'admin',
-                'action' => 'newfaq',
-                    ), 'default', true);
-            ?>" title="Aggiungi una nuova FAQ"><p class="p_menu">Aggiungi FAQ	</p></a>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'newfaq',
+                                        ), 
+                                        'default',true);?>" title="Aggiungi una nuova FAQ">Aggiungi FAQ	</a></p>
         </li>
         <!Modifica FAQ>
         <li>
-            <a href="<?=
-            $this->url(array(
-                'controller' => 'admin',
-                'action' => 'modfaq',
-                    ), 'default', true);
-            ?>" title="Modifica una FAQ"><p class="p_menu">Modifica FAQ	</p></a>
+            <p class="p_menu"><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'modfaq',
+                                        ), 
+                                        'default',true);?>" title="Modifica una FAQ">Modifica FAQ	</a></p>
         </li>
 
 

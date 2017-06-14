@@ -2,42 +2,42 @@
     <ul>
         <!HOME>
         <li>
-            <a href="<?=
+            <p class="p_menu"><a href="<?=
                 $this->url(array(
                     'controller' => 'public',
                     'action' => 'promo',
                     'logged' => 'staff'
                         ), 'default', true);
-                ?>" title="Home"><p class="p_menu">Home	</p></a>
+                ?>" title="Home">Home	</a></p>
         </li>
         <!Aggiungi Promozione>
         <li>
-            <a href="<?=
+            <p class="p_menu"><a href="<?=
                 $this->url(array(
                     'controller' => 'staff',
                     'action' => 'newpromo',
                         ), 'default', true);
-                ?>" title="Aggiungi una nuova Promozione"><p class="p_menu">Aggiungi Promozione	</p></a>
+                ?>" title="Aggiungi una nuova Promozione">Aggiungi Promozione	</a></p>
         </li>
         <!Modifica Promozione>
         <li>
-            <a href="<?=
+            <p class="p_menu"><a href="<?=
                 $this->url(array(
                     'controller' => 'staff',
                     'action' => 'modpromo',
                         ), 'default', true);
-                ?>" title="Modifica una Promozione"><p class="p_menu">Modifica Promozione	</p></a>
+                ?>" title="Modifica una Promozione">Modifica Promozione	</a></p>
 
         </li>
 
         <!PROFILO>
         <li>
-            <a href="<?=
+            <p class="p_menu"><a href="<?=
                                  $this->url(array(
                                      'controller' => 'staff',
                                      'action' => 'retrieve',
                                          ), 'default', true);
-                                 ?>" title="Modifica il tuo Profilo"><p class="p_menu">Il tuo Profilo		</p></a>
+                                 ?>" title="Modifica il tuo Profilo">Il tuo Profilo		</a></p>
         </li>
 
     </ul>
