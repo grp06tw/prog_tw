@@ -2,27 +2,30 @@
     <ul>
         <!INDIETRO>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'index',
-                                        ), 
-                                        'default',true);?>" title="Torna alla home di area riservata">Indietro	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'index',
+                    ), 'default', true);
+            ?>" title="Torna alla home di area riservata"><p class="p_menu">Indietro	</p></a>
         </li>
         <!Aggiungi Utente>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'newutente',
-                                        ), 
-                                        'default',true);?>" title="Aggiungi una nuova Utente">Aggiungi Utente	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'newutente',
+                    ), 'default', true);
+            ?>" title="Aggiungi una nuova Utente"><p class="p_menu">Aggiungi Utente	</p></a>
         </li>
         <!Modifica Utente>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'modutente',
-                                        ), 
-                                        'default',true);?>" title="Modifica una Utente">Modifica Utente	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'modutente',
+                    ), 'default', true);
+            ?>" title="Modifica una Utente"><p class="p_menu">Modifica Utente	</p></a>
         </li>
 
 
