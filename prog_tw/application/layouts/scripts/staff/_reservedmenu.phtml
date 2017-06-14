@@ -39,6 +39,16 @@
                                          ), 'default', true);
                                  ?>" title="Modifica il tuo Profilo"><p class="p_menu">Il tuo Profilo		</p></a>
         </li>
+        
+        <!LOGOUT>
+        <li>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'user',
+                'action' => 'logout',
+                    ), 'default', true);
+            ?>" title="Fai il logout"><p class="p_menu">Logout		</p></a>
+        </li>
 
     </ul>
 </div>

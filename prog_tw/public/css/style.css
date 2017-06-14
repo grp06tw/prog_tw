@@ -42,7 +42,7 @@ a:hover, a:active {
     text-decoration: underline overline;
     color: white;
 }
-#titlog{
+#titsign{
     margin-left:40px;
     font-size: 30px;
     margin-bottom: 20px;
@@ -180,6 +180,9 @@ select > option{
 .static h1{
     color: black;
 }
+.frame{
+    text-align: center;
+}
 #iframe{
     width:80%;
     height:600px;
@@ -295,7 +298,6 @@ ___________________________
 #wrapperFlyer{
     background-color: white;
 }
-
 #flayer{
     margin:10px;
     min-width: 600px;

@@ -16,14 +16,13 @@ $(function()
 
 <?php $this->headScript()->captureEnd() ?>
 
-<h3>login</h3>
-<p>Utilizza questa form per l'autenticazione</p>
+<h3 id="titsign">Login</h3>
 <br>
 
 <?= $this->loginForm; ?>
 
 <br>
-<p>Se non sei registrato
+<div class="login">Se non sei registrato
 
     <a href="<?=
     $this->url(array(
@@ -31,4 +30,4 @@ $(function()
         'action' => 'signin',
             ), 'default', true);
     ?>" title="Registrati">REGISTRATI</a>
-</p>
+</div>
