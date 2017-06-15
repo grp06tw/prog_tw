@@ -55,9 +55,9 @@ input,select{
     color: black;
     font-weight:bold;
 }
-input#login{
+/*input#login{
     padding:2px 5px;
-}
+}*/
 select > option{
     font-weight:normal;
 }
@@ -115,6 +115,7 @@ select > option{
     border:0px;
     margin-right:-5px;
     padding:10px;
+    cursor: pointer;
 }
 #desc_src{
     padding-left:20px;
@@ -233,6 +234,7 @@ h2.faq
     color: #313837;
     font-size: 25px;
     margin-left: 0px;
+    cursor: pointer;
 }
 #pricebox
 {
@@ -396,4 +398,5 @@ ___________________________
 /*** STYLE SUBMIT FORM ****/
 form .button>input{
     padding:5px;
+    cursor: pointer;
 }
