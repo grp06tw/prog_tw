@@ -45,7 +45,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $this->_view->headMeta()->appendHttpEquiv('Content-Language', 'it-IT');
         //$this->_view->headLink()->appendStylesheet('/css/style.css');
         $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/style.css'));
-        $this->_view->headTitle('123Cupon!');
+        $this->_view->headTitle('123Coupon!');
 
         $this->view->assign(array('logo' => $this->view->baseUrl('css/img/logo.png')));
     }
