@@ -79,7 +79,8 @@ class StaffController extends Zend_Controller_Action {
         //UPDATE
         if (!isset($values['immagine'])) {
             $id = $this->_getParam('ID');
-            $values['immagine'] = $this->_staffModel->getPromoById($id)['immagine'];
+            $app =$this->_staffModel->getPromoById($id);
+            $values['immagine'] = $app['immagine'];
         }
         $this->_staffModel->updatePromo($values);
         $this->_helper->redirector('modpromo');
