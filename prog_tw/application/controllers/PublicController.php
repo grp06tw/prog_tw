@@ -14,7 +14,6 @@ class PublicController extends Zend_Controller_Action {
         //creo un istanza del model che userò per la visualizzazione delle promozioni-aziende etc
         //questo model contiene tutte le query dell'area pubblica
         $this->_catalogModel = new Application_Model_Catalog();
-
         $this->_authService = new Application_Service_Auth();
 
         //imposto come layouy il file main.phtml
@@ -35,6 +34,8 @@ class PublicController extends Zend_Controller_Action {
         //recupero la form per la ricerca delle promozioni e per la registrazione
         $this->view->signinForm = $this->getSigninForm();
         $this->view->searchForm = $this->getSearchForm();
+        
+       
     }
 
     public function indexAction() {
