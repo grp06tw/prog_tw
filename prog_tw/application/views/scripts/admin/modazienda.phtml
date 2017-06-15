@@ -17,28 +17,28 @@
             </tr>
         </thead>
         <tbody id="bodymod">
-            <?php foreach ($this->righe as $promozione) : ?>
+            <?php foreach ($this->righe as $azienda) : ?>
 
                 <tr>
-                    <td><?= $promozione["nome"] ?></td>
-                    <td><?= $promozione["ragione_sociale"] ?></td>
-                    <td><?= $promozione["citta"] ?></td>
-                    <td><?= $promozione["indirizzo"] ?></td>
-                    <td><?= $promozione["descrizione"] ?></td>
-                    <td><?= $promozione["logo"] ?></td>
-                    <td><?= $this->utente[$promozione["ID_Azienda"]] ?></td>
+                    <td><?= $azienda["nome"] ?></td>
+                    <td><?= $azienda["ragione_sociale"] ?></td>
+                    <td><?= $azienda["citta"] ?></td>
+                    <td><?= $azienda["indirizzo"] ?></td>
+                    <td><?= $azienda["descrizione"] ?></td>
+                    <td><?= $azienda["logo"] ?></td>
+                    <td><?=  $this->utenti[$azienda["ID_Azienda"]] ?></td>
                     <td><a href="<?=
                         $this->url(array(
                             'controller' => 'admin',
                             'action' => 'popolateaz',
-                            'ID' => $promozione["ID_Azienda"]
+                            'ID' => $azienda["ID_Azienda"]
                                 ), 'default', true);
                         ?>" title="Modifica"><img class="img_mod" src=<?= $this->modifica ?>></a></td>
                     <td><a href="<?=
                         $this->url(array(
                             'controller' => 'admin',
                             'action' => 'deleteaz',
-                            'ID' => $promozione["ID_Azienda"]
+                            'ID' => $azienda["ID_Azienda"]
                                 ), 'default', true);
                         ?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina ?>></a></td>
                 </tr>

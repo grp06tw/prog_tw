@@ -84,6 +84,7 @@ class StaffController extends Zend_Controller_Action {
     public function popolateAction() {
         if ($id = $this->_getParam('ID')) {
             $app = $this->_staffModel->getPromoById($id);
+            $this->view->assign(array('img' => $app['logo']));
             $this->view->updatepromoForm = $this->getUpdatePromoForm($app->toArray());
         }
     }

@@ -5,16 +5,18 @@
 
 $(function()
 {
-	var actionUrl='<?= $this->url(array('controller' => 'admin', 'action' => 'validateaz',), 'default'); ?>';
+        var actionUrl='<?= $this->url(array('controller' => 'admin', 'action' => 'validateaz',), 'default'); ?>';
 	var formName='<?= $this->updateaziendaform->getName() ?>';
 	$(":input").on('blur', function(event) {
-        var formElementId = $(this).attr('id');
-        doValidation(formElementId, actionUrl, formName);
-    });
+            var formElementId = $(this).attr('id');
+            doValidation(formElementId, actionUrl, formName);
+        });
+        
+       
 });
 
 <?php $this->headScript()->captureEnd() ?>
 <div class="static">
- <h3>Modifica Promozione</h3>
+ <h3>Modifica Azienda</h3>
   <?php echo $this->updateaziendaform ?>
 </div>

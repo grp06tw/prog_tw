@@ -384,6 +384,9 @@ ___________________________
     background-color:#829B95;
     margin-bottom: 15px;
 }
+.divisoreOrd > h3{
+    cursor:pointer;
+}
 #visu{
     background-color: #A7C4BD;
     display: inline-flex;

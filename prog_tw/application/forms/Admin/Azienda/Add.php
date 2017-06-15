@@ -42,11 +42,11 @@ class Application_Form_Admin_Azienda_Add extends App_Form_Abstract {
 //Logo                
         $this->addElement('file', 'logo', array(
             'label' => 'Logo',
-            'destination' => APPLICATION_PATH . '/../public/img/promo',
+            'destination' => APPLICATION_PATH . '/../public/img/aziende',
             'validators' => array(
                 array('Count', false, 1),
                 array('Size', false, 1048576),
-                array('Extension', false, array('jpg', 'gif'))),
+                array('Extension', false, array('jpg', 'png', 'gif'))),
             'decorators' => $this->fileDecorators,
         ));
 //CITTA        
