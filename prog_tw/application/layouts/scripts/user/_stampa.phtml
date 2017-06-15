@@ -1,13 +1,18 @@
 <?php echo $this->doctype() ?>
 <html>
+
     <head>
-    <?= $this->headMeta(); ?> <!esegue i wiew hepler inizializzati dal bootstrap >
+        <?= $this->headMeta(); ?> <!esegue i wiew hepler inizializzati dal bootstrap >
     <?= $this->headLink(); ?>
     <?= $this->headTitle(); ?>
+    <?= $this->headScript(); ?>
+
 </head>
+
 <body>
-    
-    <?php echo $this->layout()->content; ?>
-    
+    <div id="wrapperFlyer">
+        <?php echo $this->layout()->content; ?>
+    </div>
 </body>
+
 </html>

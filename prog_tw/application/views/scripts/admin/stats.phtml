@@ -57,10 +57,10 @@
                     </thead>
 
                     <tbody id="bodymod">
-                        <?php foreach ($this->u as $utente) : ?>
+                        <?php foreach ($this->u as $promozione) : ?>
                             <tr>
-                                <td><?= $utente["Username"] ?></td>
-                                <td><?= $utente["couponAcquistati"] ?></td>
+                                <td><?= $promozione["Username"] ?></td>
+                                <td><?= $promozione["couponAcquistati"] ?></td>
                             </tr>               
                         <?php endforeach; ?>
                     </tbody>        

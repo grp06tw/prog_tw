@@ -50,7 +50,8 @@ class Application_Resource_Promozione extends Zend_Db_Table_Abstract {
         }
         return $this->fetchAll($select);
     }
-public function getPromsByAz($azId, $paged = null, $order = null) {
+
+    public function getPromsByAz($azId, $paged = null, $order = null) {
         $select = $this->select()
                 ->where("ID_Azienda = " . $azId);
 
@@ -70,13 +71,16 @@ public function getPromsByAz($azId, $paged = null, $order = null) {
 
     public function getPromsByWord($word, $paged = null, $order = null) {
         $words = explode(' ', $word);
-        $sql = "descrizione LIKE '%" . $words[0] . "%'";
+        $sql = "lower(descrizione) LIKE lower('%" . $words[0] . "%')";
         for ($i = 1; $i < count($words); $i++) {
-            $sql .= " OR descrizione LIKE '%" . $words[$i] . "%'";
+            $sql .= " OR lower(descrizione) LIKE lower('%" . $words[$i] . "%')";
+        }
+        for ($i = 0; $i < count($words); $i++) {
+            $sql .= " OR lower(titolo) LIKE lower('%" . $words[$i] . "%')";
         }
         $select = $this->select()
                 ->where($sql);
-
+        
         if (true === is_array($order)) {
             $select->order($order);
         }
@@ -92,9 +96,12 @@ public function getPromsByAz($azId, $paged = null, $order = null) {
 
     public function fullSearch($word, $id, $paged = null, $order = null) {
         $words = explode(' ', $word);
-        $sql = "ID_Categoria = " . $id . " AND (descrizione LIKE '%" . $words[0] . "%'";
+        $sql = "ID_Categoria = " . $id . " AND (lower(descrizione) LIKE lower('%" . $words[0] . "%')";
         for ($i = 1; $i < count($words); $i++) {
-            $sql .= " OR descrizione LIKE '%" . $words[$i] . "%'";
+            $sql .= " OR lower(descrizione) LIKE lower('%" . $words[$i] . "%')";
+        }
+        for ($i = 0; $i < count($words); $i++) {
+            $sql .= " OR lower(titolo) LIKE lower('%" . $words[$i] . "%')";
         }
         $sql .= ")";
         $select = $this->select()

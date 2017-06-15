@@ -2,27 +2,30 @@
     <ul>
         <!INDIETRO>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'index',
-                                        ), 
-                                        'default',true);?>" title="Torna alla home di area riservata">Indietro	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'index',
+                    ), 'default', true);
+            ?>" title="Torna alla home di area riservata"><p class="p_menu">Indietro	</p></a>
         </li>
         <!Aggiungi Azienda>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'newazienda',
-                                        ), 
-                                        'default',true);?>" title="Aggiungi una nuova Azienda">Aggiungi Azienda	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'newazienda',
+                    ), 'default', true);
+            ?>" title="Aggiungi una nuova Azienda"><p class="p_menu">Aggiungi Azienda	</p></a>
         </li>
         <!Modifica Azienda>
         <li>
-            <p class="p_menu"><a href="<?= $this->url(array(
-                                        'controller' => 'admin',
-                                        'action'     => 'modazienda',
-                                        ), 
-                                        'default',true);?>" title="Modifica una Azienda">Modifica Azienda	</a></p>
+            <a href="<?=
+            $this->url(array(
+                'controller' => 'admin',
+                'action' => 'modazienda',
+                    ), 'default', true);
+            ?>" title="Modifica una Azienda"><p class="p_menu">Modifica Azienda	</p></a>
         </li>
 
 

@@ -33,7 +33,7 @@ class UserController extends Zend_Controller_Action {
         $idPromo = $this->_getParam('idPromo');
         $idUtente = $this->_getParam('idUtente');
         $risposta = $this->_catalogModel->reach($idUtente, $idPromo);
-        if ($risposta == null) {
+        if ($risposta['doppio'] == 1) {
             $doppio = "si";
             //messaggio di errore che quel coupon è già stato acquisito
         } else {
@@ -48,7 +48,7 @@ class UserController extends Zend_Controller_Action {
         $this->view->assign(array('coupon',
             'promo' => $promozione,
             'utente' => $utente,
-            'coupon' => $risposta,
+            'coupon' => $risposta['coupon'],
             'azienda' => $azienda,
             'categoria' => $categoria,
             'doppio' => $doppio));
@@ -85,6 +85,19 @@ class UserController extends Zend_Controller_Action {
 
         $app = $this->_userModel->getUserData($id['Username']);
         $this->view->updatedataform = $this->populateUpdateDataForm($app->toArray());
+    }
+
+    //VALIDAZIONE AJAX
+
+    public function validateuserAction() {
+        $this->_helper->getHelper('layout')->disableLayout();
+        $this->_helper->viewRenderer->setNoRender();
+
+        $form = new Application_Form_Admin_Utente_Add();
+        $response = $form->processAjax($_POST);
+        if ($response !== null) {
+            $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
+        }
     }
 
 }

@@ -59,7 +59,7 @@ class PublicController extends Zend_Controller_Action {
         switch ($ordine) {
             case "ID_Categoria":
                 $this->_helper->redirector('catordered');
-                
+
                 break;
             case "ID_Azienda":
                 $this->_helper->redirector('azordered');
@@ -68,31 +68,60 @@ class PublicController extends Zend_Controller_Action {
                 $promozioni = $this->_catalogModel->getProms($paged, $ordine);
         }
 
-
-        //$promozioni = $this->_catalogModel->getProms($paged, $ordine);
-
-
-        $this->view->assign(array(
-            'promozioni' => $promozioni
-                )
-        );
+        $aziende = $this->_catalogModel->getAziende();
+        $categorie = $this->_catalogModel->getCats();
+        foreach ($promozioni as $promo) {
+            foreach ($aziende as $a) {
+                if ($promo["ID_Azienda"] == $a["ID_Azienda"]) {
+                    $promo["ID_Azienda"] = $a["nome"];
+                }
+            }
+            foreach ($categorie as $cat) {
+                if ($promo["ID_Categoria"] == $cat["ID_Categoria"]) {
+                    $promo["ID_Categoria"] = $cat["nome"];
+                }
+            }
+        }
+        $this->view->assign(array('promozioni' => $promozioni));
     }
 
     public function catorderedAction() {
-         $categorie = $this->_catalogModel->getCats();//siccome servono sempre ordinate la query ha di suo l'order by name
+        $categorie = $this->_catalogModel->getCats(); //siccome servono sempre ordinate la query ha di suo l'order by name
+        $aziende = $this->_catalogModel->getAziende();
+
         foreach ($categorie as $cat) {
-            $promo[$cat['nome']]= $this->_catalogModel->getPromsByCat($cat['ID_Categoria']);
+            $promo[$cat['nome']] = $this->_catalogModel->getPromsByCat($cat['ID_Categoria']);
+
+            foreach ($promo[$cat['nome']] as $p) {
+                foreach ($aziende as $a) {
+                    if ($p["ID_Azienda"] == $a["ID_Azienda"]) {
+                        $p["ID_Azienda"] = $a["nome"];
+                    }
+                }
+                $p["ID_Categoria"] = $cat['nome'];
+            }
         }
-        $this->view->assign(array('promo'=>$promo,'divisore'=>$categorie));
+        $this->view->assign(array('promo' => $promo, 'divisore' => $categorie));
         $this->render('ordered');
     }
 
     public function azorderedAction() {
-        $aziende = $this->_catalogModel->getAziende(null,'nome');
+        $categorie = $this->_catalogModel->getCats();
+        $aziende = $this->_catalogModel->getAziende(null, 'nome');
         foreach ($aziende as $az) {
-            $promo[$az['nome']]= $this->_catalogModel->getPromsByAz($az['ID_Azienda']);
+            $promo[$az['nome']] = $this->_catalogModel->getPromsByAz($az['ID_Azienda']);
+            foreach ($promo[$az['nome']] as $p) {
+
+                $p["ID_Azienda"] = $az["nome"];
+
+                foreach ($categorie as $cat) {
+                    if ($p["ID_Categoria"] == $cat["ID_Categoria"]) {
+                        $p["ID_Categoria"] = $cat["nome"];
+                    }
+                }
+            }
         }
-        $this->view->assign(array('promo'=>$promo,'divisore'=>$aziende));
+        $this->view->assign(array('promo' => $promo, 'divisore' => $aziende));
         $this->render('ordered');
     }
 
@@ -282,6 +311,8 @@ class PublicController extends Zend_Controller_Action {
     public function findAction($first = null) {
         $paged = 1;
         $ordine = null;
+        $aziende = $this->_catalogModel->getAziende();
+        $categorie = $this->_catalogModel->getCats();
         if ($first === null) {
             $paged = $this->_getParam('page', 1);
             $ordine = $this->_getParam('order', null);
@@ -291,6 +322,21 @@ class PublicController extends Zend_Controller_Action {
             if (!$trovate) {
                 $this->_helper->redirector('promo');
             }
+            
+            foreach ($trovate as $promo) {
+                foreach ($aziende as $a) {
+                    if ($promo["ID_Azienda"] == $a["ID_Azienda"]) {
+                        $promo["ID_Azienda"] = $a["nome"];
+                    }
+                }
+                foreach ($categorie as $cat) {
+                    if ($promo["ID_Categoria"] == $cat["ID_Categoria"]) {
+                        $promo["ID_Categoria"] = $cat["nome"];
+                    }
+                }
+            }
+            
+            
             $this->view->assign(array(
                 'trovate' => $trovate
                     )
@@ -301,11 +347,25 @@ class PublicController extends Zend_Controller_Action {
             $this->values["ID_Categoria"] = $this->_getParam('ID_Categoria', null);
             $this->values["words"] = $this->_getParam('words', null);
             $trovate = $this->_catalogModel->search($this->values, $paged, $ordine);
+            
+            foreach ($trovate as $promo) {
+                foreach ($aziende as $a) {
+                    if ($promo["ID_Azienda"] == $a["ID_Azienda"]) {
+                        $promo["ID_Azienda"] = $a["nome"];
+                    }
+                }
+                foreach ($categorie as $cat) {
+                    if ($promo["ID_Categoria"] == $cat["ID_Categoria"]) {
+                        $promo["ID_Categoria"] = $cat["nome"];
+                    }
+                }
+            }
+            
             $this->view->assign(array(
                 'trovate' => $trovate
                     )
             );
-
+            
             $this->view->assign(array('params' => array('ID_Categoria' => $this->values["ID_Categoria"], 'words' => $this->values["words"])));
             $this->render('search');
         }

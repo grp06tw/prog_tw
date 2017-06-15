@@ -27,7 +27,6 @@ class Application_Form_Admin_Utente_Add extends App_Form_Abstract {
             'required' => true,
             'validators' => array(array('StringLength', true, array(1, 30))),
             'decorators' => $this->elementDecorators,
-            'disabled' => 'disabled'
         ));
 //PASSWORD
         $this->addElement('text', 'password', array(

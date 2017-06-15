@@ -1,23 +1,35 @@
-<?php $this->headScript()
+<?php 
+    $this->headLink()->appendStylesheet($this->baseUrl('css/datepicker.css'));
+    $this->headScript()
 	->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+        ->appendFile('https://code.jquery.com/ui/1.12.1/jquery-ui.js')
 	->appendFile($this->baseUrl('js/functions.js'))
+        
 	->captureStart() ?>
 
 // codice jQuery inserito da view-script nella sezione head della pagina
 $(function()
 {
-	var actionUrl='<?= $this->url(array('controller' => 'staff', 'action' => 'validateproduct',), 'default');  ?>';
+	var actionUrl='<?= $this->url(array('controller' => 'staff', 'action' => 'validatepromo',), 'default');  ?>';
 	var formName='<?= $this->newpromoForm->getName() ?>';
 	$(":input").on('blur', function(event) {
         var formElementId = $(this).attr('id');
         doValidation(formElementId, actionUrl, formName);
     });
+    
 });
-
+$(function()
+ {
+        $("#inizio").datepicker({ dateFormat: 'yy-mm-dd' });
+        
+        $("#fine").datepicker({ dateFormat: 'yy-mm-dd' });
+        
+       
+});
 <?php $this->headScript()->captureEnd() ?>
 
 <div class="static">
- <h3>Aggiungi Prodotti</h3>
+ <h3>Aggiungi Promozione</h3>
  <p>Utilizza questa form per inserire una nuova promozione</p>
   <?php echo $this->newpromoForm ?>
 </div>
