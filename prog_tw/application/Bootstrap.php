@@ -47,9 +47,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $this->_view->headLink()->appendStylesheet($this->_view->baseUrl('css/style.css'));
         $this->_view->headTitle('123Coupon!');
 
-        $this->view->assign(array('logo' => $this->_view->baseUrl('css/img/logo.png')));
-
-        $this->view->assign(array('linkRelazione' => $this->_view->baseUrl('/../docs/123couponDoc.pdf')));
+        $this->view->assign(array('logo' => $this->view->baseUrl('css/img/logo.png')));
     }
 
     //Definisce la ShortCut
