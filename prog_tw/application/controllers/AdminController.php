@@ -105,6 +105,10 @@ class AdminController extends Zend_Controller_Action {
         }
         $values = $form->getValues();
         //UPDATE
+        if (!isset($values['logo'])) {
+            $id = $this->_getParam('ID');
+            $values['logo'] = $this->_adminModel->getAziendaById($id)['logo'];
+        }
         $this->_adminModel->upAzienda($values);
         $this->_helper->redirector('modazienda');
     }

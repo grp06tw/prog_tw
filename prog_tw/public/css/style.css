@@ -18,8 +18,12 @@ html
     background-color: #D3DBD9;
 }
 #headmod{
-    background-color: #A7C4BD;
-    color: black;
+    /*#A7C4BD*/
+    background-color: #829B95;
+    color: darkblue;
+}
+.striped{
+    background-color:#A7C4BD;
 }
 #modTable, #headmod > tr > th, #bodymod > tr >td {
     border: 3px solid #5C6362;
@@ -343,6 +347,7 @@ ___________________________
 .due
 {
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 .ottieni{
     height:30px;

@@ -77,6 +77,10 @@ class StaffController extends Zend_Controller_Action {
         }
         $values = $form->getValues();
         //UPDATE
+        if (!isset($values['immagine'])) {
+            $id = $this->_getParam('ID');
+            $values['immagine'] = $this->_staffModel->getPromoById($id)['immagine'];
+        }
         $this->_staffModel->updatePromo($values);
         $this->_helper->redirector('modpromo');
     }
@@ -84,7 +88,7 @@ class StaffController extends Zend_Controller_Action {
     public function popolateAction() {
         if ($id = $this->_getParam('ID')) {
             $app = $this->_staffModel->getPromoById($id);
-            $this->view->assign(array('img' => $app['logo']));
+            $this->view->assign(array('img' => $app['immagine']));
             $this->view->updatepromoForm = $this->getUpdatePromoForm($app->toArray());
         }
     }

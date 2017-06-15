@@ -7,19 +7,7 @@ $this->headScript()
 
 $(function()
 {
-$('div#elemento').slideToggle();
-
-$('div.divisoreOrd').on('click', function(){
-if($(this).parent().find('div#elemento').is(':hidden')){
-$('div#elemento').hide('slow');
-$(this).parent().find('div#elemento').slideToggle();
-}
-else{
-$(this).parent().find('div#elemento').hide('slow');
-}
-
-});
-
+    togglePromo();
 });
 
 <?php $this->headScript()->captureEnd() ?>

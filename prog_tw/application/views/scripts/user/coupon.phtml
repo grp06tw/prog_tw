@@ -8,19 +8,8 @@ $this->headScript()
 $(function()
 {
     $('div#stampa').on('click', function(event){
-
-        $('div#doppio').hide();
-        $('div.btn_flayer').hide();
-        
-        window.print();    
-        
-        $('div.btn_flayer').show();
-        $('div#doppio').show();
+        stampaCoupon();        
     });
-
-   
-
-
 });
 
 <?php $this->headScript()->captureEnd() ?>

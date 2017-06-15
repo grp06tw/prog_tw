@@ -7,20 +7,7 @@ $this->headScript()
 
 $(function()
 {
-    $('div#desc').slideToggle();
-    
-    
-        $('div#elemento').on('click', function(){
-        
-        if($(this).find('div#desc').is(':hidden')){
-                $('div#desc').hide('slow');
-                $(this).find('div#desc').slideToggle();
-            }
-            else{
-                $(this).parent().find('div#desc').hide('slow');
-            }           
-    });
-
+    toggleFAQ();
 });
 
 <?php $this->headScript()->captureEnd() ?>

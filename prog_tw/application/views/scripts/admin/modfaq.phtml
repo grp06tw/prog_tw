@@ -1,3 +1,17 @@
+<?php
+$this->headScript()
+        ->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+        ->appendFile($this->baseUrl('js/functions.js'))
+        ->captureStart()
+?>
+
+$(function()
+{
+    striper();
+});
+
+<?php $this->headScript()->captureEnd() ?>
+
 <div class="static">
     <h3>Modifica Faq</h3>
     <p>Ecco le Faq che puoi modificare</p>

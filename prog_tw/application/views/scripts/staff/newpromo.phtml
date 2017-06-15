@@ -10,6 +10,8 @@
 // codice jQuery inserito da view-script nella sezione head della pagina
 $(function()
 {
+        datepicker();
+        
 	var actionUrl='<?= $this->url(array('controller' => 'staff', 'action' => 'validatepromo',), 'default');  ?>';
 	var formName='<?= $this->newpromoForm->getName() ?>';
 	$(":input").on('blur', function(event) {
@@ -18,14 +20,8 @@ $(function()
     });
     
 });
-$(function()
- {
-        $("#inizio").datepicker({ dateFormat: 'yy-mm-dd' });
-        
-        $("#fine").datepicker({ dateFormat: 'yy-mm-dd' });
-        
-       
-});
+
+
 <?php $this->headScript()->captureEnd() ?>
 
 <div class="static">
