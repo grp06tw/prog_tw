@@ -2,8 +2,15 @@
 <div id="titlePage">
     <h3>Risultato Ricerca Promozioni</h3>
 </div>
+<?php if (count($this->trovate) == 0) : ?>
+    <div id="elemento">
+        <div id="tit">
+            <h4> Nessun risultato trovato </h4>
+        </div>
+    </div>
+<?php endif; ?>
 <?php foreach ($this->trovate as $promo) : ?>
-<div id="elemento">
+    <div id="elemento">
         <div id="tit">
             <h2> <?= $promo->titolo ?> </h2>
         </div>
@@ -20,19 +27,14 @@
         <div id="desc" class="promo">
 
             <p><?= $promo->descrizione ?></p>
-            <div id="az" class="promo">
-
-                <p><?= '<h4>Azienda: </h4>' . $promo->ID_Azienda ?></p>
-
-            </div>
-            <div id="cat" class="promo">
-
-                <p><?= '<h4>Categoria: </h4>' . $promo->ID_Categoria ?></p>
-
-            </div>
+            <p><?= '<b>Azienda: </b> &nbsp;' . $promo->ID_Azienda ?></p>
+            <p><?= '<b>Categoria: </b> &nbsp;' . $promo->ID_Categoria ?></p>
+            <p><?= '<b>Data Inizio: </b> &nbsp;' . $promo->inizio ?></p>
+            <p><?= '<b>Data Fine: </b> &nbsp;' . $promo->fine ?></p>
+            
         </div>
 
-         <?= $this->Ottieni($promo->ID_Promozione) ?>
+        <?= $this->Ottieni($promo->ID_Promozione) ?>
 
     </div> 
     <!-- fine div della promozione-->
@@ -41,7 +43,7 @@
 
 <?php
 if ($this->trovate instanceof Zend_Paginator) {
-   
-    
-    echo $this->paginationControl($this->trovate, 'Sliding', 'public/paginator/_pagSearch.phtml',$this->params);
+
+
+    echo $this->paginationControl($this->trovate, 'Sliding', 'public/paginator/_pagSearch.phtml', $this->params);
 } 

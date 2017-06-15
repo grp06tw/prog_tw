@@ -27,7 +27,8 @@ class Application_Form_Admin_Faq_Add extends App_Form_Abstract {
         ));
 
         //-----DOMANDA FAQ-----//
-        $this->addElement('text', 'domanda', array(
+        $this->addElement('textarea', 'domanda', array(
+            'cols' => '60', 'rows' => '5',
             'label' => 'Domanda',
             'autofocus' => 'autofocus',
             'filters' => array('StringTrim'),
@@ -36,7 +37,8 @@ class Application_Form_Admin_Faq_Add extends App_Form_Abstract {
         ));
 
         //-----RISPOSTA FAQ-----//
-        $this->addElement('text', 'risposta', array(
+        $this->addElement('textarea', 'risposta', array(
+            'cols' => '60', 'rows' => '10',
             'label' => 'Risposta',
             'filters' => array('StringTrim'),
             'required' => true,

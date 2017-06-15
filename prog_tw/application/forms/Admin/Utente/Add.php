@@ -103,13 +103,12 @@ class Application_Form_Admin_Utente_Add extends App_Form_Abstract {
             'decorators' => $this->elementDecorators,
         ));
 //RUOLO        
-        $role["user"] = "user";
         $role["staff"] = "staff";
-        $role["admin"] = "admin";
         $this->addElement('select', 'role', array(
             'required' => true,
             'multiOptions' => $role,
-            'show' => 'none',
+            'label' => 'Ruolo',
+            'readonly' => 'readonly',
             'decorators' => $this->elementDecorators,
         ));
 //SUBMIT

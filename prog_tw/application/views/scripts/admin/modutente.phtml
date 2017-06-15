@@ -1,6 +1,6 @@
 <div class="static">
-    <h3>Modifica Aziende</h3>
-    <p>Ecco le Aziende che puoi modificare</p>
+    <h3>Modifica Utenti</h3>
+    <p>Ecco li utenti che puoi modificare</p>
     <br>
     <table id="modTable">
         <thead id="headmod">
@@ -20,7 +20,7 @@
         </thead>
         <tbody id="bodymod">
             <?php foreach ($this->righe as $utente) : ?>
-
+                 <?php if($utente["Username"] != $this->utente) : ?>
                 <tr>
                     <td><?= $utente["Username"] ?></td>
                     <td><?= $utente["nome"]?></td>
@@ -44,7 +44,7 @@
                                         ), 
                                         'default',true);?>" title="Elimina"><img class="img_mod" src=<?= $this->elimina?>></a></td>
                 </tr>
-                
+                <?php endif;?>
             <?php endforeach; ?>
         </tbody>
     </table>

@@ -8,12 +8,16 @@ class AdminController extends Zend_Controller_Action {
     protected $_newFaqform;
     protected $_newCatForm;
     protected $_newUsrForm;
+    protected $_updUsrForm;
     protected $_updateform;
-    
+
     public function init() {
         $this->_helper->layout->setLayout('main');
         $this->view->assign(array('menu' => "admin/_reservedmenu.phtml"));
         $this->view->assign(array('topbar' => "_topbar.phtml"));
+
+        $this->_authService = new Application_Service_Auth();
+        $this->view->assign(array('utente' => $this->_authService->getIdentity()->Username));
         $this->_adminModel = new Application_Model_Admin();
         $this->_authService = new Application_Service_Auth();
 
@@ -294,13 +298,13 @@ class AdminController extends Zend_Controller_Action {
         if (!$form->isValid($_POST)) {
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('newutente');
-        }       
+        }
         $values = $form->getValues();
-        if($this->_adminModel->getUserByName($values["Username"])){
+        if ($this->_adminModel->getUserByName($values["Username"])) {
             $form->setDescription('Attenzione: Username gia in uso');
             return $this->render('newutente');
         }
-         
+
         $this->_adminModel->saveUser($values);
         $this->_helper->redirector('utenti');
     }
@@ -312,7 +316,7 @@ class AdminController extends Zend_Controller_Action {
     public function modutenteAction() {
         $this->view->assign(array('menu' => "admin/utenti/_crudutenti.phtml"));
 
-        $righe = $this->_adminModel->getUsers(null,"role");
+        $righe = $this->_adminModel->getUsers(null, "role");
         $this->view->assign(array('righe' => $righe));
     }
 
@@ -326,10 +330,14 @@ class AdminController extends Zend_Controller_Action {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('modutente');
         }
-        $form = $this->_newUsrForm;
+        if ($id = $this->_getParam('ID')) {
+            $app = $this->_adminModel->getUserById($id);
+            $this->view->updateusrform = $this->getUpdateUsrForm($app->toArray());
+        }
+        $form = $this->_updUsrForm;
         if (!$form->isValid($_POST)) {
             $form->setDescription('operazione non riuscita');
-            $this->view->updateusrform = $this->_newUsrForm;
+            $this->view->updateusrform = $this->_updUsrForm;
             return $this->render('popolateusr');
         }
         $values = $form->getValues();
@@ -372,13 +380,13 @@ class AdminController extends Zend_Controller_Action {
 
     private function getUpdateUsrForm($values) {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_newUsrForm = new Application_Form_User_Update();
-        $this->_newUsrForm->populate($values);
-        $this->_newUsrForm->setAction($urlHelper->url(array(
+        $this->_updUsrForm = new Application_Form_Admin_Utente_Update();
+        $this->_updUsrForm->populate($values);
+        $this->_updUsrForm->setAction($urlHelper->url(array(
                     'controller' => 'admin',
                     'action' => 'updusr'), 'default'
         ));
-        return $this->_newUsrForm;
+        return $this->_updUsrForm;
     }
 
     //************************************************************************************************************
@@ -509,7 +517,7 @@ class AdminController extends Zend_Controller_Action {
     public function statsAction() {
         $coupon = $this->_adminModel->getCoupon();
         $this->view->assign(array('nCoupon' => count($coupon)));
-        $utenti = $this->_adminModel->getUsers("user",null);
+        $utenti = $this->_adminModel->getUsers("user", null);
         $promozioni = $this->_adminModel->getProms();
         $count = 0;
         foreach ($promozioni as $promo) {
@@ -519,6 +527,7 @@ class AdminController extends Zend_Controller_Action {
                 }
             }
             $stP[$promo["ID_Promozione"]] = array("Promozione" => $promo["titolo"], "couponEmessi" => $count);
+            $count = 0;
         }
         $count = 0;
         foreach ($utenti as $utente) {
@@ -528,13 +537,14 @@ class AdminController extends Zend_Controller_Action {
                 }
             }
             $stU[$utente["ID_Utente"]] = array("Username" => $utente["Username"], "couponAcquistati" => $count);
+            $count = 0;
         }
 
 
         $righe = $this->_adminModel->getAziende(null, array('titolo'));
         $this->view->assign(array('p' => $stP, 'u' => $stU));
-        if ($param = $this->_getParam('param')){
-                    $this->view->assign(array('by' => $param));
+        if ($param = $this->_getParam('param')) {
+            $this->view->assign(array('by' => $param));
         }
     }
 
@@ -545,13 +555,15 @@ class AdminController extends Zend_Controller_Action {
         $this->_authService->clear();
         return $this->_helper->redirector('index', 'public');
     }
+
     //****************************************
     //          MODIFICA DATI UTENTE
     //****************************************
-    public function updatedataAction(){
+    public function updatedataAction() {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('index');
         }
+        $this->retrieveAction();
         $form = $this->_updateform;
         if (!$form->isValid($_POST)) {
             $form->setDescription('operazione non riuscita');
@@ -559,23 +571,24 @@ class AdminController extends Zend_Controller_Action {
         }
         $campi = $form->getValues();
         $this->_adminModel->updateUserData($campi);
+        $this->_authService->authenticate($campi);
         $this->_helper->redirector('updatedata');
     }
-    
-    private function populateUpdateDataForm($records){
+
+    private function populateUpdateDataForm($records) {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_updateform = new Application_Form_User_Update();
         $this->_updateform->populate($records);
-        $this->_updateform->setAction($urlHelper->url(array('controller'=> 'admin', 'action'=> 'updatedata'),'default'));
+        $this->_updateform->setAction($urlHelper->url(array('controller' => 'admin', 'action' => 'updatedata'), 'default'));
         return $this->_updateform;
     }
 
-    public function retrieveAction(){
+    public function retrieveAction() {
         $id = $this->_authService->getIdentity();
-            $app = $this->_adminModel->getUserData($id['Username']);
-            $this->view->updatedataform = $this->populateUpdateDataForm($app->toArray());
+        $app = $this->_adminModel->getUserData($id['Username']);
+        $this->view->updatedataform = $this->populateUpdateDataForm($app->toArray());
     }
-    
+
     //****************************************
     //          VALIDAZIONI AJAX
     //****************************************
@@ -589,7 +602,7 @@ class AdminController extends Zend_Controller_Action {
             $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
         }
     }
-    
+
     public function validatecatAction() {
         $this->_helper->getHelper('layout')->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
@@ -600,7 +613,7 @@ class AdminController extends Zend_Controller_Action {
             $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
         }
     }
-    
+
     public function validatefaqAction() {
         $this->_helper->getHelper('layout')->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
@@ -611,4 +624,5 @@ class AdminController extends Zend_Controller_Action {
             $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
         }
     }
+
 }

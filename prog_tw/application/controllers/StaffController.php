@@ -74,14 +74,13 @@ class StaffController extends Zend_Controller_Action {
         if (!$form->isValid($_POST)) {
             $form->setDescription('operazione non riuscita');
             return $this->render('popolate');
-
         }
         $values = $form->getValues();
         //UPDATE
         $this->_staffModel->updatePromo($values);
         $this->_helper->redirector('modpromo');
     }
-  
+
     public function popolateAction() {
         if ($id = $this->_getParam('ID')) {
             $app = $this->_staffModel->getPromoById($id);
@@ -125,7 +124,6 @@ class StaffController extends Zend_Controller_Action {
         return $this->_addform;
     }
 
-
     //****************************************
     //             logout
     //****************************************
@@ -134,13 +132,15 @@ class StaffController extends Zend_Controller_Action {
         $this->_authService->clear();
         return $this->_helper->redirector('index', 'public');
     }
+
     //****************************************
     //          MODIFICA DATI UTENTE
     //****************************************
-    public function updatedataAction(){
+    public function updatedataAction() {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('index');
         }
+        $this->retrieveAction();
         $form = $this->_updateform;
         if (!$form->isValid($_POST)) {
             $form->setDescription('operazione non riuscita');
@@ -148,28 +148,29 @@ class StaffController extends Zend_Controller_Action {
         }
         $campi = $form->getValues();
         $this->_staffModel->updateUserData($campi);
+        $this->_authService->authenticate($campi);
+
         $this->_helper->redirector('updatedata');
     }
-    
-    private function populateUpdateDataForm($records){
+
+    private function populateUpdateDataForm($records) {
         $urlHelper = $this->_helper->getHelper('url');
         $this->_updateform = new Application_Form_User_Update();
         $this->_updateform->populate($records);
-        $this->_updateform->setAction($urlHelper->url(array('controller'=> 'staff', 'action'=> 'updatedata'),'default'));
+        $this->_updateform->setAction($urlHelper->url(array('controller' => 'staff', 'action' => 'updatedata'), 'default'));
         return $this->_updateform;
     }
 
-    public function retrieveAction(){
+    public function retrieveAction() {
         $id = $this->_authService->getIdentity();
         $app = $this->_staffModel->getUserData($id['Username']);
         $this->view->updatedataform = $this->populateUpdateDataForm($app->toArray());
-        
     }
-    
+
     //****************************************
     //          VALIDAZIONI AJAX
     //****************************************
-   
+
     public function validatepromoAction() {
         $this->_helper->getHelper('layout')->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
@@ -180,4 +181,5 @@ class StaffController extends Zend_Controller_Action {
             $this->getResponse()->setHeader('Content-type', 'application/json')->setBody($response);
         }
     }
+
 }

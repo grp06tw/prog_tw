@@ -35,7 +35,7 @@ ul {
 }
 a:link, a:visited {
     text-decoration: none;
-    color: black;
+    color: darkblue;
     background-color: transparent;
 }
 a:hover, a:active {
@@ -252,11 +252,11 @@ h2.faq
 }
 #desc.promo, #desc.azienda
 {
-    height: 150px;
-    margin: 50px 110px 0px 145px;
+    margin: 50px 110px 10px 145px;
 }
 #desc
 {
+    min-height: 150px;
     margin: 35px 0px 0px 10px;
 }
 #desc>p{
@@ -292,7 +292,15 @@ ___________________________
 
 #pagination a {
 }
-
+#pagination a:link,#pagination a:visited {
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+}
+#pagination a:hover,#pagination a:active {
+    text-decoration: underline overline;
+    color: white;
+}
 /* ________________________
         STILE COUPON
 ___________________________
@@ -377,6 +385,7 @@ ___________________________
     margin-bottom: 15px;
 }
 #visu{
+    background-color: #A7C4BD;
     display: inline-flex;
 }
 #visTit{

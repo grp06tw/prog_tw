@@ -32,7 +32,7 @@ $(function()
         <h2> Sconto per: <?= $this->promo["titolo"] ?> </h2>
     </div>
     <p>
-        <?= $this->utente["nome"] . "<br>" . $this->utente["cognome"]. "<br>" ?> hai ottenuto il seguente sconto:
+        <?= '<b>Nome: </b>'. $this->utente["nome"] . "<br><b>Cognome: </b>" . $this->utente["cognome"]. "<br>" ?><b> hai ottenuto il seguente sconto:</b>
     </p>
     <div id="prezz">
 
@@ -42,15 +42,24 @@ $(function()
 
     <div id="descrizione">
         <p>
-            <?= $this->promo["descrizione"] ?><br>
-            <?= $this->categoria["nome"] ?>
+            <b><?= $this->promo["descrizione"] ?></b><br>
         </p>
     </div>
+    <br>
     <p>
-        Potrai ritirare il prodotto al seguente indirizzo:<br>
+        <b>Potrai ritirare il prodotto al seguente indirizzo:</b><br>
         <?= $this->azienda["ragione_sociale"] ?><br>
         <?= $this->azienda["indirizzo"] ?><br>
     </p>
+    <br>
+     <p>
+         <b>Potrai ritirare usufruire della promozione</b><br>
+        <?= '<b> dal:</b> '.$this->promo["inizio"].' <b>al:</b> '. $this->promo["fine"] ?><br>
+        <br>
+       
+    </p>
+    
+    
     <br>
     <p>
         CODICE COUPON: <?= $this->coupon["ID_Coupon"] ?>

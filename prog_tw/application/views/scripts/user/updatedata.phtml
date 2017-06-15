@@ -1,0 +1,20 @@
+<?php $this->headScript()
+	->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+	->appendFile($this->baseUrl('js/functions.js'))
+	->captureStart() ?>
+
+$(function()
+{
+	var actionUrl='<?= $this->url(array('controller' => 'user', 'action' => 'validateuser',), 'default');  ?>';
+	var formName='<?= $this->updatedataform->getName() ?>';
+	$(":input").on('blur', function(event) {
+        var formElementId = $(this).attr('id');
+        doValidation(formElementId, actionUrl, formName);
+    });
+});
+
+<?php $this->headScript()->captureEnd() ?>
+<div class="static">
+  <h3>Modifica Profilo</h3>
+  <?php echo $this->updatedataform ?>
+</div>

@@ -62,6 +62,8 @@ class UserController extends Zend_Controller_Action {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('index');
         }
+        
+        $this->retrieveAction();
         $form = $this->_updateform;
         if (!$form->isValid($_POST)) {
             $form->setDescription('operazione non riuscita');
@@ -69,6 +71,7 @@ class UserController extends Zend_Controller_Action {
         }
         $campi = $form->getValues();
         $this->_userModel->updateUserData($campi);
+        $this->_authService->authenticate($campi);
         $this->_helper->redirector('updatedata');
     }
 
