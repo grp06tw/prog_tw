@@ -6,6 +6,9 @@ html
 {
     background-color: #5C6362;
 }
+.stampa{
+background-color: white;    
+}
 #separatorTB{
     width:50%;
 }
@@ -354,6 +357,11 @@ ___________________________
     width:150px;
     border:0px;
     float: right;
+}
+.faiLogin{
+    width:250px;
+    float: right;
+    margin-top:-10px;
 }
 
 /* ________________________
